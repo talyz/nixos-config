@@ -1,0 +1,3 @@
+[submodule "home-talyz-nixpkgs/dotfiles"]
+	path = home-talyz-nixpkgs/dotfiles
+	url = gitea@git.elis.nu:talyz/dotfiles.git

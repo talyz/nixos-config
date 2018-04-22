@@ -1,0 +1,13 @@
+diff --git a/src/filter.c b/src/filter.c
+index 2fbf74f9..75a2b19f 100644
+--- a/src/filter.c
++++ b/src/filter.c
+@@ -1080,7 +1080,7 @@ trackpoint_accel_profile(struct motion_filter *filter,
+ 
+ 	/* This is almost the equivalent of the xserver acceleration
+ 	   at sensitivity 128 and speed 0.0 */
+-	factor = delta * accel_filter->incline + accel_filter->offset;
++	factor = sqrt(delta) * accel_filter->incline + accel_filter->offset;
+ 	/* factor = min(factor, max_accel); */
+ 
+ 	return factor;
