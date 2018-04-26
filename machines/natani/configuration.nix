@@ -7,8 +7,7 @@
 {
   imports = [
     <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
-	  #./hardware-configuration.nix
-    ./profiles/laptop.nix
+    ../../profiles/laptop.nix
     #./profiles/hardened.nix
   ];
 

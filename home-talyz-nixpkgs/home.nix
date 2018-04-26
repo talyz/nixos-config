@@ -1,9 +1,7 @@
 { pkgs, ... }:
 
 { 
-  programs.home-manager.enable = true;
-  programs.home-manager.path = https://github.com/rycee/home-manager/archive/master.tar.gz;
-    
+  imports = [ ./host.nix ];
   # home.sessionVariableSetter = "pam";
   # home.sessionVariables = { EDITOR = "emacs";
   # 			    MOZ_USE_XINPUT2 = "1";
