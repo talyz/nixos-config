@@ -16,11 +16,51 @@
   programs.emacs =
   {
     enable = true;
-    extraPackages = epkgs: [
-      epkgs.nix-mode
-      epkgs.magit
-      epkgs.zerodark-theme
-      epkgs.fish-mode
+    extraPackages = epkgs: map (package: epkgs.${package}) [
+      "use-package"
+      "nix-mode"
+      "magit"
+      "fish-mode"
+      "webpaste"
+      "yasnippet"
+      "yasnippet-snippets"
+      "ivy-yasnippet"
+      "popup"
+      "undo-tree"
+      "multiple-cursors"
+      "magit"
+      "smooth-scrolling"
+      "sr-speedbar"
+      "projectile"
+      "ace-window"
+      "flx"
+      "ivy"
+      "swiper"
+      "counsel"
+      "ivy-rich"
+      "systemd"
+      "highlight-symbol"
+      "flycheck"
+      "flycheck-pos-tip"
+      "cmake-mode"
+      "cmake-font-lock"
+      "company"
+      "company-quickhelp"
+      "paredit"
+      "xah-lookup"
+      "company-c-headers"
+      #"realgud"
+      "rtags"
+      "cmake-ide"
+      "macrostep"
+      "elpy"
+      "yaml-mode"
+      "company-ansible"
+      "ansible-doc"
+      "org"
+      #"weechat"
+      "dracula-theme"
+      "telephone-line"
     ];
   };
 
@@ -36,7 +76,12 @@
   home.file =
   {
     ".emacs".source = ./dotfiles/emacs/emacs;
-    "emacs-config.org".source = ./dotfiles/emacs/emacs-config.org;
+    "emacs-config.el".source = pkgs.runCommand "emacs-config.el" {} ''
+      cp ${./dotfiles/emacs/emacs-config.org} emacs-config.org
+      ${pkgs.emacs}/bin/emacs --batch ./emacs-config.org -f org-babel-tangle
+      mv emacs-config.el $out
+    '';
+    
     ".screenrc".source = ./dotfiles/screen/screenrc;
     ".config/fish/config.fish".source = ./dotfiles/fish/.config/fish/config.fish;
     ".config/fish/functions/cal.fish".source = ./dotfiles/fish/.config/fish/functions/cal.fish;
