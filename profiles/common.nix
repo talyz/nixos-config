@@ -21,6 +21,12 @@
     pciutils
     usbutils
     screen
+    pwgen
+    heimdalFull
+    nix-index
+    gocryptfs
+    signing-party
+    msmtp
   ];
 
   programs.fish.enable = true;

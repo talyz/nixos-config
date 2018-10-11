@@ -13,6 +13,13 @@
     firefox-bin
     keepassxc
     dropbox
+    freecad
+    kdenlive
+    ffmpeg
+    frei0r
+    breeze-icons
+    mpv
+    gparted
   ];
 
   # Disable the insane trackpoint averaging and clipping; also, make

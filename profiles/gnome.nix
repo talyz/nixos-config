@@ -10,12 +10,17 @@ in
   [
     evince
     pavucontrol
-    glib
+    glib.dev
     gnome3.gnome-tweak-tool
     gnome3.gnome_session
     gnomeExtensions.dash-to-dock
     gnomeExtensions.topicons-plus
     gse-show-workspaces
+    aspell
+    aspellDicts.sv
+    aspellDicts.en
+    aspellDicts.en-science
+    aspellDicts.en-computers
   ];
   
   services.xserver =
