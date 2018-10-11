@@ -56,8 +56,14 @@
   networking.networkmanager.enable = true;
   users.extraUsers.talyz.extraGroups = [ "networkmanager" ];
 
+  services.avahi.enable = true;
+  services.avahi.browseDomains = [ "internal.xlnaudio.com" ];
+
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.hplip ];
+  };
 
   # Enable the smartcard deamon.
   services.pcscd.enable = true;
