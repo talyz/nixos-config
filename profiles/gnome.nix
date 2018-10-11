@@ -86,6 +86,8 @@ in
     };
   };
 
+  systemd.services.accounts-daemon.restartIfChanged = false;
+  
   services.fwupd.enable = true;
   
   # Define custom keybindings.
