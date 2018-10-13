@@ -6,6 +6,8 @@ let
   gse-show-workspaces = pkgs.callPackage ./gse-show-workspaces.nix { };
 in
 {
+  imports = [ ./dconf.nix ];
+  
   environment.systemPackages = with pkgs;
   [
     evince
@@ -89,17 +91,9 @@ in
   systemd.services.accounts-daemon.restartIfChanged = false;
   
   services.fwupd.enable = true;
-  
-  # Define custom keybindings.
 
-  # Because of what is most likely a bug in gsettings, parameters
-  # using relocatable schema, such as custom keybindings, can't be
-  # added using gschema overrides. This means we have to add them
-  # directly to a dconf database instead.
-  environment.etc =
-  {
-    "dconf/db/system-wide.d/00_custom_keybindings".text =
-    ''
+  programs.dconfTalyz.enable = true;
+  programs.dconfTalyz.defaultOverrides = ''
       [org/gnome/settings-daemon/plugins/media-keys]
       custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']
       
@@ -112,14 +106,38 @@ in
       binding='<Super>e'
       command='emacsclient -c'
       name='emacsclient'
-    '';
+  '';
+  
+  # Define custom keybindings.
 
-  "dconf/profile/user".text =
-    ''
-      user-db:user
-      system-db:system-wide
-    '';
-  };
+  # Because of what is most likely a bug in gsettings, parameters
+  # using relocatable schema, such as custom keybindings, can't be
+  # added using gschema overrides. This means we have to add them
+  # directly to a dconf database instead.
+  # environment.etc =
+  # {
+  #   "dconf/db/system-wide.d/00_custom_keybindings".text =
+  #   ''
+  #     [org/gnome/settings-daemon/plugins/media-keys]
+  #     custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']
+      
+  #     [org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
+  #     binding='<Super>c'
+  #     command='gnome-terminal'
+  #     name='terminal'
+
+  #     [org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1]
+  #     binding='<Super>e'
+  #     command='emacsclient -c'
+  #     name='emacsclient'
+  #   '';
+
+  # "dconf/profile/user".text =
+  #   ''
+  #     user-db:user
+  #     system-db:system-wide
+  #   '';
+  # };
 
 #  programs.dconf.profiles.gnome_conf = "/etc/nix/gnome_dconf";
 }
