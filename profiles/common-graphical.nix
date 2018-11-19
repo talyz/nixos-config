@@ -22,19 +22,6 @@
     gparted
   ];
 
-  # Disable the insane trackpoint averaging and clipping; also, make
-  # the acceleration curve less extreme to avoid excessive jumpiness.
-  nixpkgs.config.packageOverrides = pkgs: {
-    libinput = pkgs.libinput.overrideAttrs (oldAttrs: {
-      patches = oldAttrs.patches ++ [
-        ./libinput_patches/libinput_disable_trackpoint_averaging.patch
-        ./libinput_patches/libinput_disable_trackpoint_max_delta_clipping.patch
-        ./libinput_patches/libinput_disable_trackpoint_max_accel_clipping.patch
-        ./libinput_patches/libinput_trackpoint_sqrt_delta.patch
-      ];
-    });
-  };
-
   # Enable pulseaudio.
   hardware.pulseaudio.enable = true;
 
