@@ -1,5 +1,11 @@
 { pkgs, ... }:
 
+let
+    unbreakRtagsComponent = pkg: pkg.overrideAttrs (oldAttrs: {
+        meta = (oldAttrs.meta or {}) // { broken = false; };
+        configurePhase = " ";
+    });
+in
 { 
   imports = [ ./host.nix ];
   # home.sessionVariableSetter = "pam";
@@ -51,9 +57,9 @@
       company-c-headers
       #melpaPackages.realgud
       rtags
-      (unbreakRtags company-rtags)
-      (unbreakRtags flycheck-rtags)
-      (unbreakRtags ivy-rtags)
+      (unbreakRtagsComponent company-rtags)
+      (unbreakRtagsComponent flycheck-rtags)
+      (unbreakRtagsComponent ivy-rtags)
       cmake-ide
       macrostep
       elpy
