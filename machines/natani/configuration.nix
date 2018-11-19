@@ -45,7 +45,8 @@
   
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
-    skype    
+    skype
+    nomachine-client
   ];
 
   # Make suspend to ram work.
