@@ -12,55 +12,58 @@
     EDITOR = "emacs";
     MOZ_USE_XINPUT2 = "1";
   };
-  
+
   programs.emacs =
   {
     enable = true;
-    extraPackages = epkgs: map (package: epkgs.${package}) [
-      "use-package"
-      "nix-mode"
-      "magit"
-      "fish-mode"
-      "webpaste"
-      "yasnippet"
-      "yasnippet-snippets"
-      "ivy-yasnippet"
-      "popup"
-      "undo-tree"
-      "multiple-cursors"
-      "magit"
-      "smooth-scrolling"
-      "sr-speedbar"
-      "projectile"
-      "ace-window"
-      "flx"
-      "ivy"
-      "swiper"
-      "counsel"
-      "ivy-rich"
-      "systemd"
-      "highlight-symbol"
-      "flycheck"
-      "flycheck-pos-tip"
-      "cmake-mode"
-      "cmake-font-lock"
-      "company"
-      "company-quickhelp"
-      "paredit"
-      "xah-lookup"
-      "company-c-headers"
-      #"realgud"
-      "rtags"
-      "cmake-ide"
-      "macrostep"
-      "elpy"
-      "yaml-mode"
-      "company-ansible"
-      "ansible-doc"
-      "org"
-      #"weechat"
-      "dracula-theme"
-      "telephone-line"
+    extraPackages = epkgs: with epkgs; [
+      use-package
+      nix-mode
+      magit
+      fish-mode
+      webpaste
+      yasnippet
+      yasnippet-snippets
+      ivy-yasnippet
+      popup
+      undo-tree
+      multiple-cursors
+      magit
+      smooth-scrolling
+      sr-speedbar
+      projectile
+      ace-window
+      flx
+      ivy
+      swiper
+      counsel
+      ivy-rich
+      systemd
+      highlight-symbol
+      flycheck
+      flycheck-pos-tip
+      cmake-mode
+      cmake-font-lock
+      company
+      company-quickhelp
+      paredit
+      xah-lookup
+      company-c-headers
+      #melpaPackages.realgud
+      rtags
+      (unbreakRtags company-rtags)
+      (unbreakRtags flycheck-rtags)
+      (unbreakRtags ivy-rtags)
+      cmake-ide
+      macrostep
+      elpy
+      yaml-mode
+      company-ansible
+      ansible-doc
+      org
+      melpaPackages.weechat
+      dracula-theme
+      telephone-line
     ];
   };
 
