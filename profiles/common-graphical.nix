@@ -14,10 +14,6 @@
     keepassxc
     dropbox
     freecad
-    kdenlive
-    ffmpeg
-    frei0r
-    breeze-icons
     mpv
     gparted
   ];
