@@ -55,12 +55,6 @@
     ACTION=="add", SUBSYSTEM=="pci", DRIVER=="xhci_hcd", TEST=="power/wakeup" ATTR{power/wakeup}="disabled"
   '';
 
-  services.udev.extraHwdb =
-  ''
-    libinput:name:*TrackPoint*                                                      
-     LIBINPUT_ATTR_TRACKPOINT_RANGE=10
-  '';
-
   boot.initrd.luks.devices."nixroot".device = "/dev/disk/by-uuid/527439dc-2e4f-4f1c-80e6-868178da99a8";
 
   fileSystems = {
