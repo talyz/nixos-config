@@ -91,8 +91,6 @@ in
 
   systemd.services.accounts-daemon.restartIfChanged = false;
   
-  services.fwupd.enable = true;
-
   programs.dconfTalyz.enable = true;
   programs.dconfTalyz.defaultOverrides = ''
       [org/gnome/settings-daemon/plugins/media-keys]
