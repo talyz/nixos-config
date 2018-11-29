@@ -9,21 +9,22 @@ in
   imports = [ ./dconf.nix ];
   
   environment.systemPackages = with pkgs;
-  [
-    evince
-    pavucontrol
-    glib.dev
-    gnome3.gnome-tweak-tool
-    gnome3.gnome_session
-    gnomeExtensions.dash-to-dock
-    gnomeExtensions.topicons-plus
-    gse-show-workspaces
-    aspell
-    aspellDicts.sv
-    aspellDicts.en
-    aspellDicts.en-science
-    aspellDicts.en-computers
-  ];
+    [
+      evince
+      pavucontrol
+      glib.dev
+      gnome3.gnome-tweak-tool
+      gnome3.gnome_session
+      gnomeExtensions.dash-to-dock
+      gnomeExtensions.topicons-plus
+      gse-show-workspaces
+      aspell
+      aspellDicts.sv
+      aspellDicts.en
+      aspellDicts.en-science
+      aspellDicts.en-computers
+      fwupd
+    ];
   
   services.xserver =
   {
