@@ -96,5 +96,8 @@ in
     ".config/fish/functions/cal.fish".source = ./dotfiles/fish/.config/fish/functions/cal.fish;
     ".config/fish/functions/ec.fish".source = ./dotfiles/fish/.config/fish/functions/ec.fish;
     ".config/fish/functions/fish_prompt.fish".source = ./dotfiles/fish/.config/fish/functions/fish_prompt.fish;
+
+    # Create the auto-saves directory
+    ".emacs.d/auto-saves/.manage-directory".text = "";
   };
 }
