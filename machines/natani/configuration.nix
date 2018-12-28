@@ -7,9 +7,13 @@
 {
   imports = [
     <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
-    ../../profiles/laptop.nix
+    ../../profiles/common.nix
+    ../../modules
     #./profiles/hardened.nix
   ];
+
+  talyz.laptop.tlp.enable = true;
+  talyz.gnome.enable = true;
 
   hardware = {
     cpu.intel.updateMicrocode = true;
