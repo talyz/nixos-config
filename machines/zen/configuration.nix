@@ -36,7 +36,7 @@
   boot.tmpOnTmpfs = true;
 
   # Use the latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_4_19;
 
   # Kernel modules required in the initrd to boot.
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];

@@ -8,6 +8,7 @@
   imports = [
     <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
     ../../profiles/common.nix
+    ../../profiles/work.nix
     ../../modules
     #./profiles/hardened.nix
   ];
@@ -27,7 +28,7 @@
     loader.efi.canTouchEfiVariables = true;
     # Make /tmp a tmpfs mount.
     #tmpOnTmpfs = true;
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_4_19;
     extraModulePackages = [ config.boot.kernelPackages.acpi_call ];
     initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
     kernelModules = [ "kvm-intel" ];

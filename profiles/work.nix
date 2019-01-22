@@ -7,4 +7,6 @@
       slack
       nomachine-client
     ];
+
+  virtualisation.virtualbox.host.enable = true;
 }
