@@ -1,7 +1,14 @@
 { config, pkgs, ... }:
 
+let
+  home-manager-master = (builtins.fetchTarball {
+    url = https://github.com/rycee/home-manager/archive/master.tar.gz;
+  });
+in
 {
   nix.buildCores = 0;
+
+  imports = [ "${home-manager-master}/nixos" ];
   
   environment.systemPackages = with pkgs; [
     wget
@@ -45,6 +52,8 @@
     enable = true;
     defaultEditor = true;
   };
+
+  home-manager.users.talyz = import ../home-talyz-nixpkgs/home.nix;
 
   users.extraUsers.talyz = {
     isNormalUser = true;
