@@ -19,7 +19,6 @@
   hardware = {
     cpu.intel.updateMicrocode = true;
     bluetooth.enable = true;
-    pulseaudio.package = pkgs.pulseaudioFull;
   };
 
   boot = {

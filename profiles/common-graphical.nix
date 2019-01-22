@@ -18,8 +18,21 @@
     gparted
   ];
 
-  # Enable pulseaudio.
-  hardware.pulseaudio.enable = true;
+  # Enable pulse with all the bluetooth codec modules.
+  hardware.pulseaudio = {
+    enable = true;
+    extraModules = [ pkgs.pulseaudio-modules-bt ];
+
+    daemon.config = {
+      flat-volumes = "no";
+      default-sample-format = "s24le";
+      default-sample-rate = "44100";
+      resample-method = "speex-float-10";
+      avoid-resampling = "true";
+    };
+
+    package = pkgs.pulseaudioFull;
+  };
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;

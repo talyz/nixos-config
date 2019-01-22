@@ -13,7 +13,6 @@
   ];
 
   hardware.cpu.amd.updateMicrocode = true;
-  hardware.pulseaudio.package = pkgs.pulseaudioFull;
   hardware.enableAllFirmware = true;
 
   # AMD GPU drivers
