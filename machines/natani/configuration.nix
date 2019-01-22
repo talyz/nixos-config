@@ -36,23 +36,6 @@
 
   networking.hostName = "natani";
 
-  # Internationalisation properties.
-  i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "dvorak-sv-a1";
-    defaultLocale = "en_US.UTF-8";
-  };
-  
-  time.timeZone = "Europe/Stockholm";
-
-  nixpkgs.config.allowUnfree = true;
-  
-  # List packages installed in system profile.
-  environment.systemPackages = with pkgs; [
-    skype
-    nomachine-client
-  ];
-
   # Make suspend to ram work.
   services.udev.extraRules =
   ''
@@ -121,15 +104,6 @@
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.extraUsers.talyz = {
-    isNormalUser = true;
-		extraGroups = [ "wheel" ];
-		shell = pkgs.fish;
-		uid = 1000;
-		initialPassword = "aoeuaoeu";
-	};
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
