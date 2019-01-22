@@ -14,7 +14,8 @@
   ];
 
   talyz.laptop.tlp.enable = true;
-  talyz.gnome.enable = true;
+  #talyz.gnome.enable = true;
+  talyz.exwm.enable = true;
 
   hardware = {
     cpu.intel.updateMicrocode = true;

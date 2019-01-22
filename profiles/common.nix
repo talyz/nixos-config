@@ -33,6 +33,7 @@ in
     gocryptfs
     signing-party
     msmtp
+    direnv
   ];
 
   # Internationalisation properties.
@@ -57,7 +58,7 @@ in
 
   users.extraUsers.talyz = {
     isNormalUser = true;
-		extraGroups = [ "wheel" ];
+		extraGroups = [ "wheel" "video" ];
 		shell = pkgs.fish;
 		uid = 1000;
 		initialPassword = "aoeuaoeu";

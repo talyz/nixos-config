@@ -5,5 +5,6 @@
     [
       ./laptop.nix
       ./gnome.nix
+      ./exwm.nix
     ];
 }
