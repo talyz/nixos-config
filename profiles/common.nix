@@ -16,6 +16,8 @@ in
     gnupg
     stow
     file
+    tree
+    killall
     git
     htop
     fzf
