@@ -18,7 +18,8 @@ let
   fromEmacsUsePackage = {
     config,
     package ? pkgs.emacs,
-    override ? (epkgs: epkgs)
+    override ? (epkgs: epkgs),
+    extraPackages ? []
   }:
   let
     packages = parsePackages config;
@@ -31,7 +32,7 @@ let
                                           overridden.${name}
                                         else
                                           null)
-                                 (packages ++ [ "use-package" "desktop-environment" "exwm" ]));
+                                 (packages ++ [ "use-package" ] ++ extraPackages ));
 in {
   inherit fromEmacsUsePackage;
 }

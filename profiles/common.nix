@@ -51,11 +51,6 @@ in
   
   programs.fish.enable = true;
 
-  services.emacs = {
-    enable = true;
-    defaultEditor = true;
-  };
-
   home-manager.users.talyz = import ../home-talyz-nixpkgs/home.nix;
 
   users.extraUsers.talyz = {
