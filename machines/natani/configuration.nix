@@ -31,7 +31,6 @@
     extraModulePackages = [ config.boot.kernelPackages.acpi_call ];
     initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
     kernelModules = [ "kvm-intel" ];
-    kernelParams = [ "psmouse.synaptics_intertouch=0" ];
   };
 
   networking.hostName = "natani";
@@ -42,6 +41,23 @@
     #ACTION=="add", SUBSYSTEM=="usb", TEST=="power/control" ATTR{power/control}="auto"
     ACTION=="add", SUBSYSTEM=="pci", DRIVER=="xhci_hcd", TEST=="power/wakeup" ATTR{power/wakeup}="disabled"
   '';
+
+
+  # Touchpad
+
+  # Workaround for a bug where multitouch stops working after suspend
+  # and resume.
+  boot.kernelParams = [ "psmouse.synaptics_intertouch=0" ];
+  services.xserver.libinput.accelSpeed = "0.3";
+
+  # TrackPoint
+  services.xserver.inputClassSections = [
+    ''
+      Identifier     "TrackPoint configuration"
+      MatchProduct   "TrackPoint"
+      Option "AccelSpeed" "0.4"
+    ''
+  ];
 
   # Powersaving and battery charge control
   services.tlp = {
