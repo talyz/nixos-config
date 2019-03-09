@@ -13,7 +13,6 @@
     #./profiles/hardened.nix
   ];
 
-  talyz.laptop.tlp.enable = true;
   #talyz.gnome.enable = true;
   talyz.exwm.enable = true;
 
@@ -43,6 +42,22 @@
     #ACTION=="add", SUBSYSTEM=="usb", TEST=="power/control" ATTR{power/control}="auto"
     ACTION=="add", SUBSYSTEM=="pci", DRIVER=="xhci_hcd", TEST=="power/wakeup" ATTR{power/wakeup}="disabled"
   '';
+
+  # Powersaving and battery charge control
+  services.tlp = {
+    enable = true;
+    extraConfig =
+      ''
+        ENERGY_PERF_POLICY_ON_AC=performance
+        ENERGY_PERF_POLICY_ON_BAT=balance-power
+        CPU_SCALING_GOVERNOR_ON_AC=performance
+        CPU_SCALING_GOVERNOR_ON_BAT=powersave
+        USB_AUTOSUSPEND=0
+        RUNTIME_PM_ON_BAT=on
+        START_CHARGE_THRESH_BAT0=90
+        STOP_CHARGE_THRESH_BAT0=100
+      '';
+  };
 
   boot.initrd.luks.devices."nixroot".device = "/dev/disk/by-uuid/527439dc-2e4f-4f1c-80e6-868178da99a8";
 
