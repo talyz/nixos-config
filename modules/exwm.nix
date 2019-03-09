@@ -33,9 +33,15 @@ in
                   url = https://github.com/adisbladis/exwm-overlay/archive/master.tar.gz;
                 }))
           ];
-        # services.dunst.enable = true;
 
         programs.light.enable = true;
+        programs.nm-applet.enable = true;
+
+        services.compton.enable = true;
+        services.compton.backend = "glx";
+
+        programs.gnupg.agent.enable = true;
+        programs.gnupg.agent.enableSSHSupport = true;
 
         talyz.emacs.enable = true;
         talyz.emacs.extraPackages = [ "desktop-environment" "exwm" ];
@@ -47,8 +53,19 @@ in
         services.xserver.windowManager.session = singleton {
           name = "exwm";
           start = ''
-            ${pkgs.compton}/bin/compton --backend glx &
-            nm-applet &
+            # Bind gpg-agent to this TTY if gpg commands are used.
+            export GPG_TTY=$(tty)
+
+            # SSH agent protocol doesn't support changing TTYs, so bind the agent
+            # to every new TTY.
+            ${pkgs.gnupg}/bin/gpg-connect-agent --quiet updatestartuptty /bye > /dev/null
+
+            if [ -z "$SSH_AUTH_SOCK" ]; then
+                export SSH_AUTH_SOCK=$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)
+            fi
+
+            systemctl --user import-environment
+
             ${pkgs.xss-lock}/bin/xss-lock -- ${cfg.lockerCommand} &
             ${pkgs.emacs}/bin/emacs -l ${loadScript}
           '';
