@@ -57,7 +57,7 @@
 (exwm-systemtray-enable)
 (setq exwm-systemtray-height 16)
 
-(exwm-input-set-simulation-keys
+(setq exwm-input-simulation-keys
  (mapcar (lambda (c) (cons (kbd (car c)) (cdr c)))
          `(("C-b" . left)
            ("C-f" . right)
