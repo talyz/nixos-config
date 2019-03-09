@@ -3,17 +3,25 @@
 with builtins;
 
 let
-  usePackageNameExtract = pkgs.callPackage ./use-package-name-extract/shell.nix {};
+  usePackageNameExtract = pkgs.runCommand "use-package-name-extract" {}
+    ''
+      mkdir $out
+      cp ${./use-package-name-extract.el} "$out/use-package-name-extract.el"
+      ${pkgs.emacs}/bin/emacs --no-site-file --batch \
+                              --eval "(byte-compile-file \"$out/use-package-name-extract.el\")"
+    '';
+
+  packageList = dotEmacs:
+    pkgs.runCommand "usePackagePackageList" {}
+                    ''${pkgs.emacs}/bin/emacs ${dotEmacs} --no-site-file --batch \
+                                              -l ${usePackageNameExtract}/use-package-name-extract.el \
+                                              -f print-packages 2> $out'';
   
   parsePackages = dotEmacs:
     filter (x: x != "")
            (filter (x: typeOf x == "string")
                    (split "\n"
-                          (readFile
-                            (pkgs.runCommand "usePackagePackageList"
-                                             {}
-                                             ''${usePackageNameExtract}/bin/use-package-name-extract \
-                                               ${dotEmacs} > $out''))));
+                          (readFile (packageList dotEmacs))));
   
   fromEmacsUsePackage = {
     config,
