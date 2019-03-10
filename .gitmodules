@@ -1,3 +1,6 @@
 [submodule "dotfiles"]
 	path = home-talyz-nixpkgs/dotfiles
 	url = git@github.com:talyz/dotfiles.git
+[submodule "modules/emacs-with-use-package-pkgs"]
+	path = modules/emacs-with-use-package-pkgs
+	url = git@github.com:talyz/nix-emacs-with-use-package-pkgs.git
