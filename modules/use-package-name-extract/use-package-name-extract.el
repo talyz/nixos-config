@@ -1,14 +1,16 @@
-;; run like: "emacs ~/.emacs --no-site-file --batch -l use-package-extract.el -f print-packages 2>&1"
+;; run like: "emacs ~/.emacs --no-site-file --batch -l use-package--name-extract.el -f print-packages 2>&1"
 
 (defun upe-list-until (predicate list)
-  (cond ((eq list nil) nil)
-        ((funcall predicate (car list)) nil)
-        (t (cons (car list) (upe-list-until predicate (cdr list))))))
+  (cond ((eq list nil)        nil)
+        ((funcall predicate
+                  (car list)) nil)
+        (t                    (cons (car list)
+                                    (upe-list-until predicate (cdr list))))))
 
 (defun upe-findcdr (keyword list)
-  (cond ((eq list nil) nil)
+  (cond ((eq list nil)           nil)
         ((eq (car list) keyword) list)
-        (t (upe-findcdr keyword (cdr list)))))
+        (t                       (upe-findcdr keyword (cdr list)))))
 
 (defun upe-get-use-package-progn (body keyword)
   (upe-list-until #'keywordp (cdr (upe-findcdr keyword body))))
@@ -16,18 +18,19 @@
 (defun upe-handle-use-package (use-package-expression)
   (let* ((name (cadr use-package-expression))
          (body (cddr use-package-expression))
-         (ensure (plist-get body :ensure))
-         (install-package (cond ((keywordp ensure) name)
-                                ((eq t ensure)     name)
-                                (t                 ensure)))
+         (ensure (upe-findcdr :ensure body))
+         (ensure-body (upe-get-use-package-progn body :ensure))
+         (install-package (cond ((equal '(t) ensure-body)   (list name))
+                                ((eq nil ensure-body)       (list name))
+                                ((equal '(nil) ensure-body) nil)
+                                (t                          ensure-body)))
          (init-progn (upe-get-use-package-progn body :init))
          (config-progn (upe-get-use-package-progn body :config))
          (preface-progn (upe-get-use-package-progn body :preface)))
-    (when install-package
-      (append (list install-package)
-              (upe-walk init-progn)
-              (upe-walk config-progn)
-              (upe-walk preface-progn)))))
+    (append (when ensure install-package)
+            (upe-walk init-progn)
+            (upe-walk config-progn)
+            (upe-walk preface-progn))))
 
 (defun upe-walk (tree)
   (cond ((atom tree)                  nil)
