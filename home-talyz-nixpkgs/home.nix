@@ -51,7 +51,9 @@
 
   home.file =
   {
-    ".emacs".source = ./dotfiles/emacs/emacs;
+    ".emacs".source = pkgs.runCommand "emacs" (with pkgs; { inherit cquery; }) ''
+      substituteAll ${./dotfiles/emacs/emacs} $out
+    '';
     "emacs-config.el".source = pkgs.runCommand "emacs-config.el" {} ''
       cp ${./dotfiles/emacs/emacs-config.org} emacs-config.org
       ${pkgs.emacs}/bin/emacs --batch ./emacs-config.org -f org-babel-tangle
