@@ -78,7 +78,8 @@
   services.accounts-daemon.enable = true;
   services.gnome3.gnome-terminal-server.enable = true;
   programs.dconf.enable = true;
-  
+  services.upower.enable = true;
+
   services.xserver.displayManager.gdm = {
     enable = true;
     #autoLogin.enable = true;
