@@ -37,8 +37,9 @@ in
         programs.light.enable = true;
         programs.nm-applet.enable = true;
 
-        services.compton.enable = true;
-        services.compton.backend = "glx";
+        # services.compton.enable = true;
+        # services.compton.backend = "glx";
+        # services.compton.vSync = "opengl";
 
         programs.gnupg.agent.enable = true;
         programs.gnupg.agent.enableSSHSupport = true;
