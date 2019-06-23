@@ -79,6 +79,14 @@
   services.gnome3.gnome-terminal-server.enable = true;
   programs.dconf.enable = true;
   
+  services.xserver.displayManager.gdm = {
+    enable = true;
+    #autoLogin.enable = true;
+    autoLogin.user = "talyz";
+  };
+
+  #gtk.iconCache.enable = true;
+
   # Enable CUPS to print documents.
   services.printing = {
     enable = true;

@@ -96,13 +96,6 @@ in
             # Enable the GNOME 3 Desktop Environment.
             enable = true;
           };
-          
-          displayManager.gdm =
-          {
-            enable = true;
-            autoLogin.enable = true;
-            autoLogin.user = "talyz";
-          };
         };
 
         systemd.services.accounts-daemon.restartIfChanged = false;
