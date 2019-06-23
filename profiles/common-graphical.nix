@@ -68,6 +68,9 @@
   services.avahi.browseDomains = [ "internal.xlnaudio.com" ];
 
   services.gnome3.gnome-keyring.enable = true;
+  #security.pam.services.login.enableGnomeKeyring = true;
+  security.pam.services.lightdm.enableGnomeKeyring = true;
+  security.pam.services.gdm.enableGnomeKeyring = true;
   services.gnome3.gnome-online-accounts.enable = true;
   services.gnome3.evolution-data-server.enable = true;
   security.polkit.enable = true;
