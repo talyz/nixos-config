@@ -66,7 +66,7 @@ in
 
             systemctl --user import-environment
 
-            ${pkgs.xss-lock}/bin/xss-lock -- ${cfg.lockerCommand} &
+            ${pkgs.xss-lock}/bin/xss-lock -l -- ${cfg.lockerCommand} &
             ${pkgs.emacs}/bin/emacs -l ${loadScript}
           '';
         };
