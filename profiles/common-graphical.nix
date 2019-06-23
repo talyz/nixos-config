@@ -55,6 +55,7 @@
 
   # Use libinput to handle trackpoint, touchpad, etc.
   services.xserver.libinput.enable = true;
+  services.xserver.libinput.naturalScrolling = true;
 
   # Keyboard layout.
   services.xserver.layout = "se";
