@@ -43,6 +43,14 @@
   '';
 
 
+  # Video drivers
+  services.xserver.videoDrivers = [ "intel" ];
+  hardware.opengl.extraPackages = with pkgs; [ vaapiIntel ];
+  services.xserver.deviceSection = ''
+    Option        "Tearfree"      "true"
+  '';
+
+  
   # Touchpad
 
   # Workaround for a bug where multitouch stops working after suspend
