@@ -7,8 +7,10 @@ let
 
   overlay = self: super:
     let
-      inherit (super.callPackage ./emacs-with-use-package-pkgs/emacs-with-use-package-pkgs.nix
-                                 { pkgs = super; }) emacsWithUsePackagePkgs;
+      inherit (import ./emacs-with-use-package-pkgs/emacs-with-use-package-pkgs.nix
+                      {
+                        inherit (super) runCommand emacs emacsPackagesNgGen;
+                      }) emacsWithUsePackagePkgs;
 
       orgBabelTangeledConfig = (super.runCommand "emacs-config.el" {} ''
         cp ${../home-talyz-nixpkgs/dotfiles/emacs/emacs-config.org} emacs-config.org
