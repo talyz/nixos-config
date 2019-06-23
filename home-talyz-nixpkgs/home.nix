@@ -33,6 +33,13 @@
     ".config/fish/functions/ec.fish".source = ./dotfiles/fish/.config/fish/functions/ec.fish;
     ".config/fish/functions/fish_prompt.fish".source = ./dotfiles/fish/.config/fish/functions/fish_prompt.fish;
 
+    ".config/Dharkael/flameshot.ini".text = ''
+      [General]
+      disabledTrayIcon=true
+      drawColor=#ff0000
+      drawThickness=0
+    '';
+
     # Create the auto-saves directory
     ".emacs.d/auto-saves/.manage-directory".text = "";
   };
