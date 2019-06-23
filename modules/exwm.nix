@@ -17,7 +17,7 @@ in
         type = types.bool;
       };
       lockerCommand = mkOption {
-        default = "${pkgs.i3lock}/bin/i3lock -n -c 000000";
+        default = "${pkgs.i3lock-fancy}/bin/i3lock-fancy -n -f Noto-Sans-Regular";
       };
     };
   };
