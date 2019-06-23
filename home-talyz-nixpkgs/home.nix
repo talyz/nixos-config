@@ -16,6 +16,16 @@
     userName = "talyz";
   };
 
+  gtk.enable = true;
+  gtk.iconTheme = {
+    package = pkgs.gnome3.adwaita-icon-theme;
+    name = "Adwaita";
+  };
+  gtk.gtk3.extraConfig = {
+    gtk-cursor-theme-name = "Adwaita";
+    gtk-application-prefer-dark-theme = 1;
+  };
+
   systemd.user.startServices = true;
 
   home.file =
