@@ -89,7 +89,7 @@ in
         ];
 
       services.emacs = {
-        enable = true;
+        install = true;
         defaultEditor = true;
       };
     };
