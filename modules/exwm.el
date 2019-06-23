@@ -26,7 +26,8 @@
             (when (and exwm-class-name
                        (or (string= exwm-class-name "URxvt")
                            (string= exwm-class-name "Gnome-terminal")))
-              (exwm-input-set-local-simulation-keys '(([?\C-c ?\C-c] . ?\C-c))))))
+              (exwm-input-set-local-simulation-keys nil))))
+             ;(exwm-input-set-local-simulation-keys '(([?\C-c ?\C-c] . ?\C-c))))))
 
 (add-hook 'exwm-update-title-hook
           (lambda ()
@@ -81,6 +82,10 @@
 (exwm-input-set-key
  (kbd "M-o")
  'ace-window)
+
+(exwm-input-set-key
+ (kbd "s-r")
+ 'exwm-input-grab-keyboard)
 
 (exwm-input-set-key
  (kbd "s-g")
