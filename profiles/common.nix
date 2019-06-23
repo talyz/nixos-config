@@ -36,6 +36,7 @@ in
     signing-party
     msmtp
     direnv
+    dnsutils
   ];
 
   # Internationalisation properties.
