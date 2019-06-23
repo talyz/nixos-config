@@ -22,10 +22,8 @@
     freecad
     mpv
     gparted
-    gnome3.gnome-keyring
-    gnome3.gnome-terminal
     gnome3.evolution
-    networkmanagerapplet
+    gnome3.evince
   ];
 
   # Enable pulse with all the bluetooth codec modules.
