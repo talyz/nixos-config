@@ -85,6 +85,8 @@
     drivers = [ pkgs.hplip ];
   };
 
+  hardware.sane.enable = true;
+
   # Enable the smartcard deamon.
   services.pcscd.enable = true;
 }

@@ -48,6 +48,9 @@ in
   time.timeZone = "Europe/Stockholm";
 
   nixpkgs.config.allowUnfree = true;
+  #android_sdk.accept_license = true;
+
+  programs.adb.enable = true;
   
   programs.fish.enable = true;
 
@@ -55,7 +58,7 @@ in
 
   users.extraUsers.talyz = {
     isNormalUser = true;
-		extraGroups = [ "wheel" "video" ];
+		extraGroups = [ "wheel" "video" "adbusers" "scanner" ];
 		shell = pkgs.fish;
 		uid = 1000;
 		initialPassword = "aoeuaoeu";
