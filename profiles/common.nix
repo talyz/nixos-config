@@ -59,7 +59,7 @@ in
 
   users.extraUsers.talyz = {
     isNormalUser = true;
-		extraGroups = [ "wheel" "video" "adbusers" "scanner" ];
+		extraGroups = [ "wheel" "video" "adbusers" "lp" "scanner" ];
 		shell = pkgs.fish;
 		uid = 1000;
 		initialPassword = "aoeuaoeu";

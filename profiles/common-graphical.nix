@@ -91,10 +91,14 @@
   # Enable CUPS to print documents.
   services.printing = {
     enable = true;
-    drivers = [ pkgs.hplip ];
+    drivers = [ pkgs.hplipWithPlugin ];
   };
 
+  # Enable SANE to scan documents.
+  services.saned.enable = true;
   hardware.sane.enable = true;
+  hardware.sane.extraBackends = [ pkgs.hplipWithPlugin ];
+  hardware.sane.netConf = "printer.internal.xlnaudio.com";
 
   # Enable the smartcard deamon.
   services.pcscd.enable = true;
