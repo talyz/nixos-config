@@ -26,6 +26,8 @@
     gparted
     gnome3.evolution
     gnome3.evince
+    google-play-music-desktop-player
+    google-musicmanager
   ];
 
   # Enable pulse with all the bluetooth codec modules.
