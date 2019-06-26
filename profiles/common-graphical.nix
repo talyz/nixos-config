@@ -11,6 +11,8 @@
     noto-fonts-cjk
     noto-fonts-emoji
     noto-fonts-extra
+    fira-code
+    fira-code-symbols
   ];
 
   # fonts.fontconfig.antialias = false;
