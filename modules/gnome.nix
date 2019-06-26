@@ -4,7 +4,6 @@ with lib;
 
 let
   cfg = config.talyz.gnome;
-  gse-show-workspaces = pkgs.callPackage ./gse-show-workspaces.nix { };
 in
 {
   imports = [ ./dconf.nix ];
@@ -34,7 +33,6 @@ in
           gnome3.gnome_session
           gnomeExtensions.dash-to-dock
           gnomeExtensions.topicons-plus
-          gse-show-workspaces
         ];
         
         services.xserver =
@@ -60,6 +58,9 @@ in
               switch-to-workspace-6=['<Super>6']
               switch-to-workspace-7=['<Super>7']
               switch-to-workspace-8=['<Super>8']
+              switch-windows=['<Alt>Tab']
+              switch-applications=[]
+
 
               [org.gnome.desktop.wm.preferences]
               num-workspaces=8
@@ -85,7 +86,7 @@ in
               idle-delay=0
               
               [org.gnome.shell]
-              enabled-extensions=['TopIcons@phocean.net', 'launch-new-instance@gnome-shell-extensions.gcampax.github.com', 'alternate-tab@gnome-shell-extensions.gcampax.github.com', 'gse-show-workspaces@ns.petersimonyi.ca']
+              enabled-extensions=['TopIcons@phocean.net', 'launch-new-instance@gnome-shell-extensions.gcampax.github.com']
             '';
 
             # Enable the GNOME 3 Desktop Environment.
