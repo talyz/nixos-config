@@ -20,14 +20,14 @@
   #talyz.exwm.enable = true;
 
   # AMD GPU drivers
-  boot.kernelPatches = [
-    { name = "amdgpu-config";
-      patch = null;
-      extraConfig = ''
-        DRM_AMD_DC_DCN1_0 y
-      '';
-    }
-  ];
+  # boot.kernelPatches = [
+  #   { name = "amdgpu-config";
+  #     patch = null;
+  #     extraConfig = ''
+  #       DRM_AMD_DC_DCN1_0 y
+  #     '';
+  #   }
+  # ];
 
   services.xserver.videoDrivers = [ "amdgpu" ];
   
