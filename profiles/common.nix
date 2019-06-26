@@ -56,11 +56,14 @@ in
   
   programs.fish.enable = true;
 
+  programs.wireshark.enable = true;
+  programs.wireshark.package = pkgs.wireshark-qt;
+
   home-manager.users.talyz = import ../home-talyz-nixpkgs/home.nix;
 
   users.extraUsers.talyz = {
     isNormalUser = true;
-		extraGroups = [ "wheel" "video" "adbusers" "lp" "scanner" ];
+		extraGroups = [ "wheel" "video" "adbusers" "lp" "scanner" "wireshark" ];
 		shell = pkgs.fish;
 		uid = 1000;
 		initialPassword = "aoeuaoeu";
