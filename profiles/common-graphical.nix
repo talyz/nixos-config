@@ -18,8 +18,8 @@
   # fonts.fontconfig.antialias = false;
 
   environment.systemPackages = with pkgs; [
-    keepassxc
     firefox
+    (keepassxc.override { withKeePassNetworking = true; })
     dropbox
     freecad
     mpv
