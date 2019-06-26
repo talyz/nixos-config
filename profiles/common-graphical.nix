@@ -28,6 +28,11 @@
     gnome3.evince
     google-play-music-desktop-player
     google-musicmanager
+    aspell
+    aspellDicts.sv
+    aspellDicts.en
+    aspellDicts.en-science
+    aspellDicts.en-computers
   ];
 
   # Enable pulse with all the bluetooth codec modules.

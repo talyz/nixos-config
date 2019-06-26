@@ -35,11 +35,6 @@ in
           gnomeExtensions.dash-to-dock
           gnomeExtensions.topicons-plus
           gse-show-workspaces
-          aspell
-          aspellDicts.sv
-          aspellDicts.en
-          aspellDicts.en-science
-          aspellDicts.en-computers
         ];
         
         services.xserver =
