@@ -23,6 +23,7 @@ in
     fzf
     curl
     sshfs-fuse
+    exfat-utils
     pv
     ripgrep
     openssh
