@@ -109,6 +109,8 @@ in
         
         services.fwupd.enable = true;
 
+        talyz.emacs.enable = true;
+
         # Define custom keybindings.
 
         # Because of what is most likely a bug in gsettings, parameters
