@@ -61,7 +61,7 @@ in
 
   home-manager.users.talyz = import ../home-talyz-nixpkgs/home.nix;
 
-  users.extraUsers.talyz = {
+  users.users.talyz = {
     isNormalUser = true;
 		extraGroups = [ "wheel" "video" "adbusers" "lp" "scanner" "wireshark" ];
 		shell = pkgs.fish;
