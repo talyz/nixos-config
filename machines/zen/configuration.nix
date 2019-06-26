@@ -7,13 +7,17 @@
 {
   imports = [
     <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
-    ../../profiles/desktop.nix
+    ../../profiles/common.nix
     ../../profiles/work.nix
+    ../../modules
     #./profiles/hardened.nix
   ];
 
   hardware.cpu.amd.updateMicrocode = true;
   hardware.enableAllFirmware = true;
+
+  talyz.gnome.enable = true;
+  #talyz.exwm.enable = true;
 
   # AMD GPU drivers
   boot.kernelPatches = [
