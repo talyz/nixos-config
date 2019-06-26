@@ -33,6 +33,7 @@ in
           gnome3.gnome_session
           gnomeExtensions.dash-to-dock
           gnomeExtensions.topicons-plus
+          gnome3.rhythmbox
         ];
         
         services.xserver =
