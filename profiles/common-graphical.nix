@@ -6,7 +6,7 @@
     source-code-pro
     inconsolata
     dejavu_fonts
-    emacs-all-the-icons-fonts
+    #emacs-all-the-icons-fonts
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
