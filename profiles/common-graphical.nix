@@ -49,6 +49,11 @@
       avoid-resampling = "true";
     };
 
+    configFile = pkgs.runCommand "default.pa" {} ''
+      sed 's/load-module module-bluetooth-discover/load-module module-bluetooth-discover a2dp_config="aac_afterburner=on aac_bitrate_mode=0"/' \
+          ${pkgs.pulseaudioFull}/etc/pulse/default.pa > $out
+    '';
+
     package = pkgs.pulseaudioFull;
   };
 
