@@ -1,16 +1,14 @@
 { pkgs, ... }:
 
-{ 
-  imports = [ ./host.nix ];
-
-  pam.sessionVariables =
-  {
+{
+  imports = [ ./modules/persistence.nix ];
+  
+  pam.sessionVariables = {
     EDITOR = "emacs";
     MOZ_USE_XINPUT2 = "1";
   };
 
-  programs.git =
-  {
+  programs.git = {
     enable = true;
     userEmail = "kim.lindberger@gmail.com";
     userName = "talyz";
@@ -49,6 +47,27 @@
     };
   };
 
+  home.persistence."/persistent/home/talyz".directories = [
+    "Downloads"
+    "Music"
+    "Pictures"
+    "Documents"
+    "Videos"
+    ".ssh"
+    ".mozilla"
+    ".emacs.d"
+  ];
+
+  home.persistence."/etc/nixos/home-talyz-nixpkgs/dotfiles" = {
+    removePrefixDirectory = true;
+    files = [
+      "screen/.screenrc"
+    ];
+    directories = [
+      "fish/.config/fish"
+    ];
+  };
+  
   home.file =
   {
     ".emacs".source = pkgs.runCommand "emacs" (with pkgs; { inherit cquery; }) ''
@@ -56,15 +75,9 @@
     '';
     "emacs-config.el".source = pkgs.runCommand "emacs-config.el" {} ''
       cp ${./dotfiles/emacs/emacs-config.org} emacs-config.org
-      ${pkgs.emacs}/bin/emacs --batch ./emacs-config.org -f org-babel-tangle
+      ${pkgs.emacs}/bin/emacs -Q --batch ./emacs-config.org -f org-babel-tangle
       mv emacs-config.el $out
     '';
-    
-    ".screenrc".source = ./dotfiles/screen/screenrc;
-    ".config/fish/config.fish".source = ./dotfiles/fish/.config/fish/config.fish;
-    ".config/fish/functions/cal.fish".source = ./dotfiles/fish/.config/fish/functions/cal.fish;
-    ".config/fish/functions/ec.fish".source = ./dotfiles/fish/.config/fish/functions/ec.fish;
-    ".config/fish/functions/fish_prompt.fish".source = ./dotfiles/fish/.config/fish/functions/fish_prompt.fish;
 
     ".config/Dharkael/flameshot.ini".text = ''
       [General]
@@ -74,6 +87,6 @@
     '';
 
     # Create the auto-saves directory
-    ".emacs.d/auto-saves/.manage-directory".text = "";
+    # ".emacs.d/auto-saves/.manage-directory".text = "";
   };
 }
