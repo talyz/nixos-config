@@ -4,3 +4,6 @@
 [submodule "modules/emacs-with-use-package-pkgs"]
 	path = modules/emacs-with-use-package-pkgs
 	url = git@github.com:talyz/nix-emacs-with-use-package-pkgs.git
+[submodule "machines/flora/nixpkgs"]
+	path = machines/flora/nixpkgs
+	url = git@github.com:talyz/nixpkgs.git

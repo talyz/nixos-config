@@ -5,6 +5,12 @@
 { config, lib, pkgs, ... }:
 
 {
+  nix.nixPath = [
+    "nixpkgs=/etc/nixos/machines/flora/nixpkgs"
+    "nixos-config=/etc/nixos/configuration.nix"
+    "/nix/var/nix/profiles/per-user/root/channels"
+  ];
+  
   imports = [
     <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
     ../../profiles/common.nix
