@@ -87,8 +87,6 @@ in
                           (dir: let targetDir = concatPaths [path dir]; in ''
                             if [[ ! -e "${targetDir}" ]]; then
                                 mkdir -p "${targetDir}"
-                            else
-                                echo "Directory ${targetDir} already exists, skipping..."
                             fi
                           '')
                          cfg.${path}.directories))
