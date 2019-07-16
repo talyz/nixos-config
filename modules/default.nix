@@ -6,5 +6,6 @@
       ./gnome.nix
       ./exwm.nix
       ./emacs.nix
+      ./persistence.nix
     ];
 }

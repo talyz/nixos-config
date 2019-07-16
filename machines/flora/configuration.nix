@@ -69,6 +69,20 @@
       '';
   };
 
+  environment.persistence.root = {
+    targetDir = "/persistent";
+    directories = [
+      "/var/log"
+      "/var/lib/bluetooth"
+    ];
+  };
+
+  environment.persistence.etc = {
+    targetDir = "/persistent/etc";
+    directories = [ "NetworkManager/system-connections" ];
+    files = [ "machine-id" ];
+  };
+
   users.mutableUsers = false;
   users.users.talyz.passwordFile = "/persistent/password_talyz";
   users.users.root.passwordFile = "/persistent/password_root";
@@ -103,12 +117,6 @@
   fileSystems."/etc/nixos" = {
     device = "/persistent/etc/nixos";
     options = [ "bind" "noauto" "x-systemd.automount" ];
-  };
-
-  # Persistence of logs between boots
-  fileSystems."/var/log" = {
-    device = "/persistent/var/log";
-    options = [ "bind" ];
   };
 
   fileSystems."/boot" = {
