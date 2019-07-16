@@ -56,6 +56,9 @@
     ".ssh"
     ".mozilla"
     ".emacs.d"
+    ".local/share/fish"
+    ".local/share/evolution"
+    ".config/evolution"
   ];
 
   home.persistence."/etc/nixos/home-talyz-nixpkgs/dotfiles" = {
