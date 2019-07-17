@@ -41,6 +41,13 @@
 
   networking.hostName = "flora";
 
+  # Video drivers
+  services.xserver.videoDrivers = [ "intel" ];
+  hardware.opengl.extraPackages = with pkgs; [ vaapiIntel ];
+  services.xserver.deviceSection = ''
+    Option        "Tearfree"      "true"
+  '';
+
   # Touchpad
   services.xserver.libinput.accelSpeed = "0.3";
 
