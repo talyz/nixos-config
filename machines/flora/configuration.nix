@@ -76,20 +76,24 @@
       '';
   };
 
-  environment.persistence.root = {
+  environment.persistence = {
+
     targetDir = "/persistent";
-    directories = [
-      "/var/log"
-      "/var/lib/bluetooth"
-    ];
-  };
 
-  environment.persistence.etc = {
-    targetDir = "/persistent/etc";
-    directories = [ "NetworkManager/system-connections" ];
-    files = [ "machine-id" ];
-  };
+    root = {
+      directories = [
+        "/var/log"
+        "/var/lib/bluetooth"
+      ];
+    };
 
+    etc = {
+      directories = [ "NetworkManager/system-connections" ];
+      files = [ "machine-id" ];
+    };
+
+  };
+  
   users.mutableUsers = false;
   users.users.talyz.passwordFile = "/persistent/password_talyz";
   users.users.root.passwordFile = "/persistent/password_root";
