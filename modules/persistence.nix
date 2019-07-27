@@ -18,8 +18,8 @@ let
   concatPaths = paths: (if hasPrefix "/" (head paths) then "/" else "") +
                          (dirListToPath (splitPath paths));
                          
-  link = file: pkgs.runCommand "${replaceStrings ["/" "."] ["-" ""] file}" {}
-                               "ln -s ${file} $out";
+  link = file: pkgs.runCommand "${replaceStrings ["/" "." " "] ["-" "" ""] file}" {}
+                               "ln -s '${file}' $out";
 in
 {
   options = {
