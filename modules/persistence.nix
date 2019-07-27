@@ -24,45 +24,61 @@ in
 {
   options = {
 
-    environment.persistence.etc = {
+    environment.persistence = {
 
       targetDir = mkOption {
         type = types.str;
+        description = ''
+          The directory where real files and directories are stored.
+        '';
       };
 
-      directories = mkOption {
-        type = with types; listOf str;
-        default = [];
+      etc = {
+
+        directories = mkOption {
+          type = with types; listOf str;
+          default = [];
+          description = ''
+            Directories in /etc that should be stored in persistent storage.
+          '';
+          example = ''
+            [ "NetworkManager/system-connections" ]
+          '';
+        };
+
+        files = mkOption {
+          type = with types; listOf str;
+          default = [];
+          description = ''
+            Files in /etc that should be stored in persistent storage.
+          '';
+        };
+
+        createMissingDirectories = mkOption {
+          type = types.bool;
+          default = true;
+        };
+        
       };
 
-      files = mkOption {
-        type = with types; listOf str;
-        default = [];
+      root = {
+
+        targetDir = mkOption {
+          type = types.str;
+        };
+
+        directories = mkOption {
+          type = with types; listOf str;
+          default = [];
+        };
+
+        createMissingDirectories = mkOption {
+          type = types.bool;
+          default = true;
+        };
+
       };
 
-      createMissingDirectories = mkOption {
-        type = types.bool;
-        default = true;
-      };
-      
-    };
-
-    environment.persistence.root = {
-
-      targetDir = mkOption {
-        type = types.str;
-      };
-
-      directories = mkOption {
-        type = with types; listOf str;
-        default = [];
-      };
-
-      createMissingDirectories = mkOption {
-        type = types.bool;
-        default = true;
-      };
-      
     };
     
   };
@@ -73,7 +89,7 @@ in
         (map (fileOrDir:
                 nameValuePair
                   fileOrDir
-                  { source = link (concatPaths [cfg.etc.targetDir fileOrDir]); })
+                  { source = link (concatPaths [cfg.targetDir "etc" fileOrDir]); })
              (cfg.etc.files ++ cfg.etc.directories));
 
     fileSystems =
@@ -82,7 +98,7 @@ in
                 nameValuePair
                   (concatPaths ["/" dir])
                   {
-                    device = concatPaths [cfg.root.targetDir dir];
+                    device = concatPaths [cfg.targetDir dir];
                     options = ["bind"];
                   })
              cfg.root.directories);
@@ -91,7 +107,7 @@ in
       optionalAttrs cfg.etc.createMissingDirectories {
         createDirsInEtc = noDepEntry
                             (concatMapStrings
-                               (dir: let targetDir = concatPaths [cfg.etc.targetDir dir]; in ''
+                               (dir: let targetDir = concatPaths [cfg.targetDir "etc" dir]; in ''
                                  if [[ ! -e "${targetDir}" ]]; then
                                      mkdir -p "${targetDir}"
                                  fi
@@ -100,7 +116,7 @@ in
       } // optionalAttrs cfg.root.createMissingDirectories {
         createDirsInRoot = noDepEntry
                              (concatMapStrings
-                                (dir: let targetDir = concatPaths [cfg.root.targetDir dir]; in ''
+                                (dir: let targetDir = concatPaths [cfg.targetDir dir]; in ''
                                   if [[ ! -e "${targetDir}" ]]; then
                                       mkdir -p "${targetDir}"
                                   fi
