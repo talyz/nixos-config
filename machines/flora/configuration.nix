@@ -103,7 +103,7 @@
   fileSystems."/" = {
     device = "none";
     fsType = "tmpfs";
-    options = [ "defaults" "size=1G" "mode=755" ];
+    options = [ "defaults" "size=75%" "mode=755" ];
   };
 
   # fileSystems."/" = {
