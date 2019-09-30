@@ -27,11 +27,7 @@ in
       {
         nixpkgs.overlays =
           [
-            (import
-              (builtins.fetchTarball
-                {
-                  url = https://github.com/adisbladis/exwm-overlay/archive/master.tar.gz;
-                }))
+            (import ./emacs-overlay)
           ];
 
         programs.light.enable = true;
