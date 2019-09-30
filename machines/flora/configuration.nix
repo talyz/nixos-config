@@ -19,8 +19,8 @@
     # ./profiles/hardened.nix
   ];
 
-  talyz.gnome.enable = true;
-  #talyz.exwm.enable = true;
+  #talyz.gnome.enable = true;
+  talyz.exwm.enable = true;
 
   hardware = {
     cpu.intel.updateMicrocode = true;
