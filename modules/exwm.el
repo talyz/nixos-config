@@ -25,7 +25,8 @@
           (lambda ()
             (when (and exwm-class-name
                        (or (string= exwm-class-name "URxvt")
-                           (string= exwm-class-name "Gnome-terminal")))
+                           (string= exwm-class-name "Gnome-terminal")
+                           (string= exwm-class-name "kitty")))
               (exwm-input-set-local-simulation-keys nil))))
              ;(exwm-input-set-local-simulation-keys '(([?\C-c ?\C-c] . ?\C-c))))))
 
@@ -106,7 +107,7 @@
  (kbd "s-c")
  (defun pnh-terminal ()
    (interactive)
-   (let ((cmd "systemd-run --user gnome-terminal"))
+   (let ((cmd "systemd-run --user kitty"))
      (start-process-shell-command cmd nil cmd))))
 
 (setq browse-url-firefox-arguments '("-new-window"))

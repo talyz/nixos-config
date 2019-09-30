@@ -24,6 +24,7 @@
     freecad
     krita
     mpv
+    kitty
     gparted
     gnome3.evolution
     gnome3.evince
@@ -91,7 +92,6 @@
   security.polkit.enable = true;
   services.udisks2.enable = true;
   services.accounts-daemon.enable = true;
-  services.gnome3.gnome-terminal-server.enable = true;
   programs.dconf.enable = true;
   services.upower.enable = true;
 
