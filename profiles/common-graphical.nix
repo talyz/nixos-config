@@ -48,9 +48,9 @@
     daemon.config = {
       flat-volumes = "no";
       default-sample-format = "s24le";
-      default-sample-rate = "44100";
-      resample-method = "speex-float-10";
-      avoid-resampling = "true";
+      # default-sample-rate = "44100";
+      # resample-method = "speex-float-5";
+      # avoid-resampling = "true";
     };
 
     configFile = pkgs.runCommand "default.pa" {} ''
