@@ -84,6 +84,7 @@
       directories = [
         "/var/log"
         "/var/lib/bluetooth"
+        "/var/lib/libvirt"
       ];
     };
 
