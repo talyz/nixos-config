@@ -55,12 +55,14 @@
       "Pictures"
       "Documents"
       "Videos"
+      "VirtualBox VMs"
       ".ssh"
       ".mozilla"
       ".emacs.d"
       ".local/share/fish"
       ".local/share/evolution"
       ".config/evolution"
+      ".config/VirtualBox"
     ];
   };
   
