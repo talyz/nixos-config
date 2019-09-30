@@ -38,6 +38,7 @@ in
     msmtp
     direnv
     dnsutils
+    bat
   ];
 
   # Internationalisation properties.
