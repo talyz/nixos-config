@@ -60,6 +60,7 @@
       ".ssh"
       ".mozilla"
       ".emacs.d"
+      ".nixops"
       ".local/share/fish"
       ".local/share/evolution"
       ".config/evolution"
