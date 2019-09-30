@@ -66,6 +66,7 @@
       ".local/share/keyrings"
       ".config/evolution"
       ".config/goa-1.0"
+      ".config/direnv"
       ".config/VirtualBox"
       ".cache/evolution"
     ];
