@@ -56,6 +56,7 @@
       "Documents"
       "Videos"
       "VirtualBox VMs"
+      "Projects"
       ".ssh"
       ".mozilla"
       ".emacs.d"
