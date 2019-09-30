@@ -56,7 +56,7 @@
     ''
       Identifier     "TrackPoint configuration"
       MatchProduct   "TrackPoint"
-      Option "AccelSpeed" "0.4"
+      Option "AccelSpeed" "0.6"
     ''
   ];
 
