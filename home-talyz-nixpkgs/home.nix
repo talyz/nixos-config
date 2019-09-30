@@ -63,6 +63,7 @@
       ".nixops"
       ".local/share/fish"
       ".local/share/evolution"
+      ".local/share/keyrings"
       ".config/evolution"
       ".config/VirtualBox"
     ];
