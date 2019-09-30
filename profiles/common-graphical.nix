@@ -28,6 +28,7 @@
     gparted
     gnome3.evolution
     gnome3.evince
+    gnome3.adwaita-icon-theme
     google-play-music-desktop-player
     google-musicmanager
     aspell
@@ -36,6 +37,8 @@
     aspellDicts.en-science
     aspellDicts.en-computers
   ];
+
+  xdg.icons.enable = true;
 
   # Enable pulse with all the bluetooth codec modules.
   hardware.pulseaudio = {
