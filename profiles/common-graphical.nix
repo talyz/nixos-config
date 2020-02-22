@@ -109,8 +109,25 @@
   # Enable CUPS to print documents.
   services.printing = {
     enable = true;
-    drivers = [ pkgs.hplipWithPlugin ];
+    drivers = [
+      pkgs.hplipWithPlugin
+      pkgs.postscript-lexmark
+    ];
   };
+
+  # Enable printer configuration
+  #hardware.printers.ensureDefaultPrinter = "Lexmark_CS510de";
+  hardware.printers.ensurePrinters = [
+    {
+      name = "Lexmark_CS510de";
+      deviceUri = "ipps://192.168.0.124:443/ipp/print";
+      model = "postscript-lexmark/Lexmark-CS510_Series-Postscript-Lexmark.ppd";
+      location = "UFS";
+      ppdOptions = {
+        PageSize = "A4";
+      };
+    }
+  ];
 
   # Enable SANE to scan documents.
   services.saned.enable = true;
