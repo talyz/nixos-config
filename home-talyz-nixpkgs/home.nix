@@ -63,6 +63,7 @@
       "Videos"
       "VirtualBox VMs"
       "Projects"
+      ".aws"
       ".ssh"
       ".mozilla"
       ".emacs.d"
