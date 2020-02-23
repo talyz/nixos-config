@@ -64,6 +64,7 @@
       "VirtualBox VMs"
       "Projects"
       ".aws"
+      ".gnupg"
       ".ssh"
       ".mozilla"
       ".emacs.d"
