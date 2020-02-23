@@ -72,14 +72,14 @@
       ".local/share/fish"
       ".local/share/evolution"
       ".local/share/keyrings"
+      ".local/share/direnv"
       ".config/evolution"
       ".config/goa-1.0"
-      ".config/direnv"
       ".config/VirtualBox"
       ".cache/evolution"
     ];
   };
-  
+
   home.persistence."/etc/nixos/home-talyz-nixpkgs/dotfiles" = {
     removePrefixDirectory = true;
     files = [
@@ -89,7 +89,7 @@
       "fish/.config/fish"
     ];
   };
-  
+
   home.file =
   {
     ".emacs".source = pkgs.runCommand "emacs" (with pkgs; { inherit cquery; }) ''
