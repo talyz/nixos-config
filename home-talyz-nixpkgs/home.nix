@@ -24,6 +24,12 @@
     gtk-application-prefer-dark-theme = 1;
   };
 
+  xdg.mimeApps.enable = true;
+  xdg.mimeApps.defaultApplications = {
+    "application/pdf" = [ "org.gnome.Evince.desktop" ];
+    "image/pdf" = [ "org.gnome.Evince.desktop" ];
+  };
+
   systemd.user.startServices = true;
 
   services.dunst.enable = true;
