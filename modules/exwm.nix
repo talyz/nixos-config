@@ -7,8 +7,7 @@ let
   loadScript = ./exwm.el;
 in
 {
-  options =
-  {
+  options = {
     talyz.exwm = {
       enable = mkOption {
         default = false;
@@ -21,52 +20,46 @@ in
       };
     };
   };
-  config =
-    mkIf cfg.enable (mkMerge [
-      ((import ../profiles/common-graphical.nix) { inherit config pkgs; })
-      {
-        nixpkgs.overlays =
-          [
-            (import ./emacs-overlay)
-          ];
+  config = mkIf cfg.enable {
 
-        programs.light.enable = true;
-        programs.nm-applet.enable = true;
+    talyz.common-graphical.enable = true;
 
-        # services.compton.enable = true;
-        # services.compton.backend = "glx";
-        # services.compton.vSync = "opengl";
+    nixpkgs.overlays = [
+      (import ./emacs-overlay)
+    ];
 
-        programs.gnupg.agent.enable = true;
-        programs.gnupg.agent.enableSSHSupport = true;
+    programs.light.enable = true;
+    programs.nm-applet.enable = true;
 
-        talyz.emacs.enable = true;
-        talyz.emacs.extraPackages = [ "desktop-environment" "exwm" ];
+    programs.gnupg.agent.enable = true;
+    programs.gnupg.agent.enableSSHSupport = true;
 
-        environment.systemPackages = with pkgs; [
-          flameshot
-        ];
+    talyz.emacs.enable = true;
+    talyz.emacs.extraPackages = [ "desktop-environment" "exwm" ];
 
-        services.xserver.windowManager.session = singleton {
-          name = "exwm";
-          start = ''
-            # Bind gpg-agent to this TTY if gpg commands are used.
-            export GPG_TTY=$(tty)
+    environment.systemPackages = with pkgs; [
+      flameshot
+    ];
 
-            # SSH agent protocol doesn't support changing TTYs, so bind the agent
-            # to every new TTY.
-            ${pkgs.gnupg}/bin/gpg-connect-agent --quiet updatestartuptty /bye > /dev/null
+    services.xserver.windowManager.session = singleton {
+      name = "exwm";
+      start = ''
+          # Bind gpg-agent to this TTY if gpg commands are used.
+          export GPG_TTY=$(tty)
 
-            if [ -z "$SSH_AUTH_SOCK" ]; then
-                export SSH_AUTH_SOCK=$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)
-            fi
+          # SSH agent protocol doesn't support changing TTYs, so bind the agent
+          # to every new TTY.
+          ${pkgs.gnupg}/bin/gpg-connect-agent --quiet updatestartuptty /bye > /dev/null
 
-            systemctl --user import-environment
+          if [ -z "$SSH_AUTH_SOCK" ]; then
+          export SSH_AUTH_SOCK=$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)
+          fi
 
-            ${pkgs.xss-lock}/bin/xss-lock -l -- ${cfg.lockerCommand} &
-            ${pkgs.emacs}/bin/emacs -l ${loadScript}
-          '';
-        };
-      }
-    ]);
+          systemctl --user import-environment
+
+          ${pkgs.xss-lock}/bin/xss-lock -l -- ${cfg.lockerCommand} &
+          ${pkgs.emacs}/bin/emacs -l ${loadScript}
+        '';
+    };
+  };
 }
