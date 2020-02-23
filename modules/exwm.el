@@ -107,7 +107,7 @@
  (kbd "s-c")
  (defun pnh-terminal ()
    (interactive)
-   (let ((cmd "systemd-run --user kitty"))
+   (let ((cmd "systemd-run --user gnome-terminal"))
      (start-process-shell-command cmd nil cmd))))
 
 (setq browse-url-firefox-arguments '("-new-window"))

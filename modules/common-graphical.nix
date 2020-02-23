@@ -99,6 +99,7 @@ in
     services.avahi.enable = true;
     services.avahi.browseDomains = [ "internal.xlnaudio.com" ];
 
+    programs.gnome-terminal.enable = true;
     services.gnome3.gnome-keyring.enable = true;
     #security.pam.services.login.enableGnomeKeyring = true;
     security.pam.services.lightdm.enableGnomeKeyring = true;

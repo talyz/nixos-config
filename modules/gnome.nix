@@ -125,7 +125,7 @@ in
 
         [org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
         binding='<Super>c'
-        command='kitty'
+        command='gnome-terminal'
         name='terminal'
 
         [org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1]
