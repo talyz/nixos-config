@@ -42,11 +42,9 @@ in
   ];
 
   # Internationalisation properties.
-  i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "dvorak";
-    defaultLocale = "en_US.UTF-8";
-  };
+  console.font = "Lat2-Terminus16";
+  console.keyMap = "dvorak";
+  i18n.defaultLocale = "en_US.UTF-8";
   
   time.timeZone = "Europe/Stockholm";
 
