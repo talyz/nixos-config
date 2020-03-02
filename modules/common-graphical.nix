@@ -83,9 +83,9 @@ in
     services.xserver.libinput.naturalScrolling = true;
 
     # Keyboard layout.
-    services.xserver.layout = "se";
+    services.xserver.layout = "us";
     services.xserver.xkbOptions = "eurosign:e,ctrl:nocaps,numpad:mac,kpdl:dot";
-    services.xserver.xkbVariant = "dvorak";
+    services.xserver.xkbVariant = "dvorak-intl";
 
     # Enable networkmanager.
     networking.networkmanager.enable = true;

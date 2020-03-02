@@ -48,7 +48,7 @@ in
             extraGSettingsOverrides =
               ''
                 [org.gnome.desktop.input-sources]
-                sources=[('xkb', 'se+dvorak')]
+                sources=[('xkb', 'us+dvorak-intl')]
                 xkb-options=['eurosign:e', 'ctrl:nocaps', 'numpad:mac', 'kpdl:dot']
 
                 [org.gnome.desktop.wm.keybindings]

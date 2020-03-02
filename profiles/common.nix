@@ -44,7 +44,7 @@ in
   # Internationalisation properties.
   i18n = {
     consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "dvorak-sv-a1";
+    consoleKeyMap = "dvorak";
     defaultLocale = "en_US.UTF-8";
   };
   
