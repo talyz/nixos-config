@@ -31,6 +31,7 @@
 
   services.xserver.videoDrivers = [ "amdgpu" ];
   
+  boot.kernelPatches = [{ name = "trackpoint-scrolling"; patch = ./trackpoint.patch; }];
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
