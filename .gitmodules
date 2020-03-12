@@ -10,3 +10,6 @@
 [submodule "modules/emacs-overlay"]
 	path = modules/emacs-overlay
 	url = https://github.com/nix-community/emacs-overlay
+[submodule "machines/zen/nixpkgs"]
+	path = machines/zen/nixpkgs
+	url = git@github.com:talyz/nixpkgs.git
