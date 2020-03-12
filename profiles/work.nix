@@ -7,6 +7,10 @@
       nomachine-client
     ];
 
+  programs.ssh.extraConfig = ''
+    GSSAPIAuthentication yes
+  '';
+
   # virtualisation.libvirtd.enable = true;
   # virtualisation.libvirtd.qemuRunAsRoot = false;
   # virtualisation.libvirtd.onShutdown = "shutdown";
