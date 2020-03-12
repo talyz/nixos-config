@@ -36,7 +36,7 @@
   # ];
 
   services.xserver.videoDrivers = [ "amdgpu" ];
-  
+
   boot.kernelPatches = [{ name = "trackpoint-scrolling"; patch = ./trackpoint.patch; }];
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -53,12 +53,12 @@
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
 
   # Kernel modules to load in the second stage of boot.
-  boot.kernelModules = [ "kvm-amd" "lm92" "nct6775" ];
+  boot.kernelModules = [ "kvm-amd" "lm92" ];
   #boot.extraModulePackages = [ config.boot.kernelPackages.acpi_call ];
 
   networking.hostName = "zen";
 
-  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/4e259096-3b45-44ae-b3fb-0b5ab99e888a";
+  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/debb17e3-71fc-471a-b9eb-ee3361fae721";
 
   fileSystems."/" =
     { device = "/dev/root_vg/root";
@@ -79,13 +79,8 @@
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/69ED-0001";
+    { device = "/dev/disk/by-uuid/6A31-12B4";
       fsType = "vfat";
-    };
-
-  fileSystems."/home/talyz/dropbox" =
-    { device = "/dev/root_vg/dropbox";
-      fsType = "ext4";
     };
 
   swapDevices = [
@@ -95,7 +90,7 @@
   ];
 
   nix.maxJobs = lib.mkDefault 8;
-  
+
   # Enable firewall
   networking.firewall = {
     enable = true;
