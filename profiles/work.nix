@@ -14,9 +14,12 @@
   # networking.firewall.checkReversePath = false;
 
   virtualisation.virtualbox.host.enable = true;
-  users.users.talyz.extraGroups = [ "vboxusers" ];
   virtualisation.virtualbox.host.package = pkgs.virtualbox.override {
     enable32bitGuests = false;
   };
   virtualisation.virtualbox.host.enableExtensionPack = true;
+
+  virtualisation.docker.enable = true;
+
+  users.users.talyz.extraGroups = [ "vboxusers" "docker" ];
 }
