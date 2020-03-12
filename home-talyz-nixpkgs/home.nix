@@ -14,6 +14,17 @@
     userName = "talyz";
   };
 
+  programs.gpg.enable = true;
+  programs.gpg.settings = {
+    keyserver = "hkps://keys.openpgp.org";
+    default-key = "950336A4CA46BB42242733312DED2151F4671A2B";
+  };
+
+  services.gpg-agent.enable = true;
+  services.gpg-agent.extraConfig = ''
+    pinentry-program ${pkgs.pinentry-gnome}/bin/pinentry-gnome3
+  '';
+
   gtk.enable = true;
   gtk.iconTheme = {
     package = pkgs.gnome3.adwaita-icon-theme;
