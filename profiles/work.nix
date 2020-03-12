@@ -16,4 +16,7 @@
 
   virtualisation.virtualbox.host.enable = true;
   users.users.talyz.extraGroups = [ "vboxusers" ];
+  virtualisation.virtualbox.host.package = pkgs.virtualbox.override {
+    enable32bitGuests = false;
+  };
 }
