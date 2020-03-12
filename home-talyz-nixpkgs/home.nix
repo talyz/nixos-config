@@ -127,6 +127,7 @@
       font_size         11.0
       repaint_delay     1
       input_delay       1
+      term              kitty
     '';
 
     # Create the auto-saves directory
