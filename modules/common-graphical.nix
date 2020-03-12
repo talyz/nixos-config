@@ -94,10 +94,13 @@ in
 
     # Enable networkmanager.
     networking.networkmanager.enable = true;
-    users.extraUsers.talyz.extraGroups = [ "networkmanager" ];
 
     services.avahi.enable = true;
     services.avahi.browseDomains = [ "internal.xlnaudio.com" ];
+
+    # Enable wireshark.
+    programs.wireshark.enable = true;
+    programs.wireshark.package = pkgs.wireshark-qt;
 
     programs.gnome-terminal.enable = true;
     services.gnome3.gnome-keyring.enable = true;
@@ -119,6 +122,9 @@ in
     };
 
     #gtk.iconCache.enable = true;
+
+    programs.adb.enable = true;
+    #android_sdk.accept_license = true;
 
     # Enable CUPS to print documents.
     services.printing = {
@@ -151,5 +157,8 @@ in
 
     # Enable the smartcard deamon.
     services.pcscd.enable = true;
+
+    users.users.talyz.extraGroups = [ "networkmanager" "video" "adbusers" "lp" "scanner" "wireshark" ];
+
   };
 }

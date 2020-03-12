@@ -51,14 +51,8 @@ in
   time.timeZone = "Europe/Stockholm";
 
   nixpkgs.config.allowUnfree = true;
-  #android_sdk.accept_license = true;
 
-  programs.adb.enable = true;
-  
   programs.fish.enable = true;
-
-  programs.wireshark.enable = true;
-  programs.wireshark.package = pkgs.wireshark-qt;
 
   services.openssh.enable = true;
 
@@ -66,7 +60,7 @@ in
 
   users.users.talyz = {
     isNormalUser = true;
-		extraGroups = [ "wheel" "video" "adbusers" "lp" "scanner" "wireshark" ];
+		extraGroups = [ "wheel" ];
 		shell = pkgs.fish;
 		uid = 1000;
 		initialPassword = "aoeuaoeu";
