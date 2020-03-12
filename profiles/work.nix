@@ -18,4 +18,5 @@
   virtualisation.virtualbox.host.package = pkgs.virtualbox.override {
     enable32bitGuests = false;
   };
+  virtualisation.virtualbox.host.enableExtensionPack = true;
 }
