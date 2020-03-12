@@ -14,7 +14,7 @@
   ];
 
   hardware.cpu.amd.updateMicrocode = true;
-  hardware.enableAllFirmware = true;
+  hardware.enableRedistributableFirmware = true;
 
   talyz.gnome.enable = true;
   #talyz.exwm.enable = true;
