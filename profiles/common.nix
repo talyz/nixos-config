@@ -54,7 +54,13 @@ in
 
   programs.fish.enable = true;
 
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    challengeResponseAuthentication = false;
+    passwordAuthentication = false;
+    permitRootLogin = "no";
+    startWhenNeeded = true;
+  };
 
   home-manager.users.talyz = import ../home-talyz-nixpkgs/home.nix;
 
