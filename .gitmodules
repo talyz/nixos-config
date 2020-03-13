@@ -13,3 +13,6 @@
 [submodule "machines/zen/nixpkgs"]
 	path = machines/zen/nixpkgs
 	url = git@github.com:talyz/nixpkgs.git
+[submodule "home-manager"]
+	path = modules/home-manager
+	url = git@github.com:talyz/home-manager.git

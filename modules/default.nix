@@ -3,6 +3,7 @@
 {
   imports =
     [
+      ./home-manager/nixos
       ./gnome.nix
       ./exwm.nix
       ./emacs.nix
