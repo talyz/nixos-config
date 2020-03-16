@@ -88,7 +88,7 @@ in
     services.xserver.xkbVariant = "dvorak-intl";
 
     # Enable networkmanager.
-    networking.networkmanager.enable = true;
+    networking.networkmanager.enable = lib.mkDefault true;
 
     services.avahi.enable = true;
     services.avahi.browseDomains = [ "internal.xlnaudio.com" ];
