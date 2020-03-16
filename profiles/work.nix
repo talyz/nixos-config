@@ -26,4 +26,6 @@
   virtualisation.docker.enable = true;
 
   users.users.talyz.extraGroups = [ "vboxusers" "docker" ];
+
+  services.avahi.browseDomains = [ "internal.xlnaudio.com" ];
 }

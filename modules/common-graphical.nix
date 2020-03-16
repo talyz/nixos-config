@@ -91,7 +91,6 @@ in
     networking.networkmanager.enable = lib.mkDefault true;
 
     services.avahi.enable = true;
-    services.avahi.browseDomains = [ "internal.xlnaudio.com" ];
 
     # Enable wireshark.
     programs.wireshark.enable = true;
