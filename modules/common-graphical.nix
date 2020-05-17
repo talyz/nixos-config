@@ -31,7 +31,7 @@ in
     # fonts.fontconfig.antialias = false;
 
     environment.systemPackages = with pkgs; [
-      firefox
+      firefox-wayland
       (keepassxc.override { withKeePassNetworking = true; })
       dropbox
       freecad
