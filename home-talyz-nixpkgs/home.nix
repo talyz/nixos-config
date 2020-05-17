@@ -114,6 +114,7 @@
       ".config/evolution"
       ".config/goa-1.0"
       ".config/VirtualBox"
+      ".config/Slack"
       ".cache/evolution"
     ];
   };
