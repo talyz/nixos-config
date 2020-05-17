@@ -71,7 +71,6 @@ in
     };
 
     hardware.opengl.enable = true;
-    hardware.opengl.s3tcSupport = true;
 
     # Enable the X11 windowing system.
     services.xserver.enable = true;
