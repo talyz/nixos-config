@@ -111,6 +111,8 @@
     ];
   };
 
+  services.lorri.enable = true;
+
   home.file =
   {
     ".emacs".source = pkgs.runCommand "emacs" (with pkgs; { inherit cquery; }) ''
@@ -138,6 +140,12 @@
       repaint_delay     1
       input_delay       1
       term              kitty
+    '';
+
+    ".direnvrc".text = ''
+      use_nix() {
+        eval "$(lorri direnv)"
+      }
     '';
 
     # Create the auto-saves directory
