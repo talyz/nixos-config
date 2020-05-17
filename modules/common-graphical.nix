@@ -26,6 +26,7 @@ in
       noto-fonts-extra
       fira-code
       fira-code-symbols
+      iosevka
     ];
 
     # fonts.fontconfig.antialias = false;
