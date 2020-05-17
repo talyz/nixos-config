@@ -8,6 +8,9 @@
     MOZ_USE_XINPUT2 = "1";
   };
 
+  nixpkgs.config = import ./config.nix;
+  xdg.configFile."nixpkgs/config.nix".source = ./config.nix;
+
   programs.git = {
     enable = true;
     userEmail = "kim.lindberger@gmail.com";
