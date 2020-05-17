@@ -97,6 +97,7 @@
       "Videos"
       "VirtualBox VMs"
       "Projects"
+      "NoMachine"
       "Dropbox (XLN Audio)"
       ".aws"
       ".gnupg/private-keys-v1.d"
