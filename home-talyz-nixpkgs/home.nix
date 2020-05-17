@@ -75,7 +75,12 @@
   };
 
   home.persistence."/persistent/home/talyz" = {
-    files = [];
+    files = [
+      ".gnupg/pubring.kbx"
+      ".gnupg/sshcontrol"
+      ".gnupg/trustdb.gpg"
+      ".gnupg/random_seed"
+    ];
     directories = [
       "Downloads"
       "Music"
@@ -85,7 +90,7 @@
       "VirtualBox VMs"
       "Projects"
       ".aws"
-      ".gnupg"
+      ".gnupg/private-keys-v1.d"
       ".ssh"
       ".mozilla"
       ".emacs.d"
