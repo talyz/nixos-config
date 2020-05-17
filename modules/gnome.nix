@@ -6,8 +6,6 @@ let
   cfg = config.talyz.gnome;
 in
 {
-  imports = [ ./dconf.nix ];
-
   options =
     {
       talyz.gnome =
@@ -31,107 +29,124 @@ in
       gnome3.gnome-tweak-tool
       gnome3.gnome_session
       gnomeExtensions.dash-to-dock
-      gnomeExtensions.topicons-plus
       gnome3.rhythmbox
     ];
 
+
     talyz.common-graphical.enable = true;
 
-    services.xserver =
+    services.xserver.desktopManager.gnome3.enable = true;
+
+    systemd.services.accounts-daemon.restartIfChanged = false;
+
+    services.fwupd.enable = true;
+
+    talyz.emacs.enable = true;
+
+    home-manager.users.talyz = { lib, ... }:
       {
-        desktopManager.gnome3 =
+        programs.gnome-terminal.enable = true;
+        programs.gnome-terminal.profile."b1dcc9dd-5262-4d8d-a863-c897e6d979b9" = {
+          default = true;
+          visibleName = "White on Black";
+          font = "DejaVu Sans Mono 10";
+          showScrollbar = true;
+          colors = {
+            foregroundColor = "rgb(220,220,220)";
+            palette = [];
+            boldColor = "rgb(255,255,255)";
+            backgroundColor = "rgb(0,0,0)";
+          };
+        };
+
+        dconf.settings =
           {
-            extraGSettingsOverridePackages = with pkgs; [
-              gnome3.gnome_shell
-            ];
+            "org/gnome/settings-daemon/plugins/media-keys" = {
+              custom-keybindings = [
+                "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+                "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+              ];
+            };
 
-            extraGSettingsOverrides =
-              ''
-                [org.gnome.desktop.input-sources]
-                sources=[('xkb', 'us+dvorak-intl')]
-                xkb-options=['eurosign:e', 'ctrl:nocaps', 'numpad:mac', 'kpdl:dot']
+            "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+              name = "terminal";
+              binding = "<Super>c";
+              command = "gnome-terminal";
+            };
 
-                [org.gnome.desktop.wm.keybindings]
-                switch-to-workspace-1=['<Super>1']
-                switch-to-workspace-2=['<Super>2']
-                switch-to-workspace-3=['<Super>3']
-                switch-to-workspace-4=['<Super>4']
-                switch-to-workspace-5=['<Super>5']
-                switch-to-workspace-6=['<Super>6']
-                switch-to-workspace-7=['<Super>7']
-                switch-to-workspace-8=['<Super>8']
-                switch-windows=['<Alt>Tab']
-                switch-applications=[]
+            "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+              name = "emacsclient";
+              binding = "<Super>e";
+              command = "emacsclient -c";
+            };
 
-                [org.gnome.shell.keybindings]
-                switch-to-application-1=[]
-                switch-to-application-2=[]
-                switch-to-application-3=[]
-                switch-to-application-4=[]
-                switch-to-application-5=[]
-                switch-to-application-6=[]
-                switch-to-application-7=[]
-                switch-to-application-8=[]
-                switch-to-application-9=[]
+            "org/gnome/desktop/input-sources" = {
+              sources = lib.hm.gvariant.mkTuple [ "xkb" "us+dvorak-intl" ];
+              xkb-options= [ "eurosign:e" "ctrl:nocaps" "numpad:mac" "kpdl:dot" ];
+            };
 
-                [org.gnome.desktop.wm.preferences]
-                num-workspaces=8
+            "org/gnome/desktop/wm/keybindings" = {
+              switch-to-workspace-1 = [ "<Super>1" ];
+              switch-to-workspace-2 = [ "<Super>2" ];
+              switch-to-workspace-3 = [ "<Super>3" ];
+              switch-to-workspace-4 = [ "<Super>4" ];
+              switch-to-workspace-5 = [ "<Super>5" ];
+              switch-to-workspace-6 = [ "<Super>6" ];
+              switch-to-workspace-7 = [ "<Super>7" ];
+              switch-to-workspace-8 = [ "<Super>8" ];
+              switch-to-workspace-9 = [ "<Super>9" ];
+              switch-windows = [ "<Alt>Tab" ];
+              switch-applications = [];
+            };
 
-                [org.gnome.shell.overrides]
-                dynamic-workspaces=false
+            "org/gnome/shell/keybindings" = {
+              switch-to-application-1 = [];
+              switch-to-application-2 = [];
+              switch-to-application-3 = [];
+              switch-to-application-4 = [];
+              switch-to-application-5 = [];
+              switch-to-application-6 = [];
+              switch-to-application-7 = [];
+              switch-to-application-8 = [];
+              switch-to-application-9 = [];
+            };
 
-                [org.gnome.desktop.wm.preferences]
-                resize-with-right-button=true
+            "org/gnome/desktop/wm/preferences" = {
+              num-workspaces = 9;
+            };
 
-                [org.gnome.shell]
-                always-show-log-out=true
+            "org/gnome/shell/overrides" = {
+              dynamic-workspaces = false;
+            };
 
-                [org.gnome.shell.app-switcher]
-                current-workspace-only=true
+            "org/gnome/desktop/wm/preferences" = {
+              resize-with-right-button = true;
+            };
 
-                [org.gnome.settings-daemon.plugins.power]
-                idle-dim=false
-                sleep-inactive-ac-type='nothing'
-                sleep-inactive-battery-type='nothing'
+            "org/gnome/shell" = {
+              always-show-log-out = true;
+            };
 
-                [org.gnome.desktop.session]
-                idle-delay=0
+            "org/gnome/shell/app-switcher" = {
+              current-workspace-only = true;
+            };
 
-                [org.gnome.shell]
-                enabled-extensions=['TopIcons@phocean.net', 'launch-new-instance@gnome-shell-extensions.gcampax.github.com']
-              '';
+            "org/gnome/settings-daemon/plugins/power" = {
+              idle-dim = false;
+              sleep-inactive-ac-type = "nothing";
+              sleep-inactive-battery-type = "nothing";
+            };
 
-              # Enable the GNOME 3 Desktop Environment.
-              enable = true;
+            "org/gnome/desktop/session" = {
+              idle-delay = lib.hm.gvariant.mkUint32 0;
+            };
+
+            "org/gnome/shell" = {
+              enabled-extensions = [
+                "launch-new-instance@gnome-shell-extensions.gcampax.github.com"
+              ];
+            };
           };
       };
-
-      systemd.services.accounts-daemon.restartIfChanged = false;
-
-      services.fwupd.enable = true;
-
-      talyz.emacs.enable = true;
-
-      # Define custom keybindings.
-
-      # Because of what is most likely a bug in gsettings, parameters
-      # using relocatable schema, such as custom keybindings, can't be
-      # added using gschema overrides. This means we have to add them
-      # directly to a dconf database instead.
-      programs.dconfTalyz.enable = true;
-      programs.dconfTalyz.defaultOverrides = ''
-        [org/gnome/settings-daemon/plugins/media-keys]
-        custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']
-
-        [org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0]
-        binding='<Super>c'
-        command='gnome-terminal'
-        name='terminal'
-
-        [org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1]
-        binding='<Super>e'
-        command='emacsclient -c'
-        name='emacsclient'
-      '';
   };
 }
