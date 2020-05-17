@@ -15,6 +15,10 @@
     enable = true;
     userEmail = "kim.lindberger@gmail.com";
     userName = "talyz";
+    signing = {
+      key = "950336A4CA46BB42242733312DED2151F4671A2B";
+      signByDefault = true;
+    };
   };
 
   programs.gpg.enable = true;
