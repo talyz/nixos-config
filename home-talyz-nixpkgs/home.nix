@@ -74,6 +74,14 @@
     };
   };
 
+  programs.mpv.enable = true;
+  programs.mpv.config = {
+    profile = "gpu-hq";
+    interpolation = true;
+    tscale = "oversample";
+    video-sync = "display-resample";
+  };
+
   home.persistence."/persistent/home/talyz" = {
     files = [
       ".gnupg/pubring.kbx"
