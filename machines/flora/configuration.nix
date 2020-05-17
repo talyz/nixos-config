@@ -10,7 +10,7 @@
     "nixos-config=/etc/nixos/configuration.nix"
     "/nix/var/nix/profiles/per-user/root/channels"
   ];
-  
+
   imports = [
     <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
     ../../profiles/common.nix
@@ -77,9 +77,7 @@
   };
 
   environment.persistence = {
-
     targetDir = "/persistent";
-
     root = {
       directories = [
         "/var/log"
@@ -87,14 +85,12 @@
         "/var/lib/libvirt"
       ];
     };
-
     etc = {
       directories = [ "NetworkManager/system-connections" ];
       files = [ "machine-id" ];
     };
-
   };
-  
+
   users.mutableUsers = false;
   users.users.talyz.passwordFile = "/persistent/password_talyz";
   users.users.root.passwordFile = "/persistent/password_root";
