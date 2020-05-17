@@ -65,8 +65,8 @@
     enable = true;
     extraConfig =
       ''
-        ENERGY_PERF_POLICY_ON_AC=performance
-        ENERGY_PERF_POLICY_ON_BAT=balance-power
+        CPU_ENERGY_PERF_POLICY_ON_AC=performance
+        CPU_ENERGY_PERF_POLICY_ON_BAT=balance_power
         CPU_SCALING_GOVERNOR_ON_AC=performance
         CPU_SCALING_GOVERNOR_ON_BAT=powersave
         USB_AUTOSUSPEND=0
