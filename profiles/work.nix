@@ -23,9 +23,11 @@
   };
   virtualisation.virtualbox.host.enableExtensionPack = true;
 
-  virtualisation.docker.enable = true;
+  virtualisation.podman.enable = true;
+  virtualisation.podman.dockerCompat = true;
+  virtualisation.containers.users = [ "talyz" ];
 
-  users.users.talyz.extraGroups = [ "vboxusers" "docker" ];
+  users.users.talyz.extraGroups = [ "vboxusers" ];
 
   services.avahi.browseDomains = [ "internal.xlnaudio.com" ];
 }
