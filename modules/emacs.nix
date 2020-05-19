@@ -33,6 +33,14 @@ let
           company-rtags = (unbreakRtagsComponent epkgs.company-rtags);
           flycheck-rtags = (unbreakRtagsComponent epkgs.flycheck-rtags);
           ivy-rtags = (unbreakRtagsComponent epkgs.ivy-rtags);
+          dracula-theme = epkgs.melpaPackages.dracula-theme.overrideAttrs (oldAttrs: oldAttrs // {
+            src = super.fetchFromGitHub {
+              owner = "talyz";
+              repo = "dracula-emacs";
+              rev = "a4c41005cb58208932b6d9ec99c8d912e42c634a";
+              sha256 = "0bp3adn9w08zrps0dgwhcmwcifzld8lsq92rsad5hcvnqhvjfkc7";
+            };
+          });
           # nix-mode = epkgs.nix-mode.overrideAttrs (oldAttrs: {
           #   version = "20190119";
           #   src = super.fetchFromGitHub {
