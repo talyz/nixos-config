@@ -16,3 +16,6 @@
 [submodule "home-manager"]
 	path = modules/home-manager
 	url = git@github.com:talyz/home-manager.git
+[submodule "machines/evals/nixpkgs"]
+	path = machines/evals/nixpkgs
+	url = git@github.com:talyz/nixpkgs.git
