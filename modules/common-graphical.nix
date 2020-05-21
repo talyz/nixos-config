@@ -35,7 +35,6 @@ in
       firefox-wayland
       (keepassxc.override { withKeePassNetworking = true; })
       dropbox
-      freecad
       krita
       mpv
       kitty
