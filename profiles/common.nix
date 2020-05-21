@@ -34,6 +34,12 @@
     bat
   ];
 
+  boot.kernelParams = [
+    ''cgroup_no_v1="all"''
+    "systemd.unified_cgroup_hierarchy=1"
+  ];
+  systemd.services."user@".serviceConfig.Delegate = "pids memory cpu io";
+
   # Internationalisation properties.
   console.font = "Lat2-Terminus16";
   console.keyMap = "dvorak";
