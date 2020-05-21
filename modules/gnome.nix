@@ -16,6 +16,17 @@ in
             description = "Whether to enable the gnome desktop.";
             type = types.bool;
           };
+          privateDconfSettings = mkOption {
+            default = null;
+            example = { "/persistent/home/talyz/gsconnect_settings" = "/org/gnome/shell/extensions/"; };
+            description = ''
+              External files to import dconf settings from. The
+              attribute name is the path to the file to read settings
+              from, its value is the dconf path under which the
+              settings should be loaded.
+            '';
+            type = types.nullOr (types.attrsOf types.str);
+          };
         };
     };
 
@@ -147,6 +158,27 @@ in
               ];
             };
           };
+
+        home.activation.${if (cfg.privateDconfSettings != null) then "privateDconfSettings" else null} =
+          lib.hm.dag.entryAfter ["dconfSettings"] ''
+            if [[ -v DBUS_SESSION_BUS_ADDRESS ]]; then
+              DCONF_DBUS_RUN_SESSION=""
+            else
+              DCONF_DBUS_RUN_SESSION="${pkgs.dbus}/bin/dbus-run-session"
+            fi
+
+            ${lib.concatMapStringsSep "\n"
+              (path: ''
+                if [[ -v DRY_RUN ]]; then
+                  echo $DCONF_DBUS_RUN_SESSION ${pkgs.gnome3.dconf}/bin/dconf load ${cfg.privateDconfSettings.${path}} "<" ${path}
+                else
+                  $DCONF_DBUS_RUN_SESSION ${pkgs.gnome3.dconf}/bin/dconf load ${cfg.privateDconfSettings.${path}} < ${path}
+                fi
+              '')
+              (lib.attrNames cfg.privateDconfSettings)}
+
+            unset DCONF_DBUS_RUN_SESSION
+            '';
       };
   };
 }
