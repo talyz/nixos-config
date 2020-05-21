@@ -89,7 +89,10 @@
     };
     etc = {
       directories = [ "NetworkManager/system-connections" ];
-      files = [ "machine-id" ];
+      files = [
+        "machine-id"
+        "nix/id_rsa"
+      ];
     };
   };
 
@@ -142,8 +145,33 @@
   swapDevices =
     [ { device = "/dev/disk/by-uuid/aae52a21-ce44-4826-b8a9-5ba71f0caad3"; }
     ];
+  nix.maxJobs = lib.mkDefault 2;
 
-  nix.maxJobs = lib.mkDefault 4;
+  nix.buildMachines = [{
+    hostName = "zen";
+    sshUser = "root";
+    system = "x86_64-linux";
+    maxJobs = 2;
+    supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+  }];
+  nix.distributedBuilds = true;
+  nix.extraOptions = ''
+    builders-use-substitutes = true
+  '';
+  nix.binaryCaches = lib.mkAfter [ "ssh-ng://zen" ];
+  nix.binaryCachePublicKeys = lib.mkAfter [ "zen:/mViKdKKlduW1kwAGKauOPM0dg3Jfe6Z4Yosho+54PU=" ];
+
+  programs.ssh.knownHosts.zen = {
+    hostNames = [ "zen" "10.0.15.50" ];
+    publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINyFlaKS43N8ZqheVodC2g1Xo0Z/HvvI+aekYHw9bIIS";
+  };
+  programs.ssh.extraConfig = ''
+    Host zen
+        Hostname 10.0.15.50
+        User root
+        IdentitiesOnly yes
+        IdentityFile /etc/nix/id_rsa
+  '';
 
   # Enable firewall
   networking.firewall = {
