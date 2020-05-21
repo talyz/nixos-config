@@ -40,9 +40,12 @@ in
       gnome3.gnome-tweak-tool
       gnome3.gnome_session
       gnomeExtensions.dash-to-dock
+      gnomeExtensions.gsconnect
       gnome3.rhythmbox
     ];
 
+    # Open firewall port for GSConnect
+    networking.firewall.allowedTCPPorts = [ 1716 ];
 
     talyz.common-graphical.enable = true;
 
@@ -155,9 +158,16 @@ in
             "org/gnome/shell" = {
               enabled-extensions = [
                 "launch-new-instance@gnome-shell-extensions.gcampax.github.com"
+                "gsconnect@andyholmes.github.io"
               ];
             };
           };
+
+        home.persistence."/persistent/home/talyz" = {
+          directories = [
+            ".config/gsconnect"
+          ];
+        };
 
         home.activation.${if (cfg.privateDconfSettings != null) then "privateDconfSettings" else null} =
           lib.hm.dag.entryAfter ["dconfSettings"] ''

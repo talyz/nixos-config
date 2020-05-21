@@ -20,6 +20,8 @@
   ];
 
   talyz.gnome.enable = true;
+  talyz.gnome.privateDconfSettings."/persistent/home/talyz/gsconnect_settings" = "/org/gnome/shell/extensions/";
+
   talyz.exwm.enable = true;
 
   hardware = {
