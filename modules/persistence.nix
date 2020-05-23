@@ -99,6 +99,7 @@ in
                   (concatPaths ["/" dir])
                   {
                     device = concatPaths [cfg.targetDir dir];
+                    noCheck = true;
                     options = ["bind"];
                   })
              cfg.root.directories);
