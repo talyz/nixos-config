@@ -9,5 +9,6 @@
       ./emacs.nix
       ./impermanence/nixos.nix
       ./common-graphical.nix
+      ./media-center.nix
     ];
 }
