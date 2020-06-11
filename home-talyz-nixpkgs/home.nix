@@ -105,6 +105,7 @@
       ".mozilla"
       ".emacs.d"
       ".nixops"
+      ".nixops-managed-deployments"
       ".dropbox"
       ".dropbox-dist"
       ".local/share/containers"
