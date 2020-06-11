@@ -114,8 +114,9 @@
       ".local/share/direnv"
       ".config/evolution"
       ".config/goa-1.0"
-      ".config/VirtualBox"
+      ".config/keepassxc"
       ".config/Slack"
+      ".config/VirtualBox"
       ".cache/evolution"
     ];
   };
