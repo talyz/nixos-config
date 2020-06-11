@@ -7,7 +7,7 @@
       ./gnome.nix
       ./exwm.nix
       ./emacs.nix
-      ./persistence.nix
+      ./impermanence/nixos.nix
       ./common-graphical.nix
     ];
 }

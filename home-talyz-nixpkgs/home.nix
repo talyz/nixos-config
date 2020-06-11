@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  imports = [ ./modules/persistence.nix ];
+  imports = [ ../modules/impermanence/home-manager.nix ];
   
   pam.sessionVariables = {
     EDITOR = "emacs";

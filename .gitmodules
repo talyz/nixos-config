@@ -19,3 +19,6 @@
 [submodule "machines/evals/nixpkgs"]
 	path = machines/evals/nixpkgs
 	url = git@github.com:talyz/nixpkgs.git
+[submodule "modules/impermanence"]
+	path = modules/impermanence
+	url = git@github.com:nix-community/impermanence.git

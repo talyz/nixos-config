@@ -78,22 +78,19 @@
       '';
   };
 
-  environment.persistence = {
-    targetDir = "/persistent";
-    root = {
-      directories = [
-        "/var/log"
-        "/var/lib/bluetooth"
-        "/var/lib/libvirt"
-      ];
-    };
-    etc = {
-      directories = [ "NetworkManager/system-connections" ];
-      files = [
-        "machine-id"
-        "nix/id_rsa"
-      ];
-    };
+  environment.persistence."/persistent" = {
+    directories = [
+      "/var/log"
+      "/var/lib/bluetooth"
+      "/var/lib/libvirt"
+      "/var/lib/docker"
+      "/var/lib/systemd/coredump"
+      "/etc/NetworkManager/system-connections"
+    ];
+    files = [
+      "/etc/machine-id"
+      "/etc/nix/id_rsa"
+    ];
   };
 
   users.mutableUsers = false;
