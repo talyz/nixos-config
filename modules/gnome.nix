@@ -59,6 +59,8 @@ in
 
     home-manager.users.talyz = { lib, ... }:
       {
+        xdg.configFile."gnome-initial-setup-done".text = "yes";
+
         programs.gnome-terminal.enable = true;
         programs.gnome-terminal.profile."b1dcc9dd-5262-4d8d-a863-c897e6d979b9" = {
           default = true;
