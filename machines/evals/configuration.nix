@@ -44,6 +44,7 @@
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   # TrackPoint
+  boot.kernelPatches = [{ name = "trackpoint-scrolling"; patch = ../../trackpoint.patch; }];
   services.xserver.inputClassSections = [
     ''
       Identifier     "TrackPoint configuration"
