@@ -7,13 +7,13 @@
     wget
     ag
     gnupg
-    stow
     file
     tree
     killall
     git
     htop
     fzf
+    fd
     curl
     sshfs-fuse
     exfat-utils
@@ -26,6 +26,7 @@
     pwgen
     heimdalFull
     nix-index
+    nixpkgs-review
     gocryptfs
     signing-party
     msmtp
