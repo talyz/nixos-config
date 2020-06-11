@@ -118,6 +118,8 @@
       ".config/Slack"
       ".config/VirtualBox"
       ".cache/evolution"
+      ".cache/lorri"
+      ".cache/nix"
     ];
   };
 
