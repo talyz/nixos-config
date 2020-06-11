@@ -14,9 +14,7 @@
   imports = [
     <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
     ../../profiles/common.nix
-    ../../profiles/work.nix
     ../../modules
-    # ./profiles/hardened.nix
   ];
 
   talyz.gnome.enable = true;
