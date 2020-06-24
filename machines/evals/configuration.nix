@@ -53,28 +53,23 @@
     ''
   ];
 
-  environment.persistence = {
-    targetDir = "/persistent";
-    root = {
-      directories = [
-        "/var/log"
-        "/var/lib/bluetooth"
-        "/var/lib/libvirt"
-      ];
-    };
-    etc = {
-      directories = [
-        "nixos"
-        "NetworkManager/system-connections"
-      ];
-      files = [
-        "machine-id"
-        "ssh/ssh_host_ed25519_key"
-        "ssh/ssh_host_ed25519_key.pub"
-        "ssh/ssh_host_rsa_key"
-        "ssh/ssh_host_rsa_key.pub"
-      ];
-    };
+  environment.persistence."/persistent" = {
+    directories = [
+      "/var/log"
+      "/var/lib/bluetooth"
+      "/var/lib/libvirt"
+      "/var/lib/docker"
+      "/var/lib/systemd/coredump"
+      "/etc/nixos"
+      "/etc/NetworkManager/system-connections"
+    ];
+    files = [
+      "/etc/machine-id"
+      "/etc/ssh/ssh_host_ed25519_key"
+      "/etc/ssh/ssh_host_ed25519_key.pub"
+      "/etc/ssh/ssh_host_rsa_key"
+      "/etc/ssh/ssh_host_rsa_key.pub"
+    ];
   };
 
   users.mutableUsers = false;
@@ -82,6 +77,7 @@
   users.users.root.passwordFile = "/persistent/password_root";
 
   boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/cec990ff-a4d6-410d-841d-0bc3a0e4c888";
+  boot.initrd.luks.devices."cryptroot".allowDiscards = true;
 
   fileSystems."/" =
     { device = "/dev/root_vg/root";
