@@ -24,10 +24,6 @@ in
 
     talyz.common-graphical.enable = true;
 
-    nixpkgs.overlays = [
-      (import ./emacs-overlay)
-    ];
-
     programs.light.enable = true;
     programs.nm-applet.enable = true;
 
@@ -35,7 +31,10 @@ in
     programs.gnupg.agent.enableSSHSupport = true;
 
     talyz.emacs.enable = true;
-    talyz.emacs.extraPackages = [ "desktop-environment" "exwm" ];
+    talyz.emacs.extraPackages = epkgs: with epkgs; [
+      desktop-environment
+      exwm
+    ];
 
     environment.systemPackages = with pkgs; [
       flameshot

@@ -7,11 +7,6 @@ let
 
   overlay = self: super:
     let
-      inherit (import ./emacs-with-use-package-pkgs/emacs-with-use-package-pkgs.nix
-                      {
-                        inherit (super) runCommand emacs emacsPackagesNgGen;
-                      }) emacsWithUsePackagePkgs;
-
       orgBabelTangeledConfig = (super.runCommand "emacs-config.el" {} ''
         cp ${../home-talyz-nixpkgs/dotfiles/emacs/emacs-config.org} emacs-config.org
         ${super.emacs}/bin/emacs --batch ./emacs-config.org -f org-babel-tangle
@@ -19,9 +14,10 @@ let
       '');
     in
     {
-      emacs = (emacsWithUsePackagePkgs {
-        config = "${orgBabelTangeledConfig}";
-        extraPackages = cfg.extraPackages;
+      emacs = (super.emacsWithPackagesFromUsePackage {
+        config = readFile "${orgBabelTangeledConfig}";
+        package = super.emacs;
+        extraEmacsPackages = cfg.extraPackages;
         override = epkgs: epkgs // {
           weechat = epkgs.melpaPackages.weechat;
           elpy = epkgs.melpaPackages.elpy;
@@ -48,12 +44,12 @@ in
         type = types.bool;
       };
       extraPackages = mkOption {
-        default = [];
+        default = _: [];
         example = literalExample ''
-          epkgs: [
-          epkgs.emms
-          epkgs.magit
-          epkgs.proofgeneral
+          epkgs: with epkgs; [
+            emms
+            magit
+            proofgeneral
           ]
         '';
         description = ''
@@ -68,6 +64,7 @@ in
     {
       nixpkgs.overlays =
         [
+          (import ./emacs-overlay)
           overlay
         ];
 
