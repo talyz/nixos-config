@@ -17,11 +17,6 @@ let
         ${super.emacs}/bin/emacs --batch ./emacs-config.org -f org-babel-tangle
         mv emacs-config.el $out
       '');
-
-      unbreakRtagsComponent = pkg: pkg.overrideAttrs (oldAttrs: {
-        meta = (oldAttrs.meta or {}) // { broken = false; };
-        configurePhase = " ";
-      });
     in
     {
       emacs = (emacsWithUsePackagePkgs {
@@ -30,9 +25,6 @@ let
         override = epkgs: epkgs // {
           weechat = epkgs.melpaPackages.weechat;
           elpy = epkgs.melpaPackages.elpy;
-          company-rtags = (unbreakRtagsComponent epkgs.company-rtags);
-          flycheck-rtags = (unbreakRtagsComponent epkgs.flycheck-rtags);
-          ivy-rtags = (unbreakRtagsComponent epkgs.ivy-rtags);
           dracula-theme = epkgs.melpaPackages.dracula-theme.overrideAttrs (oldAttrs: oldAttrs // {
             src = super.fetchFromGitHub {
               owner = "talyz";
@@ -41,25 +33,8 @@ let
               sha256 = "0bp3adn9w08zrps0dgwhcmwcifzld8lsq92rsad5hcvnqhvjfkc7";
             };
           });
-          # nix-mode = epkgs.nix-mode.overrideAttrs (oldAttrs: {
-          #   version = "20190119";
-          #   src = super.fetchFromGitHub {
-          #     owner = "NixOS";
-          #     repo = "nix-mode";
-          #     rev = "1e53bed4d47c526c71113569f592c82845a17784";
-          #     sha256 = "172s5lxlns633gbi6sq6iws269chalh5k501n3wffp5i3b2xzdyq";
-          #   };
-          #   recipe = builtins.fetchurl {
-          #     url = "https://github.com/melpa/melpa/blob/master/recipes/nix-mode";
-          #     sha256 = "10f3ly4860lkxzykw4fbvhn3i0c2hgj77jfjbhlk2c1jz9x4yyy5";
-          #     name = "recipe";
-          #   };
-          # });
         };
       });
-      rtags = super.rtags.override {
-        emacs = super.emacs;
-      };
     };
 in
 {
