@@ -6,16 +6,9 @@ let
   cfg = config.talyz.emacs;
 
   overlay = self: super:
-    let
-      orgBabelTangeledConfig = (super.runCommand "emacs-config.el" {} ''
-        cp ${../home-talyz-nixpkgs/dotfiles/emacs/emacs-config.org} emacs-config.org
-        ${super.emacs}/bin/emacs --batch ./emacs-config.org -f org-babel-tangle
-        mv emacs-config.el $out
-      '');
-    in
     {
       emacs = (super.emacsWithPackagesFromUsePackage {
-        config = readFile "${orgBabelTangeledConfig}";
+        config = ../home-talyz-nixpkgs/dotfiles/emacs/emacs-config.org;
         package = super.emacs;
         extraEmacsPackages = cfg.extraPackages;
         override = epkgs: epkgs // {
