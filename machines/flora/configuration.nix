@@ -63,17 +63,16 @@
   # Powersaving and battery charge control
   services.tlp = {
     enable = true;
-    extraConfig =
-      ''
-        CPU_ENERGY_PERF_POLICY_ON_AC=performance
-        CPU_ENERGY_PERF_POLICY_ON_BAT=balance_power
-        CPU_SCALING_GOVERNOR_ON_AC=performance
-        CPU_SCALING_GOVERNOR_ON_BAT=powersave
-        USB_AUTOSUSPEND=0
-        RUNTIME_PM_ON_BAT=on
-        START_CHARGE_THRESH_BAT0=75
-        STOP_CHARGE_THRESH_BAT0=80
-      '';
+    settings = {
+      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+      CPU_ENERGY_PERF_POLICY_ON_BAT= "balance_power";
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      USB_AUTOSUSPEND = 0;
+      RUNTIME_PM_ON_BAT = "on";
+      START_CHARGE_THRESH_BAT0 = 75;
+      STOP_CHARGE_THRESH_BAT0 = 80;
+    };
   };
 
   environment.persistence."/persistent" = {
