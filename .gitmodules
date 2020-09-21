@@ -21,3 +21,6 @@
 	url = git@github.com:nix-community/impermanence.git
 [submodule "modules/home-manager/"]
 	url = https://github.com/nix-community/home-manager.git
+[submodule "machines/natani/nixpkgs"]
+	path = machines/natani/nixpkgs
+	url = git@github.com:NixOS/nixpkgs.git
