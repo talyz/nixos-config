@@ -52,7 +52,7 @@
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
 
   # Kernel modules to load in the second stage of boot.
-  boot.kernelModules = [ "kvm-amd" "lm92" ];
+  boot.kernelModules = [ "kvm-amd" "nct6775" ];
   #boot.extraModulePackages = [ config.boot.kernelPackages.acpi_call ];
 
   networking.hostName = "zen";
