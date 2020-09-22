@@ -18,14 +18,10 @@
   # networking.firewall.checkReversePath = false;
 
   virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.host.package = pkgs.virtualbox.override {
-    enable32bitGuests = false;
-  };
   virtualisation.virtualbox.host.enableExtensionPack = true;
 
   virtualisation.podman.enable = true;
   virtualisation.podman.dockerCompat = true;
-  virtualisation.containers.users = [ "talyz" ];
 
   users.users.talyz.extraGroups = [ "vboxusers" ];
 
