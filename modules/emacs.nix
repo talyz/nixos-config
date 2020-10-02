@@ -12,7 +12,15 @@ let
         package = super.emacs;
         extraEmacsPackages = cfg.extraPackages;
         override = epkgs: epkgs // {
-          weechat = epkgs.melpaPackages.weechat;
+          # weechat = epkgs.melpaPackages.weechat;
+          weechat =  epkgs.melpaPackages.weechat.overrideAttrs (oldAttrs: oldAttrs // {
+            src = super.fetchFromGitHub {
+              owner = "bqv";
+              repo = "weechat.el";
+              rev = "446868de424170be0584980d4dcc0859f7077d54";
+              sha256 = "12vbp35z3hgr9lqplc7ycf8n2rfd0zarr50arc9bqy5z14pf3biv";
+            };
+          });
           elpy = epkgs.melpaPackages.elpy;
           dracula-theme = epkgs.melpaPackages.dracula-theme.overrideAttrs (oldAttrs: oldAttrs // {
             src = super.fetchFromGitHub {
