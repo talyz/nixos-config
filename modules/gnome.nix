@@ -93,7 +93,7 @@ in
             "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
               name = "emacsclient";
               binding = "<Super>e";
-              command = "emacsclient -c";
+              command = "emacs";
             };
 
             "org/gnome/desktop/input-sources" = {

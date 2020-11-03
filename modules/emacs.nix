@@ -69,9 +69,6 @@ in
           overlay
         ];
 
-      services.emacs = {
-        install = true;
-        defaultEditor = true;
-      };
+      environment.systemPackages = [ pkgs.emacs ];
     };
 }
