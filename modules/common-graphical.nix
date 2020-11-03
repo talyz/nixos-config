@@ -27,6 +27,7 @@ in
       fira-code
       fira-code-symbols
       iosevka
+      twitter-color-emoji
     ];
 
     # fonts.fontconfig.antialias = false;
