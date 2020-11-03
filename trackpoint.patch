@@ -1,8 +1,8 @@
 diff --git a/drivers/hid/hid-lenovo.c b/drivers/hid/hid-lenovo.c
-index 364bc7f11d9d..7c4e9971c2ed 100644
+index c6c8e20f3e8d..3f31958d23e4 100644
 --- a/drivers/hid/hid-lenovo.c
 +++ b/drivers/hid/hid-lenovo.c
-@@ -146,25 +146,6 @@ static int lenovo_input_mapping_cptkbd(struct hid_device *hdev,
+@@ -184,25 +184,6 @@ static int lenovo_input_mapping_cptkbd(struct hid_device *hdev,
  			(usage->hid & HID_USAGE) == 0x238)
  		return -1;
  
@@ -28,14 +28,32 @@ index 364bc7f11d9d..7c4e9971c2ed 100644
  	return 0;
  }
  
-@@ -354,53 +335,6 @@ static int lenovo_raw_event(struct hid_device *hdev,
+@@ -442,73 +423,6 @@ static int lenovo_raw_event(struct hid_device *hdev,
  	return 0;
  }
  
+-static int lenovo_event_tp10ubkbd(struct hid_device *hdev,
+-		struct hid_field *field, struct hid_usage *usage, __s32 value)
+-{
+-	struct lenovo_drvdata *data = hid_get_drvdata(hdev);
+-
+-	if (usage->type == EV_KEY && usage->code == KEY_FN_ESC && value == 1) {
+-		/*
+-		 * The user has toggled the Fn-lock state. Toggle our own
+-		 * cached value of it and sync our value to the keyboard to
+-		 * ensure things are in sync (the sycning should be a no-op).
+-		 */
+-		data->fn_lock = !data->fn_lock;
+-		schedule_work(&data->fn_lock_sync_work);
+-	}
+-
+-	return 0;
+-}
+-
 -static int lenovo_event_cptkbd(struct hid_device *hdev,
 -		struct hid_field *field, struct hid_usage *usage, __s32 value)
 -{
--	struct lenovo_drvdata_cptkbd *cptkbd_data = hid_get_drvdata(hdev);
+-	struct lenovo_drvdata *cptkbd_data = hid_get_drvdata(hdev);
 -
 -	/* "wheel" scroll events */
 -	if (usage->type == EV_REL && (usage->code == REL_WHEEL ||
@@ -74,6 +92,8 @@ index 364bc7f11d9d..7c4e9971c2ed 100644
 -	case USB_DEVICE_ID_LENOVO_CUSBKBD:
 -	case USB_DEVICE_ID_LENOVO_CBTKBD:
 -		return lenovo_event_cptkbd(hdev, field, usage, value);
+-	case USB_DEVICE_ID_LENOVO_TP10UBKBD:
+-		return lenovo_event_tp10ubkbd(hdev, field, usage, value);
 -	default:
 -		return 0;
 -	}
@@ -82,7 +102,7 @@ index 364bc7f11d9d..7c4e9971c2ed 100644
  static int lenovo_features_set_tpkbd(struct hid_device *hdev)
  {
  	struct hid_report *report;
-@@ -935,7 +869,6 @@ static struct hid_driver lenovo_driver = {
+@@ -1135,7 +1049,6 @@ static struct hid_driver lenovo_driver = {
  	.probe = lenovo_probe,
  	.remove = lenovo_remove,
  	.raw_event = lenovo_raw_event,
