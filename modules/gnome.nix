@@ -138,6 +138,10 @@ in
               dynamic-workspaces = false;
             };
 
+            "org/gnome/mutter" = {
+              dynamic-workspaces = false;
+            };
+
             "org/gnome/desktop/wm/preferences" = {
               resize-with-right-button = true;
             };
