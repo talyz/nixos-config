@@ -97,8 +97,11 @@ in
             };
 
             "org/gnome/desktop/input-sources" = {
-              sources = lib.hm.gvariant.mkTuple [ "xkb" "us+dvorak-intl" ];
-              xkb-options= [ "eurosign:e" "ctrl:nocaps" "numpad:mac" "kpdl:dot" ];
+              sources = [
+                (lib.hm.gvariant.mkTuple [ "xkb" "us+dvorak-intl" ])
+              ] ++ lib.optional config.talyz.media-center.enable
+                (lib.hm.gvariant.mkTuple [ "xkb" "se" ]);
+              xkb-options = [ "eurosign:e" "ctrl:nocaps" "numpad:mac" "kpdl:dot" ];
             };
 
             "org/gnome/desktop/wm/keybindings" = {
@@ -148,14 +151,17 @@ in
             };
 
             "org/gnome/settings-daemon/plugins/power" = {
-              idle-dim = false;
+              idle-dim = config.talyz.media-center.enable;
               sleep-inactive-ac-type = "nothing";
               sleep-inactive-battery-type = "nothing";
             };
 
-            "org/gnome/desktop/session" = {
-              idle-delay = lib.hm.gvariant.mkUint32 0;
-            };
+            "org/gnome/desktop/session" =
+              let
+                delay = if config.talyz.media-center.enable then 900 else 0;
+              in {
+                idle-delay = lib.hm.gvariant.mkUint32 delay;
+              };
 
             "org/gnome/shell" = {
               enabled-extensions = [
