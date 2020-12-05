@@ -32,8 +32,8 @@
   boot.tmpOnTmpfs = true;
 
   # Use the latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_hardened;
-  #boot.kernelPackages = pkgs.linuxPackages_latest;
+  #boot.kernelPackages = pkgs.linuxPackages_hardened;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Kernel modules required in the initrd to boot.
   boot.initrd.availableKernelModules = [ "ehci_pci" "ahci" "xhci_pci" "firewire_ohci" "usbhid" "usb_storage" "sd_mod" ];
@@ -76,28 +76,28 @@
 
   ### File system configuration ###
 
-  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/fe4b8be3-10f6-42c7-bd7d-f4444f8f23bb";
+  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/f9bd2426-07d1-4874-923c-e9e63adc8122";
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/94ea8967-7223-4a82-8b0a-ecd4b2c9a97f";
+    device = "/dev/root_vg/root";
     fsType = "btrfs";
     options = [ "subvol=root" ];
   };
 
   fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/94ea8967-7223-4a82-8b0a-ecd4b2c9a97f";
+    device = "/dev/root_vg/root";
     fsType = "btrfs";
     options = [ "subvol=home" ];
   };
 
   fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/94ea8967-7223-4a82-8b0a-ecd4b2c9a97f";
+    device = "/dev/root_vg/root";
     fsType = "btrfs";
     options = [ "subvol=nix" ];
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/925D-040F";
+    device = "/dev/disk/by-uuid/70DE-7DAC";
     fsType = "vfat";
   };
 
@@ -129,7 +129,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "19.09"; # Did you read the comment?
+  system.stateVersion = "20.09"; # Did you read the comment?
 
 }
 
