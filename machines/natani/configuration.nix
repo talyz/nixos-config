@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, modulesPath, ... }:
 
 {
   nix.nixPath = [
@@ -12,28 +12,26 @@
   ];
 
   imports = [
-    <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
+    (modulesPath + "/installer/scan/not-detected.nix")
     ../../profiles/common.nix
     ../../profiles/work.nix
     ../../modules
-    #./profiles/hardened.nix
   ];
 
-  #talyz.gnome.enable = true;
+  talyz.gnome.enable = true;
   talyz.exwm.enable = true;
 
   hardware = {
     cpu.intel.updateMicrocode = true;
     bluetooth.enable = true;
+    enableRedistributableFirmware = true;
   };
 
   boot = {
     # Use the systemd-boot EFI boot loader.
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
-    # Make /tmp a tmpfs mount.
-    #tmpOnTmpfs = true;
-    kernelPackages = pkgs.linuxPackages_latest_hardened;
+    kernelPackages = pkgs.linuxPackages_latest;
     extraModulePackages = [ config.boot.kernelPackages.acpi_call ];
     initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
     kernelModules = [ "kvm-intel" ];
@@ -56,7 +54,7 @@
     Option        "Tearfree"      "true"
   '';
 
-  
+
   # Touchpad
 
   # Workaround for a bug where multitouch stops working after suspend
@@ -76,58 +74,91 @@
   # Powersaving and battery charge control
   services.tlp = {
     enable = true;
-    extraConfig =
-      ''
-        ENERGY_PERF_POLICY_ON_AC=performance
-        ENERGY_PERF_POLICY_ON_BAT=balance-power
-        CPU_SCALING_GOVERNOR_ON_AC=performance
-        CPU_SCALING_GOVERNOR_ON_BAT=powersave
-        USB_AUTOSUSPEND=0
-        RUNTIME_PM_ON_BAT=on
-        START_CHARGE_THRESH_BAT0=90
-        STOP_CHARGE_THRESH_BAT0=100
-      '';
+    settings = {
+      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+      CPU_ENERGY_PERF_POLICY_ON_BAT= "balance_power";
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      INTEL_GPU_MIN_FREQ_ON_AC = 1100;
+      INTEL_GPU_MIN_FREQ_ON_BAT = 600;
+      INTEL_GPU_MAX_FREQ_ON_AC = 1100;
+      INTEL_GPU_MAX_FREQ_ON_BAT = 1100;
+      INTEL_GPU_BOOST_FREQ_ON_AC = 1100;
+      INTEL_GPU_BOOST_FREQ_ON_BAT = 1100;
+      USB_AUTOSUSPEND = 0;
+      RUNTIME_PM_ON_BAT = "on";
+      START_CHARGE_THRESH_BAT0 = 90;
+      STOP_CHARGE_THRESH_BAT0 = 100;
+    };
   };
 
-  boot.initrd.luks.devices."nixroot".device = "/dev/disk/by-uuid/527439dc-2e4f-4f1c-80e6-868178da99a8";
+  environment.persistence."/persistent" = {
+    directories = [
+      "/var/log"
+      "/var/lib/bluetooth"
+      "/var/lib/libvirt"
+      "/var/lib/docker"
+      "/var/lib/systemd/coredump"
+      "/etc/nixos"
+      "/etc/NetworkManager/system-connections"
+    ];
+    files = [
+      "/etc/machine-id"
+      "/etc/ssh/ssh_host_ed25519_key"
+      "/etc/ssh/ssh_host_ed25519_key.pub"
+      "/etc/ssh/ssh_host_rsa_key"
+      "/etc/ssh/ssh_host_rsa_key.pub"
+    ];
+  };
 
-  fileSystems = {
-    "/" = {
-      device = "/dev/disk/by-uuid/aa5aed15-618a-4246-99e7-d764388d61f6";
+  users.mutableUsers = false;
+  users.users.talyz.passwordFile = "/persistent/password_talyz";
+  users.users.root.passwordFile = "/persistent/password_root";
+
+  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/87303af4-4061-410c-804e-5c371a1202e1";
+  boot.initrd.luks.devices."cryptroot".allowDiscards = true;
+
+  fileSystems."/" =
+    { device = "/dev/root_vg/root";
       fsType = "btrfs";
       options = [ "subvol=root" ];
     };
-    
-    "/nix" = {
-      device = "/dev/disk/by-uuid/aa5aed15-618a-4246-99e7-d764388d61f6";
+
+  boot.initrd.postDeviceCommands = lib.mkAfter ''
+    mkdir /btrfs_tmp
+    mount /dev/root_vg/root /btrfs_tmp
+    if [[ -e /btrfs_tmp/root ]]; then
+      mv /btrfs_tmp/root "/btrfs_tmp/old_root_$(date "+%Y-%m-%-d_%H:%M:%S")"
+    fi
+    btrfs subvolume create /btrfs_tmp/root
+    sync
+    umount /btrfs_tmp
+  '';
+
+  fileSystems."/persistent" =
+    { device = "/dev/root_vg/root";
+      neededForBoot = true;
+      fsType = "btrfs";
+      options = [ "subvol=persistent" ];
+    };
+
+  fileSystems."/nix" =
+    { device = "/dev/root_vg/root";
       fsType = "btrfs";
       options = [ "subvol=nix" ];
     };
-    
-    "/home" = {
-      device = "/dev/disk/by-uuid/aa5aed15-618a-4246-99e7-d764388d61f6";
-      fsType = "btrfs";
-      options = [ "subvol=home" ];
-    };
-    
-    "/boot" = {
-      device = "/dev/disk/by-uuid/920A-2CF3";
+
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/66A8-21C6";
       fsType = "vfat";
     };
-  };
 
-  swapDevices = [
-    {
-      device = "/dev/sda2";
-      randomEncryption = {
-        enable = true;
-        cipher = "aes-xts-plain64";
-      };
-    }
-  ];
+  swapDevices = [{
+    device = "/dev/root_vg/swap";
+  }];
 
-  nix.maxJobs = lib.mkDefault 4;
-  
+  nix.maxJobs = lib.mkDefault 2;
+
   # Enable firewall
   networking.firewall = {
     enable = true;
@@ -137,23 +168,12 @@
   # allowedUDPPorts = [ ... ];
   };
 
-  # Enable automatic screen rotation.
-  hardware.sensor.iio.enable = true;
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.bash.enableCompletion = true;
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "18.09"; # Did you read the comment?
+  system.stateVersion = "20.09"; # Did you read the comment?
+
+  # Enable automatic screen rotation.
+  hardware.sensor.iio.enable = true;
 }
