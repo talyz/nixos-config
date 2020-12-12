@@ -30,7 +30,6 @@ in
     programs.gnupg.agent.enable = true;
     programs.gnupg.agent.enableSSHSupport = true;
 
-    talyz.emacs.enable = true;
     talyz.emacs.extraPackages = epkgs: with epkgs; [
       desktop-environment
       exwm

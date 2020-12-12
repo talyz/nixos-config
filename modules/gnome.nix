@@ -60,8 +60,6 @@ in
 
     services.fwupd.enable = true;
 
-    talyz.emacs.enable = true;
-
     home-manager.users.talyz = { lib, ... }:
       {
         xdg.configFile."gnome-initial-setup-done".text = "yes";

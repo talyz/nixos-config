@@ -38,12 +38,6 @@ in
   options =
   {
     talyz.emacs = {
-      enable = mkOption {
-        default = true;
-        example = false;
-        description = "Whether to use my special emacs configuration system-wide.";
-        type = types.bool;
-      };
       extraPackages = mkOption {
         default = _: [];
         example = literalExample ''
