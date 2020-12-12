@@ -65,9 +65,9 @@
     enable = true;
     settings = {
       CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-      CPU_ENERGY_PERF_POLICY_ON_BAT= "balance_power";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
       CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      CPU_SCALING_GOVERNOR_ON_BAT = "schedutil";
       INTEL_GPU_MIN_FREQ_ON_AC = 900;
       INTEL_GPU_MIN_FREQ_ON_BAT = 600;
       INTEL_GPU_MAX_FREQ_ON_AC = 900;
