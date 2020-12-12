@@ -47,6 +47,11 @@ in
     # Open firewall port for GSConnect
     networking.firewall.allowedTCPPorts = [ 1716 ];
 
+    # Link the GSConnect config to persistent storage
+    talyz.ephemeralRoot.root.extraDirectories = [
+      ".config/gsconnect"
+    ];
+
     talyz.common-graphical.enable = true;
 
     services.xserver.desktopManager.gnome3.enable = true;
@@ -175,11 +180,6 @@ in
             };
           };
 
-        home.persistence."/persistent/home/talyz" = {
-          directories = [
-            ".config/gsconnect"
-          ];
-        };
 
         home.activation.${if (cfg.privateDconfSettings != null) then "privateDconfSettings" else null} =
           lib.hm.dag.entryAfter ["dconfSettings"] ''
@@ -200,7 +200,7 @@ in
               (lib.attrNames cfg.privateDconfSettings)}
 
             unset DCONF_DBUS_RUN_SESSION
-            '';
+          '';
       };
   };
 }

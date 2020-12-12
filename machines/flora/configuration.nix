@@ -81,24 +81,10 @@
     };
   };
 
-  environment.persistence."/persistent" = {
-    directories = [
-      "/var/log"
-      "/var/lib/bluetooth"
-      "/var/lib/libvirt"
-      "/var/lib/docker"
-      "/var/lib/systemd/coredump"
-      "/etc/NetworkManager/system-connections"
-    ];
-    files = [
-      "/etc/machine-id"
-      "/etc/nix/id_rsa"
-    ];
-  };
-
-  users.mutableUsers = false;
-  users.users.talyz.passwordFile = "/persistent/password_talyz";
-  users.users.root.passwordFile = "/persistent/password_root";
+  talyz.ephemeralRoot.enable = true;
+  talyz.ephemeralRoot.root.extraFiles = [
+    "/etc/nix/id_rsa"
+  ];
 
   boot.initrd.luks.devices."nixroot".device = "/dev/disk/by-uuid/d4663e0d-c010-41c9-9f9b-cd1e86e38361";
 

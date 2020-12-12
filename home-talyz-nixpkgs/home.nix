@@ -82,58 +82,6 @@
     video-sync = "display-resample";
   };
 
-  home.persistence."/persistent/home/talyz" = {
-    files = [
-      ".gnupg/pubring.kbx"
-      ".gnupg/sshcontrol"
-      ".gnupg/trustdb.gpg"
-      ".gnupg/random_seed"
-    ];
-    directories = [
-      "Downloads"
-      "Music"
-      "Pictures"
-      "Documents"
-      "Videos"
-      "VirtualBox VMs"
-      "Projects"
-      "NoMachine"
-      "Dropbox (XLN Audio)"
-      ".aws"
-      ".gnupg/private-keys-v1.d"
-      ".ssh"
-      ".mozilla"
-      ".emacs.d"
-      ".nixops"
-      ".nixops-managed-deployments"
-      ".dropbox"
-      ".dropbox-dist"
-      ".local/share/containers"
-      ".local/share/fish"
-      ".local/share/evolution"
-      ".local/share/keyrings"
-      ".local/share/direnv"
-      ".config/evolution"
-      ".config/goa-1.0"
-      ".config/keepassxc"
-      ".config/Slack"
-      ".config/VirtualBox"
-      ".cache/evolution"
-      ".cache/lorri"
-      ".cache/nix"
-    ];
-  };
-
-  home.persistence."/etc/nixos/home-talyz-nixpkgs/dotfiles" = {
-    removePrefixDirectory = true;
-    files = [
-      "screen/.screenrc"
-    ];
-    directories = [
-      "fish/.config/fish"
-    ];
-  };
-
   services.lorri.enable = true;
 
   home.file =

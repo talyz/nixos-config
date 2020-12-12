@@ -48,28 +48,7 @@
     ''
   ];
 
-  environment.persistence."/persistent" = {
-    directories = [
-      "/var/log"
-      "/var/lib/bluetooth"
-      "/var/lib/libvirt"
-      "/var/lib/docker"
-      "/var/lib/systemd/coredump"
-      "/etc/nixos"
-      "/etc/NetworkManager/system-connections"
-    ];
-    files = [
-      "/etc/machine-id"
-      "/etc/ssh/ssh_host_ed25519_key"
-      "/etc/ssh/ssh_host_ed25519_key.pub"
-      "/etc/ssh/ssh_host_rsa_key"
-      "/etc/ssh/ssh_host_rsa_key.pub"
-    ];
-  };
-
-  users.mutableUsers = false;
-  users.users.talyz.passwordFile = "/persistent/password_talyz";
-  users.users.root.passwordFile = "/persistent/password_root";
+  talyz.ephemeralRoot.enable = true;
 
   boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/617c6e22-0465-434d-937d-e0348c913455";
   boot.initrd.luks.devices."cryptroot".allowDiscards = true;
