@@ -13,13 +13,13 @@
 
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
-    ../../profiles/common.nix
-    ../../profiles/work.nix
     ../../modules
   ];
 
   talyz.gnome.enable = true;
   talyz.exwm.enable = true;
+
+  talyz.work.enable = true;
 
   hardware.cpu.amd.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;

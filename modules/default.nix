@@ -3,6 +3,8 @@
 {
   imports =
     [
+      ./common.nix
+      ./work.nix
       ./home-manager/nixos
       ./gnome.nix
       ./exwm.nix

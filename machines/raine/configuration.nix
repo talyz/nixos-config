@@ -7,7 +7,6 @@
 {
   imports = [
     <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
-    ../../profiles/common.nix
     ../../modules
   ];
 
