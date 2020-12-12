@@ -19,9 +19,6 @@
       key = "950336A4CA46BB42242733312DED2151F4671A2B";
       signByDefault = true;
     };
-    extraConfig = {
-      submodule.recurse = true;
-    };
   };
 
   programs.gpg.enable = true;
