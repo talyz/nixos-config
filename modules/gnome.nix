@@ -176,8 +176,23 @@ in
                 "gsconnect@andyholmes.github.io"
               ];
             };
-          };
 
+            # File browser (nautilus) settings
+            "org/gnome/nautilus/settings" = {
+              confirm-trash = false;
+              default-folder-viewer = "list-view";
+              default-sort-order = "type";
+              show-create-link = true;
+            };
+            "org/gnome/nautilus/list-view" = {
+              use-tree-view = true;
+            };
+
+            "org/gtk/Settings/FileChooser" = {
+              sort-directories-first = true;
+              sort-column = "type";
+            };
+          };
 
         home.activation.${if (cfg.privateDconfSettings != null) then "privateDconfSettings" else null} =
           lib.hm.dag.entryAfter ["dconfSettings"] ''
