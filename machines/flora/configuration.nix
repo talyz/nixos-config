@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, lib, pkgs, ... }:
 
 {
@@ -34,7 +30,6 @@
     # Make /tmp a tmpfs mount.
     #tmpOnTmpfs = true;
     kernelPackages = pkgs.linuxPackages_latest;
-    # extraModulePackages = [ config.boot.kernelPackages.acpi_call ];
     initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "nvme" "usb_storage" "sd_mod" ];
     kernelModules = [ "kvm-intel" ];
   };
@@ -123,14 +118,10 @@
     fsType = "vfat";
   };
 
-  # fileSystems."/root" = {
-  #   device = "/persistent/root";
-  #   options = [ "bind" "noauto" "x-systemd.automount" ];
-  # };
+  swapDevices = [{
+    device = "/dev/disk/by-uuid/aae52a21-ce44-4826-b8a9-5ba71f0caad3";
+  }];
 
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/aae52a21-ce44-4826-b8a9-5ba71f0caad3"; }
-    ];
   nix.maxJobs = lib.mkDefault 2;
 
   nix.buildMachines = [{
@@ -163,9 +154,6 @@
   networking.firewall = {
     enable = true;
     allowPing = true;
-  # Open ports in the firewall.
-  # allowedTCPPorts = [ ... ];
-  # allowedUDPPorts = [ ... ];
   };
 
   # This value determines the NixOS release with which your system is to be
