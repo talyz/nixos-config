@@ -55,6 +55,7 @@ in
     talyz.common-graphical.enable = true;
 
     services.xserver.desktopManager.gnome3.enable = true;
+    services.gnome3.experimental-features.realtime-scheduling = true;
 
     systemd.services.accounts-daemon.restartIfChanged = false;
 
@@ -176,6 +177,11 @@ in
                 "gsconnect@andyholmes.github.io"
               ];
             };
+
+            "org/gnome/mutter".experimental-features = [
+              "rt-scheduler"
+              "autostart-xwayland"
+            ];
 
             # File browser (nautilus) settings
             "org/gnome/nautilus/settings" = {
