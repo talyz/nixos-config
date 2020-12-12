@@ -118,6 +118,18 @@ in
 
     #gtk.iconCache.enable = true;
 
+    home-manager.users.talyz = { lib, ... }:
+      {
+        dconf.settings = {
+          # Evolution
+          "org/gnome/evolution/mail" = {
+            forward-style-name = "inline";
+            forward-style = 1;
+            layout = 1;
+          };
+        };
+      };
+
     programs.adb.enable = true;
     #android_sdk.accept_license = true;
 
