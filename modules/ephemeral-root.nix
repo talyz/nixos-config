@@ -128,6 +128,7 @@ in
           "/etc/ssh/ssh_host_rsa_key.pub"
         ] ++ cfg.root.extraFiles;
         directories = [
+          "/etc/nixos"
           "/var/log"
           "/var/lib/bluetooth"
           "/var/lib/docker"

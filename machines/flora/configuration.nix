@@ -107,11 +107,6 @@
     options = [ "subvol=nix" ];
   };
 
-  fileSystems."/etc/nixos" = {
-    device = "/persistent/etc/nixos";
-    options = [ "bind" "noauto" "x-systemd.automount" ];
-  };
-
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/194B-06B7";
     fsType = "vfat";
