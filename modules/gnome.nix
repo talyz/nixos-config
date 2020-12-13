@@ -48,7 +48,7 @@ in
     networking.firewall.allowedTCPPorts = [ 1716 ];
 
     # Link the GSConnect config to persistent storage
-    talyz.ephemeralRoot.root.extraDirectories = [
+    talyz.ephemeralRoot.home.extraDirectories = [
       ".config/gsconnect"
     ];
 
