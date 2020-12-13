@@ -84,7 +84,7 @@ in
               "NoMachine"
               "Dropbox (XLN Audio)"
               ".aws"
-              ".gnupg/private-keys-v1.d"
+              ".gnupg"
               ".ssh"
               ".mozilla"
               ".emacs.d"
