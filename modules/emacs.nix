@@ -69,6 +69,8 @@ in
           (import ./emacs-overlay)
         ];
 
+      environment.sessionVariables.EDITOR = "emacs";
+
       environment.systemPackages = [ emacs ];
     };
 }

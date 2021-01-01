@@ -2,11 +2,6 @@
 
 {
   imports = [ ../modules/impermanence/home-manager.nix ];
-  
-  pam.sessionVariables = {
-    EDITOR = "emacs";
-    MOZ_USE_XINPUT2 = "1";
-  };
 
   nixpkgs.config = import ./config.nix;
   xdg.configFile."nixpkgs/config.nix".source = ./config.nix;

@@ -52,6 +52,10 @@ in
       aspellDicts.en-computers
     ];
 
+    environment.sessionVariables = {
+      MOZ_USE_XINPUT2 = "1";
+    };
+
     xdg.icons.enable = true;
 
     # Enable pulse with all the bluetooth codec modules.
