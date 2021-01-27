@@ -1,8 +1,6 @@
 { pkgs, ... }:
 
 {
-  imports = [ ../modules/impermanence/home-manager.nix ];
-
   nixpkgs.config = import ./config.nix;
   xdg.configFile."nixpkgs/config.nix".source = ./config.nix;
 

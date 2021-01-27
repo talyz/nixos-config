@@ -10,9 +10,9 @@ in
         default = false;
         example = true;
         description = ''
-        Whether the system uses an ephemeral root device and desired
-        state should be linked to persistent storage.
-      '';
+          Whether the system uses an ephemeral root device and desired
+          state should be linked to persistent storage.
+        '';
       };
 
       home.extraFiles = lib.mkOption {
@@ -24,9 +24,9 @@ in
           ".gnupg/random_seed"
         ];
         description = ''
-        Additional files in the home directory to link to persistent
-        storage.
-      '';
+          Additional files in the home directory to link to persistent
+          storage.
+        '';
       };
 
       home.extraDirectories = lib.mkOption {
@@ -35,9 +35,9 @@ in
           ".config/gsconnect"
         ];
         description = ''
-        Additional directories in the home directory to link to
-        persistent storage.
-      '';
+          Additional directories in the home directory to link to
+          persistent storage.
+        '';
       };
 
       root.extraFiles = lib.mkOption {
@@ -46,8 +46,8 @@ in
           "/etc/nix/id_rsa"
         ];
         description = ''
-        Additional files in the root to link to persistent storage.
-      '';
+          Additional files in the root to link to persistent storage.
+        '';
       };
 
       root.extraDirectories = lib.mkOption {
@@ -56,15 +56,32 @@ in
           "/var/lib/libvirt"
         ];
         description = ''
-        Additional directories in the root to link to persistent
-        storage.
-      '';
+          Additional directories in the root to link to persistent
+          storage.
+        '';
       };
     };
 
 
-  config = lib.mkIf cfg.enable
+  config = lib.mkMerge [
     {
+      home-manager.users.talyz = { lib, ... }:
+        {
+          imports = [ ../modules/impermanence/home-manager.nix ];
+
+          home.persistence."/etc/nixos/home-talyz-nixpkgs/dotfiles" = {
+            removePrefixDirectory = true;
+            files = [
+              "screen/.screenrc"
+            ];
+            directories = [
+              "fish/.config/fish"
+            ];
+          };
+        };
+    }
+
+    (lib.mkIf cfg.enable {
       users.mutableUsers = false;
       users.users.talyz.passwordFile = "/persistent/password_talyz";
       users.users.root.passwordFile = "/persistent/password_root";
@@ -113,17 +130,6 @@ in
               ".cache/keepassxc"
             ] ++ cfg.home.extraDirectories;
           };
-
-          home.persistence."/etc/nixos/home-talyz-nixpkgs/dotfiles" = {
-            removePrefixDirectory = true;
-            allowOther = true;
-            files = [
-              "screen/.screenrc"
-            ];
-            directories = [
-              "fish/.config/fish"
-            ];
-          };
         };
 
       environment.persistence."/persistent" = {
@@ -143,5 +149,6 @@ in
           "/etc/NetworkManager/system-connections"
         ] ++ cfg.root.extraDirectories;
       };
-    };
+    })
+  ];
 }
