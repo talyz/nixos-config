@@ -40,7 +40,7 @@ in
       mpv
       kitty
       gparted
-      gnome3.evolution
+      evolution
       gnome3.evince
       gnome3.adwaita-icon-theme
       google-play-music-desktop-player
