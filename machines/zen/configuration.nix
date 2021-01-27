@@ -23,6 +23,7 @@
   #talyz.exwm.enable = true;
 
   talyz.work.enable = true;
+  programs.steam.enable = true;
 
   # AMD GPU drivers
   # boot.kernelPatches = [
