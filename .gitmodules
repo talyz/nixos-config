@@ -27,3 +27,6 @@
 [submodule "machines/trace/nixpkgs"]
 	path = machines/trace/nixpkgs
 	url = git@github.com:talyz/nixpkgs.git
+[submodule "modules/dracula-emacs"]
+	path = modules/dracula-emacs
+	url = git@github.com:talyz/dracula-emacs.git

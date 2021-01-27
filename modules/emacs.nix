@@ -21,13 +21,7 @@ let
       });
       elpy = epkgs.melpaPackages.elpy;
       dracula-theme = epkgs.melpaPackages.dracula-theme.overrideAttrs (oldAttrs: oldAttrs // {
-        src = /persistent/home/talyz/Projects/dracula-emacs;
-        # pkgs.fetchFromGitHub {
-        #   owner = "talyz";
-        #   repo = "dracula-emacs";
-        #   rev = "a4c41005cb58208932b6d9ec99c8d912e42c634a";
-        #   sha256 = "0bp3adn9w08zrps0dgwhcmwcifzld8lsq92rsad5hcvnqhvjfkc7";
-        # };
+        src = ./dracula-emacs;
       });
       inf-elixir = epkgs.trivialBuild {
         pname = "inf-elixir";
