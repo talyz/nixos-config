@@ -33,7 +33,7 @@ in
     # fonts.fontconfig.antialias = false;
 
     environment.systemPackages = with pkgs; [
-      firefox-wayland
+      firefox-bin
       (keepassxc.override { withKeePassNetworking = true; })
       dropbox
       krita
