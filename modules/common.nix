@@ -52,6 +52,8 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  documentation.man.generateCaches = true;
+
   programs.fish.enable = true;
 
   services.openssh = {
