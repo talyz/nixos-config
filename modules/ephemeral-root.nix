@@ -69,9 +69,12 @@ in
       users.users.talyz.passwordFile = "/persistent/password_talyz";
       users.users.root.passwordFile = "/persistent/password_root";
 
+      programs.fuse.userAllowOther = true;
+
       home-manager.users.talyz = { lib, ... }:
         {
           home.persistence."/persistent/home/talyz" = {
+            allowOther = true;
             files = cfg.home.extraFiles;
             directories = [
               "Downloads"
@@ -110,6 +113,7 @@ in
 
           home.persistence."/etc/nixos/home-talyz-nixpkgs/dotfiles" = {
             removePrefixDirectory = true;
+            allowOther = true;
             files = [
               "screen/.screenrc"
             ];
