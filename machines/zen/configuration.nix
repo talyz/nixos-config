@@ -7,7 +7,7 @@
 {
   nix.nixPath = [
     "nixpkgs=/etc/nixos/machines/zen/nixpkgs"
-    "nixos-config=/etc/nixos/configuration.nix"
+    "nixos-config=/etc/nixos/machines/zen/configuration.nix"
     "/nix/var/nix/profiles/per-user/root/channels"
   ];
 
