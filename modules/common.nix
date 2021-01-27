@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
 {
+  imports = [ ./cachix.nix ];
+
   nix.buildCores = 0;
   
   environment.systemPackages = with pkgs; [
