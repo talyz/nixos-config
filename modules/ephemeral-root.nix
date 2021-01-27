@@ -110,6 +110,7 @@ in
               ".cache/evolution"
               ".cache/lorri"
               ".cache/nix"
+              ".cache/keepassxc"
             ] ++ cfg.home.extraDirectories;
           };
 
