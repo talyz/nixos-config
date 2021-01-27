@@ -35,6 +35,7 @@
     direnv
     dnsutils
     bat
+    unzip
   ];
 
   boot.kernelParams = [
