@@ -25,6 +25,8 @@
   talyz.work.enable = true;
   programs.steam.enable = true;
 
+  environment.enableDebugInfo = true;
+
   # AMD GPU drivers
   # boot.kernelPatches = [
   #   { name = "amdgpu-config";
