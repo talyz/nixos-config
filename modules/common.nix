@@ -36,6 +36,7 @@
     dnsutils
     bat
     unzip
+    jq
   ];
 
   boot.kernelParams = [
