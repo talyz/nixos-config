@@ -42,9 +42,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Make /tmp a tmpfs mount.
-  boot.tmpOnTmpfs = true;
-
   # Use the latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
