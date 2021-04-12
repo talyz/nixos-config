@@ -10,9 +10,6 @@
 [submodule "machines/zen/nixpkgs"]
 	path = machines/zen/nixpkgs
 	url = git@github.com:talyz/nixpkgs.git
-[submodule "home-manager"]
-	path = modules/home-manager
-	url = git@github.com:talyz/home-manager.git
 [submodule "machines/evals/nixpkgs"]
 	path = machines/evals/nixpkgs
 	url = git@github.com:talyz/nixpkgs.git
@@ -30,3 +27,6 @@
 [submodule "modules/dracula-emacs"]
 	path = modules/dracula-emacs
 	url = git@github.com:talyz/dracula-emacs.git
+[submodule "home-manager"]
+	path = modules/home-manager
+	url = https://github.com/nix-community/home-manager.git
