@@ -4,7 +4,7 @@
   imports = [ ./cachix.nix ];
 
   nix.buildCores = 0;
-  
+
   environment.systemPackages = with pkgs; [
     wget
     ag
@@ -48,7 +48,7 @@
   console.font = "Lat2-Terminus16";
   console.keyMap = "dvorak";
   i18n.defaultLocale = "en_US.UTF-8";
-  
+
   time.timeZone = "Europe/Stockholm";
 
   nixpkgs.config.allowUnfree = true;
@@ -69,10 +69,10 @@
 
   users.users.talyz = {
     isNormalUser = true;
-		extraGroups = [ "wheel" ];
-		shell = pkgs.fish;
-		uid = 1000;
-		initialPassword = "aoeuaoeu";
+    extraGroups = [ "wheel" ];
+    shell = pkgs.fish;
+    uid = 1000;
+    initialPassword = "aoeuaoeu";
     openssh.authorizedKeys.keys = [
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDYb+iWquRt4aA7ARpLqsoRrjsku+YLFv0IzSu2rxCl6SWLLCqq0x4fayPJq0K8nVIJQcp8E1gj5x9IY54JxKH/T3IOiUYSPFdd79xZj32xwGojoMDab0c9YoOGA/GCnJeqawrsB2eDvQb1QFrxQ6L4/ooCiD0s0o/DZPzp1SaaQMGdpVrPQJlsGpejjoinT2NMB1VkRECtF6U1GnT9wfxYqZxmRzvKkfzim+IWpUft94lFP2uaY2veVC19YdMBiiRYHhG4q3gCeCanbbZlwi+I7uv5fcxAK4qsbWQ4z6uFBw4Zovkr/X8nGBxIytSY79/wdC/IvxUXmyo9xbWGpOrR8lXVt8fWwKm8NZHH6xdo3BJa7uYAzHOpw9mOFbAnPcd7KZN8OouYsycRlB/1/wfsd5HTqJfUJc/P5aK1I2UEVAF7jpgXMy8H7qIVRD7hBr7u6gGD+R0NQT+kGgueEyrolFsD+X/3PnzhBZIzU9XgOfHP3MJRph6hNW5EvpX9ZDmJBSHmvJNeKbMHr/w59d3ojbnQJDTzoe2n2SHRxJtFPUkOy2w6YrDsoTpfe7/xYDiamXjVpoVkIIeKRL67VLL07gvoGYf1w8G90G7lPT7h/tEgXBzcDoF8uZjgkHezVh2eHl7KNnxyjAslFC0lcxJ7dD5hIwV33WhXXuphy5SnWQ== talyz@natani-2020-09-14"
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCxpS0/cz+daRaLFagSCK9SEd5bq8wmZs+yUbktgsiMQsfh3fT8kK5P7O7DjZBJMrPRwXJU6BNCGpe08755kdVw1gNfDDUyiUznqM1Q3Uzvb0dvOMm16RgLRb8da8ilNxIVXI5cO0MKzZJM06aTZfPyP9bFIUCIL9DP3wu91ts+vlBuOCcFymzf7B5uTZUpHaoq2Aq8+xeBUnF9stdBJ35yJihIIZCIZ2hSMpfV7lrKgyzgUJugO9WoGIsKgaro2r8Em7IiWdAfLa/OAunEw7Crau4sJrwBXLSqRxor/H8wUHWzfDqm1YvL1yMShVe4Fv/2V7uXxhsA5xHbboGe7tkPaURaUhySgUxycjZhFT/fNqJyU0/xUyrJMGA+5Ml9dY3NeTMJKUBeyt18yj8gAh4gqRzLtcsgSveQB1h5nVYO3xP1ydhLYrfZ4XJkEhSix8YhfEr+pxCwSC/9cx2w/H+10aQgQJqI15llfBL1Rl24g0f+VcawuWdahRL0sDUYQLBt5FRNn/SKBu/PGGU5XW4Ox0Zw7wSJZ0ukPORwaRFPgMC2IpDk14bqBEG6VVWYuSSq01IOAnwNqcrcsKFXA/+9OV5wgYOpxjQwIx5bA41T8RsbrrgENMAlm3VkUOgWz50wuMQfWR7fXrmqehsvmmG/fJo9ro56W908y9val2cCVw== talyz@flora-2019-06-24"
@@ -81,5 +81,5 @@
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCoybGcGH2jH9l2p1Jyk9nWAyNkKqA/SBET+koXM2mbQAnmKpL8SKUNN4K/NQJAqEaGNTn2F6dl1w7SOg4AOajIlbGPOpyR/XgE+QptqZ+9K6vSL1ZcVc0PHnaspbfAIUT5rMR3mYN6SudL+w4ybd4afsC6TOJ2555cZdm8AQDbgYzoQM0Gc6RRRNmOaU5hzGeWj1ssx1R+rPv8O4aR5vKrlVIZKnIxlOHPtac9SpRxxCkb4U+N30lTestugxwpZrlEtNdJ5hhec8Hs8Buyh2DW7KkOlXbvmiPMDysBQECnBnZPLN5RlL5h983ngUkN3ShHlOXOez2fTakisxcfJppm0bLMb1zYOGolqU9mkl3LRJRojdnEeoDICyB9Lzn58RWFUHTzOWtjCK5zZSelnX/TZ6MPwWg6nMi92a2fB57OV/VkDsam8qRBsEQQIcXFBNSXU0j7TlEOlAYbjlNELOatJnHrp+q85MI3S0mOP+YEAagSUC6zSGKr2pgV4Vf3fGVUKMpkWOynPNs6mNn3lziWBUdbjb7iZDKZmQbcwI9NGAAv5VTkYhWMepludNbXeRCwlMNNQYmZPS/q/e7D40MK3++/eJJsalo3eML9bdZEuy1Xske+1wdw0xRSilLQtVRPXHNziVqejb7HQY0t4hGSlij4kky0bsWMSfetI29qbw== talyz@trace-2020-12-10"
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDIl7rJCJVP+1CfwRuzQtllxXjhpe3i0ZiiWtGsQ6V3o5/BgBO4kAlkmWWG/bASpRuy8GyDhErGbZUi48pjvsJzGMgDV+ZN+1d4OLeKUOAk1Xvyo/sb5e/NPXT00Zb1x9kqcfPtpEKyGiEpDYYhfz76v+AsyOYHAxoWxV3mwro0xalPDps0fJCF/XVXouBMeI7xqm4ot+4sCPNVNyLYvv2FK6Xw+TDJCEje5o4ELuD4iKUcIUfUD/pFeosrsAhi8O0LuZub7dO5qLiA+Z6LuMCeqF/hJ/rK8Unt+YC77bAg272YztXrngKlEyZ4AaB8ZIql9DEJEMPqYR2Lu/YMAs9qvamk004cb2z/ZqwG42Tyurlgo6Pau6VarlIENycrZey5EIhm4nQspP+75Pd0uOnpxP5MTbu7YEC1FdUYWhk9itTCHpEPvMCyOByl4t60KeNSRC7+Ksx0qGyPEz1aPYxIHl3b5lCkTDlXV5P2Nf+TvZXQZUMqqvdOCqgoVjYxqMofebw88iBeiDP01uxRRc7xFyecyPm/EKkfk8+LTfI00cXo9t/PsHUhwexaALAjdnx3EKsOPT6TjGNDHc6o58ORXcaajmMQP6EgYSqoibx8/cGXrAevA+DPnwBzLUQ3aikt3f0PDt2I5Yj/o3Aykr+BnbTfQ1mGwxRAoMBg1CWgWw== kim.lindberger@Kims-Mac-mini.local"
     ];
-	};
+  };
 }
