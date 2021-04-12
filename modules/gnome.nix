@@ -39,7 +39,6 @@ in
       glib.dev
       gnome3.gnome-tweak-tool
       gnome3.gnome_session
-      gnomeExtensions.dash-to-dock
       gnomeExtensions.gsconnect
       gnome3.rhythmbox
     ];
