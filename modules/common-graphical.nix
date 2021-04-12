@@ -34,17 +34,14 @@ in
 
     environment.systemPackages = with pkgs; [
       firefox-bin
-      (keepassxc.override { withKeePassNetworking = true; })
+      keepassxc
       dropbox
       krita
       mpv
-      kitty
       gparted
       evolution
       gnome3.evince
       gnome3.adwaita-icon-theme
-      google-play-music-desktop-player
-      google-musicmanager
       aspell
       aspellDicts.sv
       aspellDicts.en
