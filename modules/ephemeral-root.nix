@@ -65,11 +65,14 @@ in
 
   config = lib.mkMerge [
     {
+      programs.fuse.userAllowOther = true;
+
       home-manager.users.talyz = { lib, ... }:
         {
           imports = [ ../modules/impermanence/home-manager.nix ];
 
           home.persistence."/etc/nixos/home-talyz-nixpkgs/dotfiles" = {
+            allowOther = true;
             removePrefixDirectory = true;
             files = [
               "screen/.screenrc"
@@ -85,8 +88,6 @@ in
       users.mutableUsers = false;
       users.users.talyz.passwordFile = "/persistent/password_talyz";
       users.users.root.passwordFile = "/persistent/password_root";
-
-      programs.fuse.userAllowOther = true;
 
       home-manager.users.talyz = { lib, ... }:
         {
