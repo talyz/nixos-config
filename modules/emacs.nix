@@ -34,6 +34,20 @@ let
       };
     };
   });
+
+  languageServers = with pkgs; [
+    elixir_ls
+    gopls
+    ccls
+    cmake-language-server
+    rnix-lsp
+    python-language-server
+  ];
+
+  emacsWithLanguageServers =
+    pkgs.runCommand "emacs-with-language-servers" { nativeBuildInputs = [ pkgs.makeWrapper ]; } ''
+      makeWrapper ${emacs}/bin/emacs $out/bin/emacs --prefix PATH : ${lib.makeBinPath languageServers}
+    '';
 in
 {
   options =
@@ -65,6 +79,8 @@ in
 
       environment.sessionVariables.EDITOR = "emacs";
 
-      environment.systemPackages = [ emacs ];
+      environment.systemPackages = [
+        emacsWithLanguageServers
+      ];
     };
 }
