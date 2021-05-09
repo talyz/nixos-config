@@ -26,9 +26,10 @@
             (when (and exwm-class-name
                        (or (string= exwm-class-name "URxvt")
                            (string= exwm-class-name "Gnome-terminal")
-                           (string= exwm-class-name "kitty")))
-              (exwm-input-set-local-simulation-keys nil))))
-             ;(exwm-input-set-local-simulation-keys '(([?\C-c ?\C-c] . ?\C-c))))))
+                           (string= exwm-class-name "kitty")
+                           (string= exwm-class-name "XTerm")))
+              ;; (exwm-input-set-local-simulation-keys nil))))
+             (exwm-input-set-local-simulation-keys '(([?\C-c ?\C-c] . ?\C-c))))))
 
 (add-hook 'exwm-update-title-hook
           (lambda ()
