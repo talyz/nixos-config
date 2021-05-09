@@ -33,7 +33,7 @@ in
     # fonts.fontconfig.antialias = false;
 
     environment.systemPackages = with pkgs; [
-      firefox-bin
+      firefox-wayland
       keepassxc
       dropbox
       krita
