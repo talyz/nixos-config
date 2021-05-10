@@ -90,7 +90,7 @@ in
             "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
               name = "terminal";
               binding = "<Super>c";
-              command = "gnome-terminal";
+              command = "xterm";
             };
 
             "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {

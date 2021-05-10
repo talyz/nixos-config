@@ -129,6 +129,17 @@ in
             layout = 1;
           };
         };
+
+        xresources.properties = {
+          "XTerm*faceName" = "dejavu sans mono:size=10";
+          "XTerm*charClass" = [ "37:48" "45-47:48" "58:48" "64:48" "126:48" ];
+          "XTerm.termName" = "xterm-256color";
+          "XTerm.vt100.metaSendsEscape" = true;
+          "XTerm.vt100.backarrowKey" = false;
+          "XTerm.ttyModes" = "erase ^?";
+          "XTerm.vt100.saveLines" = "32768";
+          "XTerm.vt100.reverseVideo" = true;
+        };
       };
 
     programs.adb.enable = true;
