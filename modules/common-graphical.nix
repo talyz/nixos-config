@@ -47,6 +47,7 @@ in
       aspellDicts.en
       aspellDicts.en-science
       aspellDicts.en-computers
+      foot
     ];
 
     environment.sessionVariables = {
@@ -139,6 +140,32 @@ in
           "XTerm.ttyModes" = "erase ^?";
           "XTerm.vt100.saveLines" = "32768";
           "XTerm.vt100.reverseVideo" = true;
+        };
+
+        xdg.configFile."foot/foot.ini".text = ''
+          font=monospace:size=6
+        '' + lib.generators.toINI {} {
+          colors = {
+            alpha = 1.0;
+            foreground = "c5c8c6";
+            background = "000000";
+            regular0 = "000000";  # black
+            regular1 = "cc2222";  # red
+            regular2 = "22cc22";  # green
+            regular3 = "cccc22";  # yellow
+            regular4 = "2222cc";  # blue
+            regular5 = "cc22cc";  # magenta
+            regular6 = "22cccc";  # cyan
+            regular7 = "cccccc";  # white
+            bright0 = "222222";   # bright black
+            bright1 = "ff4444";   # bright red
+            bright2 = "44ff44";   # bright green
+            bright3 = "ffff44";   # bright yellow
+            bright4 = "4444ff";   # bright blue
+            bright5 = "ff44ff";   # bright magenta
+            bright6 = "44ffff";   # bright cyan
+            bright7 = "ffffff";   # bright white
+          };
         };
       };
 
