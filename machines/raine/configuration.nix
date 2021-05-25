@@ -10,18 +10,14 @@
     ../../modules
   ];
 
-  hardware.cpu.intel.updateMicrocode = true;
+  hardware.cpu.amd.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
 
   talyz.gnome.enable = true;
   talyz.media-center.enable = true;
 
   # Video drivers
-  services.xserver.videoDrivers = [ "intel" ];
-  hardware.opengl.extraPackages = with pkgs; [ vaapiIntel ];
-  # services.xserver.deviceSection = ''
-  #   Option        "Tearfree"      "true"
-  # '';
+  services.xserver.videoDrivers = [ "amdgpu" ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -35,10 +31,10 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Kernel modules required in the initrd to boot.
-  boot.initrd.availableKernelModules = [ "ehci_pci" "ahci" "xhci_pci" "firewire_ohci" "usbhid" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "nvme" "ahci" "xhci_pci" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   # Kernel modules to load in the second stage of boot.
-  boot.kernelModules = [ "kvm-intel" ];
+  boot.kernelModules = [ "kvm-amd" "nct6775" ];
 
 
   ### Network configuration ###
@@ -49,7 +45,7 @@
   systemd.network.enable = true;
   systemd.network.networks."wired" = {
     enable = true;
-    matchConfig.Name = "enp4s0";
+    matchConfig.Name = "enp9s0";
     DHCP = "no";
     address = [ "192.168.1.128/24" ];
     gateway = [ "192.168.1.1" ];
