@@ -16,6 +16,12 @@ in
             description = "Whether to enable the gnome desktop.";
             type = types.bool;
           };
+          useWayland = mkOption {
+            default = true;
+            description = ''
+              Set appropriate options for the Wayland session.
+            '';
+          };
           privateDconfSettings = mkOption {
             default = null;
             example = { "/persistent/home/talyz/gsconnect_settings" = "/org/gnome/shell/extensions/"; };
@@ -54,6 +60,7 @@ in
     talyz.common-graphical.enable = true;
 
     services.xserver.desktopManager.gnome3.enable = true;
+    services.xserver.displayManager.gdm.wayland = cfg.useWayland;
     services.gnome3.experimental-features.realtime-scheduling = true;
 
     systemd.services.accounts-daemon.restartIfChanged = false;
@@ -90,7 +97,7 @@ in
             "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
               name = "terminal";
               binding = "<Super>c";
-              command = "xterm";
+              command = if cfg.useWayland then "foot" else "xterm";
             };
 
             "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
