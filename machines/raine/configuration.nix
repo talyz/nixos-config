@@ -16,6 +16,8 @@
   talyz.gnome.enable = true;
   talyz.media-center.enable = true;
 
+  programs.steam.enable = true;
+
   # Video drivers
   services.xserver.videoDrivers = [ "amdgpu" ];
 
