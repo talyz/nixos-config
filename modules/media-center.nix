@@ -16,7 +16,7 @@ in
   };
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      kodi
+      kodi-wayland
     ];
 
     services.nzbget.enable = true;
