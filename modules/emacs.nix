@@ -41,7 +41,7 @@ let
     ccls
     cmake-language-server
     rnix-lsp
-    python-language-server
+    python3Packages.python-language-server
   ];
 
   emacsWithLanguageServers =
