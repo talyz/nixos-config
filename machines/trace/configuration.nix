@@ -54,6 +54,29 @@
     ''
   ];
 
+  services.power-profiles-daemon.enable = false;
+
+  # Powersaving and battery charge control
+  services.tlp = {
+    enable = true;
+    settings = {
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "performance";
+      SCHED_POWERSAVE_ON_AC = 0;
+      SCHED_POWERSAVE_ON_BAT = 0;
+      RADEON_DPM_STATE_ON_AC = "performance";
+      RADEON_DPM_STATE_ON_BAT = "battery";
+      RADEON_DPM_PERF_LEVEL_ON_AC = "high";
+      RADEON_DPM_PERF_LEVEL_ON_BAT = "auto";
+      CPU_BOOST_ON_AC = 1;
+      CPU_BOOST_ON_BAT = 1;
+      USB_AUTOSUSPEND = 0;
+      RUNTIME_PM_ON_BAT = "on";
+      START_CHARGE_THRESH_BAT0 = 95;
+      STOP_CHARGE_THRESH_BAT0 = 100;
+    };
+  };
+
   talyz.ephemeralRoot.enable = true;
 
   boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/617c6e22-0465-434d-937d-e0348c913455";
