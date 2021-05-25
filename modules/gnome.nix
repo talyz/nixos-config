@@ -59,9 +59,9 @@ in
 
     talyz.common-graphical.enable = true;
 
-    services.xserver.desktopManager.gnome3.enable = true;
+    services.xserver.desktopManager.gnome.enable = true;
     services.xserver.displayManager.gdm.wayland = cfg.useWayland;
-    services.gnome3.experimental-features.realtime-scheduling = true;
+    services.gnome.experimental-features.realtime-scheduling = true;
 
     systemd.services.accounts-daemon.restartIfChanged = false;
 

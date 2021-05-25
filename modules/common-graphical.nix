@@ -100,12 +100,12 @@ in
     programs.wireshark.package = pkgs.wireshark-qt;
 
     programs.gnome-terminal.enable = true;
-    services.gnome3.gnome-keyring.enable = true;
+    services.gnome.gnome-keyring.enable = true;
     #security.pam.services.login.enableGnomeKeyring = true;
     security.pam.services.lightdm.enableGnomeKeyring = true;
     security.pam.services.gdm.enableGnomeKeyring = true;
-    services.gnome3.gnome-online-accounts.enable = true;
-    services.gnome3.evolution-data-server.enable = true;
+    services.gnome.gnome-online-accounts.enable = true;
+    services.gnome.evolution-data-server.enable = true;
     security.polkit.enable = true;
     services.udisks2.enable = true;
     services.accounts-daemon.enable = true;
