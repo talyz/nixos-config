@@ -143,7 +143,8 @@ in
         };
 
         xdg.configFile."foot/foot.ini".text = ''
-          font=monospace:size=6
+          font=monospace:size=10
+          dpi-aware=no
         '' + lib.generators.toINI {} {
           colors = {
             alpha = 1.0;
