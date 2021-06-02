@@ -5,6 +5,12 @@
 { config, pkgs, lib, ... }:
 
 {
+  nix.nixPath = [
+    "nixpkgs=/etc/nixos/machines/${config.networking.hostName}/nixpkgs"
+    "nixos-config=/etc/nixos/machines/${config.networking.hostName}/configuration.nix"
+    "/nix/var/nix/profiles/per-user/root/channels"
+  ];
+
   imports = [
     <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
     ../../modules
@@ -109,7 +115,7 @@
       label = "raid";
     };
   };
-      
+
   swapDevices = [
     {
       device = "/dev/root_vg/swap";
@@ -129,4 +135,3 @@
   system.stateVersion = "20.09"; # Did you read the comment?
 
 }
-

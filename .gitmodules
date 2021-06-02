@@ -30,3 +30,7 @@
 [submodule "home-manager"]
 	path = modules/home-manager
 	url = https://github.com/nix-community/home-manager.git
+[submodule "machines/raine/nixpkgs"]
+	path = machines/raine/nixpkgs
+	url = https://github.com/NixOS/nixpkgs.git
+	branch = nixos-20.09
