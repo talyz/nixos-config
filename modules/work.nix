@@ -27,7 +27,7 @@
       # virtualisation.libvirtd.enable = true;
       # virtualisation.libvirtd.qemuRunAsRoot = false;
       # virtualisation.libvirtd.onShutdown = "shutdown";
-      # users.users.talyz.extraGroups = [ "libvirtd" ];
+      # users.users.${config.talyz.username}.extraGroups = [ "libvirtd" ];
       # networking.firewall.checkReversePath = false;
 
       virtualisation.virtualbox.host.enable = true;
@@ -36,7 +36,7 @@
       virtualisation.podman.enable = true;
       virtualisation.podman.dockerCompat = true;
 
-      users.users.talyz.extraGroups = [ "vboxusers" ];
+      users.users.${config.talyz.username}.extraGroups = [ "vboxusers" ];
 
       services.avahi.browseDomains = [ "internal.xlnaudio.com" ];
     };

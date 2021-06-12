@@ -2,6 +2,7 @@
 
 let
   cfg = config.talyz.ephemeralRoot;
+  user = config.talyz.username;
 in
 {
   options.talyz.ephemeralRoot =
@@ -67,7 +68,7 @@ in
     {
       programs.fuse.userAllowOther = true;
 
-      home-manager.users.talyz = { lib, ... }:
+      home-manager.users.${user} = { lib, ... }:
         {
           imports = [ ../modules/impermanence/home-manager.nix ];
 
@@ -86,12 +87,12 @@ in
 
     (lib.mkIf cfg.enable {
       users.mutableUsers = false;
-      users.users.talyz.passwordFile = "/persistent/password_talyz";
+      users.users.${user}.passwordFile = "/persistent/password_${user}";
       users.users.root.passwordFile = "/persistent/password_root";
 
-      home-manager.users.talyz = { lib, ... }:
+      home-manager.users.${user} = { lib, ... }:
         {
-          home.persistence."/persistent/home/talyz" = {
+          home.persistence."/persistent/home/${user}" = {
             allowOther = true;
             files = cfg.home.extraFiles;
             directories = [

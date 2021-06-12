@@ -4,6 +4,7 @@ with lib;
 
 let
   cfg = config.talyz.gnome;
+  user = config.talyz.username;
 in
 {
   options =
@@ -24,7 +25,7 @@ in
           };
           privateDconfSettings = mkOption {
             default = null;
-            example = { "/persistent/home/talyz/gsconnect_settings" = "/org/gnome/shell/extensions/"; };
+            example = { "/persistent/home/${user}/gsconnect_settings" = "/org/gnome/shell/extensions/"; };
             description = ''
               External files to import dconf settings from. The
               attribute name is the path to the file to read settings
@@ -67,7 +68,7 @@ in
 
     services.fwupd.enable = true;
 
-    home-manager.users.talyz = { lib, ... }:
+    home-manager.users.${user} = { lib, ... }:
       {
         xdg.configFile."gnome-initial-setup-done".text = "yes";
 

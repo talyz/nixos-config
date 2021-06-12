@@ -2,6 +2,7 @@
 
 let
   cfg = config.talyz.common-graphical;
+  user = config.talyz.username;
 in
 {
   options = {
@@ -115,12 +116,12 @@ in
     services.xserver.displayManager.gdm = {
       enable = true;
       #autoLogin.enable = true;
-      #autoLogin.user = "talyz";
+      #autoLogin.user = ${user};
     };
 
     #gtk.iconCache.enable = true;
 
-    home-manager.users.talyz = { lib, ... }:
+    home-manager.users.${user} = { lib, ... }:
       {
         dconf.settings = {
           # Evolution
@@ -205,7 +206,14 @@ in
     # Enable the smartcard deamon.
     services.pcscd.enable = true;
 
-    users.users.talyz.extraGroups = [ "networkmanager" "video" "adbusers" "lp" "scanner" "wireshark" ];
+    users.users.${user}.extraGroups = [
+      "networkmanager"
+      "video"
+      "adbusers"
+      "lp"
+      "scanner"
+      "wireshark"
+    ];
 
   };
 }
