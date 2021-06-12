@@ -13,5 +13,6 @@
       ./ephemeral-root.nix
       ./common-graphical.nix
       ./media-center.nix
+      ./cachix.nix
     ];
 }

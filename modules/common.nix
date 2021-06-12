@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [ ./cachix.nix ];
   options = {
     talyz.username = lib.mkOption {
       type = lib.types.str;
