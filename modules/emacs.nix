@@ -4,9 +4,10 @@ with lib;
 
 let
   cfg = config.talyz.emacs;
+  user = config.talyz.username;
 
   emacs = (pkgs.emacsWithPackagesFromUsePackage {
-    config = ../home-talyz-nixpkgs/dotfiles/emacs/emacs-config.org;
+    config = ./dotfiles/emacs/emacs-config.org;
     package = pkgs.emacs;
     extraEmacsPackages = epkgs: [ epkgs.inf-elixir ] ++ (cfg.extraPackages epkgs);
     override = epkgs: epkgs // {
@@ -76,6 +77,21 @@ in
         [
           (import ./emacs-overlay)
         ];
+
+      home-manager.users.${user} = { lib, ... }:
+        {
+          home.file = {
+            ".emacs".source = ./dotfiles/emacs/emacs;
+            "emacs-config.el".source = pkgs.runCommand "emacs-config.el" {} ''
+              cp ${./dotfiles/emacs/emacs-config.org} emacs-config.org
+              ${pkgs.emacs}/bin/emacs -Q --batch ./emacs-config.org -f org-babel-tangle
+              mv emacs-config.el $out
+            '';
+
+            # Create the auto-saves directory
+            # ".emacs.d/auto-saves/.manage-directory".text = "";
+          };
+        };
 
       environment.sessionVariables.EDITOR = "emacs";
 

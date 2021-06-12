@@ -71,7 +71,44 @@
 
     programs.fish.enable = true;
 
-    home-manager.users.${config.talyz.username} = import ../home-talyz-nixpkgs/home.nix;
+    home-manager.users.${config.talyz.username} = { ... }:
+      {
+        nixpkgs.config = import ./config.nix;
+        xdg.configFile."nixpkgs/config.nix".source = ./config.nix;
+
+        programs.git = {
+          enable = true;
+          userEmail = "kim.lindberger@gmail.com";
+          userName = "talyz";
+          signing = {
+            key = "950336A4CA46BB42242733312DED2151F4671A2B";
+            signByDefault = true;
+          };
+        };
+
+        programs.gpg.enable = true;
+        programs.gpg.settings = {
+          keyserver = "hkps://keys.openpgp.org";
+          default-key = "950336A4CA46BB42242733312DED2151F4671A2B";
+        };
+
+        services.gpg-agent.enable = true;
+        services.gpg-agent.extraConfig = ''
+          pinentry-program ${pkgs.pinentry-gnome}/bin/pinentry-gnome3
+        '';
+
+        systemd.user.startServices = true;
+
+        services.lorri.enable = true;
+
+        home.file = {
+          ".direnvrc".text = ''
+            use_nix() {
+              eval "$(lorri direnv)"
+            }
+          '';
+        };
+      };
 
     services.openssh = {
       enable = true;

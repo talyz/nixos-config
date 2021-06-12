@@ -123,6 +123,51 @@ in
 
     home-manager.users.${user} = { lib, ... }:
       {
+        gtk.enable = true;
+        gtk.iconTheme = {
+          package = pkgs.gnome3.adwaita-icon-theme;
+          name = "Adwaita";
+        };
+        gtk.gtk3.extraConfig = {
+          gtk-cursor-theme-name = "Adwaita";
+          gtk-application-prefer-dark-theme = 1;
+        };
+
+        # xdg.mimeApps.enable = true;
+        # xdg.mimeApps.defaultApplications = {
+        #   "application/pdf" = [ "org.gnome.Evince.desktop" ];
+        #   "image/pdf" = [ "org.gnome.Evince.desktop" ];
+        # };
+
+        services.dunst.enable = true;
+        services.dunst.iconTheme = {
+          package = pkgs.gnome3.adwaita-icon-theme;
+          name = "Adwaita";
+        };
+        services.dunst.settings =  {
+          global = {
+            geometry = "500x5-30+50";
+            padding = 8;
+            horizontal_padding = 8;
+            frame_color = "#eceff1";
+            font = "Droid Sans 11";
+          };
+
+          urgency_normal = {
+            background = "#37474f";
+            foreground = "#eceff1";
+            timeout = 10;
+          };
+        };
+
+        programs.mpv.enable = true;
+        programs.mpv.config = {
+          profile = "gpu-hq";
+          interpolation = true;
+          tscale = "oversample";
+          video-sync = "display-resample";
+        };
+
         dconf.settings = {
           # Evolution
           "org/gnome/evolution/mail" = {
@@ -168,6 +213,26 @@ in
             bright6 = "44ffff";   # bright cyan
             bright7 = "ffffff";   # bright white
           };
+        };
+
+        home.file = {
+          ".config/Dharkael/flameshot.ini".text = ''
+            [General]
+            disabledTrayIcon=true
+            drawColor=#ff0000
+            drawThickness=0
+          '';
+
+          ".config/kitty/kitty.conf".text = ''
+            font_family       Fira Code Retina
+            bold_font         Fira Code Bold
+            italic_font       Fira Code Italic
+            bold_italic_font  Fira Code Bold Italic
+            font_size         11.0
+            repaint_delay     1
+            input_delay       1
+            term              kitty
+          '';
         };
       };
 

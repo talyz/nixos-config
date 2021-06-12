@@ -72,7 +72,7 @@ in
         {
           imports = [ ../modules/impermanence/home-manager.nix ];
 
-          home.persistence."/etc/nixos/home-talyz-nixpkgs/dotfiles" = {
+          home.persistence."/etc/nixos/modules/dotfiles" = {
             allowOther = true;
             removePrefixDirectory = true;
             files = [

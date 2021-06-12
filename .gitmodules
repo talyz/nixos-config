@@ -1,5 +1,5 @@
 [submodule "dotfiles"]
-	path = home-talyz-nixpkgs/dotfiles
+	path = modules/dotfiles
 	url = git@github.com:talyz/dotfiles.git
 [submodule "machines/flora/nixpkgs"]
 	path = machines/flora/nixpkgs
