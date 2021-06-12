@@ -8,7 +8,7 @@ let
 
   emacs = (pkgs.emacsWithPackagesFromUsePackage {
     config = ./dotfiles/emacs/emacs-config.org;
-    package = pkgs.emacs;
+    package = pkgs.emacsGcc;
     extraEmacsPackages = epkgs: [ epkgs.inf-elixir ] ++ (cfg.extraPackages epkgs);
     override = epkgs: epkgs // {
       # weechat = epkgs.melpaPackages.weechat;
