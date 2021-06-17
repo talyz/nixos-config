@@ -186,6 +186,10 @@ in
           "XTerm.ttyModes" = "erase ^?";
           "XTerm.vt100.saveLines" = "32768";
           "XTerm.vt100.reverseVideo" = true;
+          "xterm*VT100.Translations" = ''#override \
+            Ctrl Shift <Key>V:    insert-selection(CLIPBOARD) \n\
+            Ctrl Shift <Key>C:    copy-selection(CLIPBOARD)
+          '';
         };
 
         xdg.configFile."foot/foot.ini".text = ''
