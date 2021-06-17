@@ -39,6 +39,7 @@ in
       dropbox
       krita
       mpv
+      discord
       gparted
       evolution
       gnome3.evince
