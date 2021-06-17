@@ -1,8 +1,8 @@
 diff --git a/drivers/hid/hid-lenovo.c b/drivers/hid/hid-lenovo.c
-index c6c8e20f3e8d..3f31958d23e4 100644
+index 0ff03fed9770..0dae4e481a3e 100644
 --- a/drivers/hid/hid-lenovo.c
 +++ b/drivers/hid/hid-lenovo.c
-@@ -184,25 +184,6 @@ static int lenovo_input_mapping_cptkbd(struct hid_device *hdev,
+@@ -195,25 +195,6 @@ static int lenovo_input_mapping_cptkbd(struct hid_device *hdev,
  			(usage->hid & HID_USAGE) == 0x238)
  		return -1;
  
@@ -28,7 +28,7 @@ index c6c8e20f3e8d..3f31958d23e4 100644
  	return 0;
  }
  
-@@ -442,73 +423,6 @@ static int lenovo_raw_event(struct hid_device *hdev,
+@@ -455,76 +436,6 @@ static int lenovo_raw_event(struct hid_device *hdev,
  	return 0;
  }
  
@@ -88,6 +88,9 @@ index c6c8e20f3e8d..3f31958d23e4 100644
 -static int lenovo_event(struct hid_device *hdev, struct hid_field *field,
 -		struct hid_usage *usage, __s32 value)
 -{
+-	if (!hid_get_drvdata(hdev))
+-		return 0;
+-
 -	switch (hdev->product) {
 -	case USB_DEVICE_ID_LENOVO_CUSBKBD:
 -	case USB_DEVICE_ID_LENOVO_CBTKBD:
@@ -102,7 +105,7 @@ index c6c8e20f3e8d..3f31958d23e4 100644
  static int lenovo_features_set_tpkbd(struct hid_device *hdev)
  {
  	struct hid_report *report;
-@@ -1135,7 +1049,6 @@ static struct hid_driver lenovo_driver = {
+@@ -1156,7 +1067,6 @@ static struct hid_driver lenovo_driver = {
  	.probe = lenovo_probe,
  	.remove = lenovo_remove,
  	.raw_event = lenovo_raw_event,
