@@ -18,6 +18,7 @@
         [
           slack
           nomachine-client
+          zoom-us
         ];
 
       programs.ssh.extraConfig = ''
