@@ -57,21 +57,34 @@ in
 
     xdg.icons.enable = true;
 
-    # Enable pulse with all the bluetooth codec modules.
-    hardware.pulseaudio = {
+    services.pipewire = {
       enable = true;
-      extraModules = [ pkgs.pulseaudio-modules-bt ];
+      pulse.enable = true;
+      # jack.enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      media-session.config.bluez-monitor = {
+        properties = {
+          "bluez5.sbc-xq-support" = true;
+          "bluez5.headset-roles" = [
+            # "hsp_hs"
+            # "hsp_ag"
+            "hfp_hf"
+            "hfp_ag"
+          ];
+        };
 
-      daemon.config = {
-        flat-volumes = "no";
-        default-sample-format = "s24le";
-        # default-sample-rate = "44100";
-        # resample-method = "speex-float-5";
-        # avoid-resampling = "true";
+        rules = [{
+          matches = [{
+            # This matches all cards.
+            "device.name" = "~bluez_card.*";
+          }];
+          actions.update-props."bluez5.msbc-support" = true;
+        }];
       };
-
-      package = pkgs.pulseaudioFull;
     };
+
+    hardware.pulseaudio.enable = false;
 
     hardware.opengl.enable = true;
 
