@@ -116,6 +116,7 @@ in
               ".aws"
               ".gnupg"
               ".ssh"
+              ".mix"
               ".mozilla"
               ".emacs.d"
               ".nixops"
