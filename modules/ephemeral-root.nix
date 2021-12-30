@@ -16,6 +16,14 @@ in
         '';
       };
 
+      home.mountDotfiles = lib.mkOption {
+        default = true;
+        description = ''
+          Whether directories from /etc/nixos/modules/dotfiles should
+          be bind mounted to /home/<user>.
+        '';
+      };
+
       home.extraFiles = lib.mkOption {
         default = [];
         example = [
@@ -65,7 +73,7 @@ in
 
 
   config = lib.mkMerge [
-    {
+    (lib.mkIf cfg.home.mountDotfiles {
       programs.fuse.userAllowOther = true;
 
       home-manager.users.${user} = { lib, ... }:
@@ -83,7 +91,7 @@ in
             ];
           };
         };
-    }
+    })
 
     (lib.mkIf cfg.enable {
       users.mutableUsers = false;
