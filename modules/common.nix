@@ -123,7 +123,7 @@
 
     users.users.${config.talyz.username} = {
       isNormalUser = true;
-      extraGroups = [ "wheel" ];
+      extraGroups = [ "wheel" "flatpak" ];
       shell = pkgs.fish;
       uid = 1000;
       initialPassword = "aoeuaoeu";

@@ -104,6 +104,9 @@ in
     services.xserver.xkbOptions = "eurosign:e,ctrl:nocaps,numpad:mac,kpdl:dot";
     services.xserver.xkbVariant = "dvorak-intl";
 
+    # Enable Flatpak.
+    services.flatpak.enable = true;
+
     # Enable networkmanager.
     networking.networkmanager.enable = lib.mkDefault true;
     networking.networkmanager.wifi.backend = "iwd";

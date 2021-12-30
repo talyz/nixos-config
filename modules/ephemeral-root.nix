@@ -128,6 +128,7 @@ in
               ".local/share/keyrings"
               ".local/share/direnv"
               ".local/share/cura"
+              ".local/share/flatpak"
               ".config/evolution"
               ".config/goa-1.0"
               ".config/keepassxc"
@@ -138,6 +139,7 @@ in
               ".cache/lorri"
               ".cache/nix"
               ".cache/keepassxc"
+              ".cache/flatpak"
             ] ++ cfg.home.extraDirectories;
           };
         };
@@ -155,6 +157,7 @@ in
           "/var/log"
           "/var/lib/bluetooth"
           "/var/lib/docker"
+          "/var/lib/flatpak"
           "/var/lib/systemd/coredump"
           "/etc/NetworkManager/system-connections"
         ] ++ cfg.root.extraDirectories;
