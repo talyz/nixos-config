@@ -22,17 +22,11 @@
 
   hardware.bluetooth.enable = true;
 
-  boot.initrd.availableKernelModules = [ "nvme" "ehci_pci" "xhci_pci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
+  boot.initrd.availableKernelModules = [ "ehci_pci" "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
-
-  boot.kernelPatches = [
-    { name = "elantech";
-      patch = ./elantech.patch;
-    }
-  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -45,6 +39,12 @@
 
   services.xserver.videoDrivers = [ "amdgpu" ];
 
+  services.udev.extraHwdb = ''
+    evdev:name:TPPS/2 IBM TrackPoint:dmi:bvn*:bvr*:bd*:svnLENOVO:pn*:pvrThinkPadA485:*
+     POINTINGSTICK_SENSITIVITY=200
+     POINTINGSTICK_CONST_ACCEL=1.0
+  '';
+
   # TrackPoint
   services.xserver.inputClassSections = [
     ''
@@ -54,32 +54,19 @@
     ''
   ];
 
-  services.power-profiles-daemon.enable = false;
-
-  # Powersaving and battery charge control
-  services.tlp = {
-    enable = true;
-    settings = {
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_SCALING_GOVERNOR_ON_BAT = "performance";
-      SCHED_POWERSAVE_ON_AC = 0;
-      SCHED_POWERSAVE_ON_BAT = 0;
-      RADEON_DPM_STATE_ON_AC = "performance";
-      RADEON_DPM_STATE_ON_BAT = "battery";
-      RADEON_DPM_PERF_LEVEL_ON_AC = "high";
-      RADEON_DPM_PERF_LEVEL_ON_BAT = "auto";
-      CPU_BOOST_ON_AC = 1;
-      CPU_BOOST_ON_BAT = 1;
-      USB_AUTOSUSPEND = 0;
-      RUNTIME_PM_ON_BAT = "on";
-      START_CHARGE_THRESH_BAT0 = 95;
-      STOP_CHARGE_THRESH_BAT0 = 100;
+  home-manager.users.${config.talyz.username} = { lib, ... }:
+    {
+      dconf.settings = {
+        "org/gnome/desktop/peripherals/touchpad".speed = 0.20;
+        "org/gnome/desktop/peripherals/mouse".speed = 0.20;
+      };
     };
-  };
+
+  services.power-profiles-daemon.enable = false;
 
   talyz.ephemeralRoot.enable = true;
 
-  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/617c6e22-0465-434d-937d-e0348c913455";
+  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/3f92dc1b-8ac1-4850-b447-01216e3e622d";
   boot.initrd.luks.devices."cryptroot".allowDiscards = true;
 
   fileSystems."/" =
@@ -113,7 +100,7 @@
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/C853-68B5";
+    { device = "/dev/disk/by-uuid/5126-38BE";
       fsType = "vfat";
     };
 
@@ -133,5 +120,5 @@
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "21.03"; # Did you read the comment?
+  system.stateVersion = "21.11"; # Did you read the comment?
 }
