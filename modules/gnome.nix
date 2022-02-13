@@ -44,10 +44,10 @@ in
       evince
       pavucontrol
       glib.dev
-      gnome3.gnome-tweak-tool
-      gnome3.gnome_session
+      gnome3.gnome-tweaks
+      gnome3.gnome-session
       gnomeExtensions.gsconnect
-      gnome3.rhythmbox
+      rhythmbox
     ];
 
     # Open firewall port for GSConnect
@@ -218,9 +218,9 @@ in
             ${lib.concatMapStringsSep "\n"
               (path: ''
                 if [[ -v DRY_RUN ]]; then
-                  echo $DCONF_DBUS_RUN_SESSION ${pkgs.gnome3.dconf}/bin/dconf load ${cfg.privateDconfSettings.${path}} "<" ${path}
+                  echo $DCONF_DBUS_RUN_SESSION ${pkgs.dconf}/bin/dconf load ${cfg.privateDconfSettings.${path}} "<" ${path}
                 else
-                  $DCONF_DBUS_RUN_SESSION ${pkgs.gnome3.dconf}/bin/dconf load ${cfg.privateDconfSettings.${path}} < ${path}
+                  $DCONF_DBUS_RUN_SESSION ${pkgs.dconf}/bin/dconf load ${cfg.privateDconfSettings.${path}} < ${path}
                 fi
               '')
               (lib.attrNames cfg.privateDconfSettings)}
