@@ -98,53 +98,6 @@ in
       users.users.${user}.passwordFile = "/persistent/password_${user}";
       users.users.root.passwordFile = "/persistent/password_root";
 
-      home-manager.users.${user} = { lib, ... }:
-        {
-          home.persistence."/persistent/home/${user}" = {
-            allowOther = true;
-            files = cfg.home.extraFiles;
-            directories = [
-              "Downloads"
-              "Music"
-              "Pictures"
-              "Documents"
-              "Videos"
-              "VirtualBox VMs"
-              "Projects"
-              "NoMachine"
-              "Dropbox (XLN Audio)"
-              ".aws"
-              ".gnupg"
-              ".ssh"
-              ".mix"
-              ".mozilla"
-              ".emacs.d"
-              ".nixops"
-              ".nixops-managed-deployments"
-              ".dropbox"
-              ".dropbox-dist"
-              ".local/share/containers"
-              ".local/share/fish"
-              ".local/share/evolution"
-              ".local/share/keyrings"
-              ".local/share/direnv"
-              ".local/share/cura"
-              ".local/share/flatpak"
-              ".config/evolution"
-              ".config/goa-1.0"
-              ".config/keepassxc"
-              ".config/Slack"
-              ".config/VirtualBox"
-              ".config/cura"
-              ".cache/evolution"
-              ".cache/lorri"
-              ".cache/nix"
-              ".cache/keepassxc"
-              ".cache/flatpak"
-            ] ++ cfg.home.extraDirectories;
-          };
-        };
-
       environment.persistence."/persistent" = {
         files = [
           "/etc/machine-id"
@@ -162,6 +115,48 @@ in
           "/var/lib/systemd/coredump"
           "/etc/NetworkManager/system-connections"
         ] ++ cfg.root.extraDirectories;
+        users.talyz = {
+          directories = [
+            "Downloads"
+            "Music"
+            "Pictures"
+            "Documents"
+            "Videos"
+            "VirtualBox VMs"
+            "Projects"
+            "NoMachine"
+            "Dropbox (XLN Audio)"
+            ".aws"
+            { directory = ".gnupg"; mode = "0700"; }
+            { directory = ".ssh"; mode = "0700"; }
+            ".mix"
+            ".mozilla"
+            ".emacs.d"
+            { directory = ".nixops"; mode = "0700"; }
+            { directory = ".nixops-managed-deployments"; mode = "0700"; }
+            ".dropbox"
+            ".dropbox-dist"
+            ".local/share/containers"
+            ".local/share/fish"
+            ".local/share/evolution"
+            { directory = ".local/share/keyrings"; mode = "0700"; }
+            ".local/share/direnv"
+            ".local/share/cura"
+            ".local/share/flatpak"
+            ".config/evolution"
+            ".config/goa-1.0"
+            ".config/keepassxc"
+            ".config/Slack"
+            ".config/VirtualBox"
+            ".config/cura"
+            ".cache/evolution"
+            ".cache/lorri"
+            ".cache/nix"
+            ".cache/keepassxc"
+            ".cache/flatpak"
+          ] ++ cfg.home.extraDirectories;
+          files = cfg.home.extraFiles;
+        };
       };
     })
   ];
