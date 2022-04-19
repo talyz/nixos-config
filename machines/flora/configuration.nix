@@ -82,27 +82,32 @@
 
   boot.initrd.luks.devices."nixroot".device = "/dev/disk/by-uuid/d4663e0d-c010-41c9-9f9b-cd1e86e38361";
 
-  fileSystems."/" = {
-    device = "none";
-    fsType = "tmpfs";
-    options = [ "defaults" "size=75%" "mode=755" ];
-  };
+  fileSystems."/" =
+    { device = "/dev/root_vg/root";
+      fsType = "btrfs";
+      options = [ "subvol=root" ];
+    };
 
-  # fileSystems."/" = {
-  #   device = "/dev/disk/by-uuid/240881f5-782f-4d6a-8dd8-fd4151f33a78";
-  #   fsType = "btrfs";
-  #   options = [ ];
-  # };
+  boot.initrd.postDeviceCommands = lib.mkAfter ''
+    mkdir /btrfs_tmp
+    mount /dev/root_vg/root /btrfs_tmp
+    if [[ -e /btrfs_tmp/root ]]; then
+      mv /btrfs_tmp/root "/btrfs_tmp/old_root_$(date "+%Y-%m-%-d_%H:%M:%S")"
+    fi
+    btrfs subvolume create /btrfs_tmp/root
+    sync
+    umount /btrfs_tmp
+  '';
 
   fileSystems."/persistent" = {
-    device = "/dev/disk/by-uuid/4fe8590d-920f-4811-96d5-ce8e560f116d";
+    device = "/dev/root_vg/root";
     neededForBoot = true;
     fsType = "btrfs";
     options = [ "subvol=persistent" ];
   };
 
   fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/4fe8590d-920f-4811-96d5-ce8e560f116d";
+    device = "/dev/root_vg/root";
     fsType = "btrfs";
     options = [ "subvol=nix" ];
   };
@@ -113,7 +118,7 @@
   };
 
   swapDevices = [{
-    device = "/dev/disk/by-uuid/aae52a21-ce44-4826-b8a9-5ba71f0caad3";
+    device = "/dev/root_vg/swap";
   }];
 
   nix.maxJobs = lib.mkDefault 2;
