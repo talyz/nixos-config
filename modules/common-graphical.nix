@@ -106,7 +106,6 @@ in
 
     # Enable networkmanager.
     networking.networkmanager.enable = lib.mkDefault true;
-    networking.networkmanager.wifi.backend = "iwd";
 
     services.avahi.enable = true;
 
