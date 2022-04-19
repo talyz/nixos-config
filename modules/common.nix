@@ -70,6 +70,7 @@
       bat
       unzip
       jq
+      cpufrequtils
     ];
 
     boot.kernelParams = [
