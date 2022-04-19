@@ -41,7 +41,6 @@
 
     environment.systemPackages = with pkgs; [
       wget
-      ag
       gnupg
       file
       tree
@@ -52,7 +51,7 @@
       fd
       curl
       sshfs-fuse
-      exfat-utils
+      exfat
       pv
       ripgrep
       openssh
@@ -60,7 +59,7 @@
       usbutils
       screen
       pwgen
-      heimdalFull
+      heimdal
       nix-index
       nixpkgs-review
       gocryptfs
