@@ -140,12 +140,12 @@
   nix.binaryCachePublicKeys = lib.mkAfter [ "zen:/mViKdKKlduW1kwAGKauOPM0dg3Jfe6Z4Yosho+54PU=" ];
 
   programs.ssh.knownHosts.zen = {
-    hostNames = [ "zen" "10.0.15.50" ];
+    extraHostNames = [ "zen" "192.168.1.29" ];
     publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINyFlaKS43N8ZqheVodC2g1Xo0Z/HvvI+aekYHw9bIIS";
   };
   programs.ssh.extraConfig = ''
     Host zen
-        Hostname 10.0.15.50
+        Hostname 192.168.1.29
         User root
         IdentitiesOnly yes
         IdentityFile /etc/nix/id_rsa
