@@ -62,7 +62,7 @@ in
 
     services.xserver.desktopManager.gnome.enable = true;
     services.xserver.displayManager.gdm.wayland = cfg.useWayland;
-    services.gnome.experimental-features.realtime-scheduling = true;
+    security.rtkit.enable = true; # To make rt-scheduler work
 
     systemd.services.accounts-daemon.restartIfChanged = false;
 
