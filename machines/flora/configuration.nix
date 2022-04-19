@@ -45,7 +45,7 @@
   '';
 
   # Touchpad
-  services.xserver.libinput.accelSpeed = "0.3";
+  services.xserver.libinput.touchpad.accelSpeed = "0.3";
 
   # TrackPoint
   services.xserver.inputClassSections = [
