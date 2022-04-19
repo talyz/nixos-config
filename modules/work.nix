@@ -17,6 +17,7 @@
       environment.systemPackages = with pkgs;
         [
           slack
+          bitwarden
           nomachine-client
           zoom-us
         ];
