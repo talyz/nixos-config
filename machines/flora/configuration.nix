@@ -17,6 +17,8 @@
 
   talyz.exwm.enable = true;
 
+  talyz.work.enable = true;
+
   hardware = {
     cpu.intel.updateMicrocode = true;
     bluetooth.enable = true;
