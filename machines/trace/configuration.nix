@@ -17,15 +17,15 @@
 
   talyz.work.enable = true;
 
-  hardware.cpu.amd.updateMicrocode = true;
+  hardware.cpu.intel.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
 
   hardware.bluetooth.enable = true;
 
-  boot.initrd.availableKernelModules = [ "ehci_pci" "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   # Use the systemd-boot EFI boot loader.
@@ -33,16 +33,15 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Make /tmp a tmpfs mount.
-  boot.tmpOnTmpfs = true;
+  # boot.tmpOnTmpfs = true;
 
   networking.hostName = "trace";
 
-  services.xserver.videoDrivers = [ "amdgpu" ];
-
-  services.udev.extraHwdb = ''
-    evdev:name:TPPS/2 IBM TrackPoint:dmi:bvn*:bvr*:bd*:svnLENOVO:pn*:pvrThinkPadA485:*
-     POINTINGSTICK_SENSITIVITY=200
-     POINTINGSTICK_CONST_ACCEL=1.0
+  # Video drivers
+  services.xserver.videoDrivers = [ "intel" ];
+  hardware.opengl.extraPackages = with pkgs; [ vaapiIntel ];
+  services.xserver.deviceSection = ''
+    Option        "Tearfree"      "true"
   '';
 
   # TrackPoint
@@ -66,7 +65,7 @@
 
   talyz.ephemeralRoot.enable = true;
 
-  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/3f92dc1b-8ac1-4850-b447-01216e3e622d";
+  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/45a3728f-2d14-4e0b-8547-22a347b112ca";
   boot.initrd.luks.devices."cryptroot".allowDiscards = true;
 
   fileSystems."/" =
@@ -100,7 +99,7 @@
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/5126-38BE";
+    { device = "/dev/disk/by-uuid/F276-B050";
       fsType = "vfat";
     };
 
@@ -120,5 +119,5 @@
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "21.11"; # Did you read the comment?
+  system.stateVersion = "22.05"; # Did you read the comment?
 }
