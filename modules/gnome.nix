@@ -50,6 +50,11 @@ in
       rhythmbox
     ];
 
+    environment.gnome.excludePackages = with pkgs; [
+      gnome.gnome-software
+    ];
+    services.packagekit.enable = false;
+
     # Open firewall port for GSConnect
     networking.firewall.allowedTCPPorts = [ 1716 ];
 
