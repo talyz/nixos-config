@@ -180,6 +180,10 @@ in
               night-light-enabled = true;
             };
 
+            "org/gnome/desktop/interface" = {
+              color-scheme = "prefer-dark";
+            };
+
             "org/gnome/desktop/session" =
               let
                 delay = if config.talyz.media-center.enable then 900 else 0;
