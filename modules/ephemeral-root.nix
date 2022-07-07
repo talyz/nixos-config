@@ -143,6 +143,7 @@ in
             ".local/share/direnv"
             ".local/share/cura"
             ".local/share/flatpak"
+            ".local/share/Steam"
             ".config/Bitwarden"
             ".config/evolution"
             ".config/goa-1.0"

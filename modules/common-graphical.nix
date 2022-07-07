@@ -134,6 +134,8 @@ in
 
     #gtk.iconCache.enable = true;
 
+    programs.steam.enable = true;
+
     home-manager.users.${user} = { lib, ... }:
       {
         gtk.enable = true;
