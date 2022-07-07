@@ -176,6 +176,10 @@ in
               sleep-inactive-battery-type = "nothing";
             };
 
+            "org/gnome/settings-daemon/plugins/color" = {
+              night-light-enabled = true;
+            };
+
             "org/gnome/desktop/session" =
               let
                 delay = if config.talyz.media-center.enable then 900 else 0;
