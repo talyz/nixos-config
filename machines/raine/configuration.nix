@@ -77,6 +77,18 @@
   };
 
 
+  ### Dynamic DNS update ###
+
+  services.ddclient = {
+    enable = true;
+    server = "dyndns.loopia.se";
+    domains = [ "webhallon.com" ];
+    use = "web, web=dyndns.loopia.se/checkip, web-skip='Current IP Address:'";
+    username = "webhallon.com";
+    passwordFile = "/etc/nixos/machines/raine/loopia_password";
+  };
+
+
   ### File system configuration ###
 
   boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/f9bd2426-07d1-4874-923c-e9e63adc8122";
