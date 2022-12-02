@@ -63,25 +63,6 @@ in
       # jack.enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
-      media-session.config.bluez-monitor = {
-        properties = {
-          "bluez5.sbc-xq-support" = true;
-          "bluez5.headset-roles" = [
-            # "hsp_hs"
-            # "hsp_ag"
-            "hfp_hf"
-            "hfp_ag"
-          ];
-        };
-
-        rules = [{
-          matches = [{
-            # This matches all cards.
-            "device.name" = "~bluez_card.*";
-          }];
-          actions.update-props."bluez5.msbc-support" = true;
-        }];
-      };
     };
 
     hardware.pulseaudio.enable = false;
