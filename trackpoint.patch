@@ -1,8 +1,8 @@
 diff --git a/drivers/hid/hid-lenovo.c b/drivers/hid/hid-lenovo.c
-index 0ff03fed9770..0dae4e481a3e 100644
+index 9dabd6323234..05f80e9de9d6 100644
 --- a/drivers/hid/hid-lenovo.c
 +++ b/drivers/hid/hid-lenovo.c
-@@ -195,25 +195,6 @@ static int lenovo_input_mapping_cptkbd(struct hid_device *hdev,
+@@ -226,25 +226,6 @@ static int lenovo_input_mapping_cptkbd(struct hid_device *hdev,
  			(usage->hid & HID_USAGE) == 0x238)
  		return -1;
  
@@ -28,7 +28,7 @@ index 0ff03fed9770..0dae4e481a3e 100644
  	return 0;
  }
  
-@@ -455,76 +436,6 @@ static int lenovo_raw_event(struct hid_device *hdev,
+@@ -645,88 +626,6 @@ static int lenovo_raw_event(struct hid_device *hdev,
  	return 0;
  }
  
@@ -82,6 +82,15 @@ index 0ff03fed9770..0dae4e481a3e 100644
 -		return 1;
 -	}
 -
+-	if (usage->type == EV_KEY && usage->code == KEY_FN_ESC && value == 1) {
+-		/*
+-		 * The user has toggled the Fn-lock state. Toggle our own
+-		 * cached value of it and sync our value to the keyboard to
+-		 * ensure things are in sync (the syncing should be a no-op).
+-		 */
+-		cptkbd_data->fn_lock = !cptkbd_data->fn_lock;
+-	}
+-
 -	return 0;
 -}
 -
@@ -94,8 +103,11 @@ index 0ff03fed9770..0dae4e481a3e 100644
 -	switch (hdev->product) {
 -	case USB_DEVICE_ID_LENOVO_CUSBKBD:
 -	case USB_DEVICE_ID_LENOVO_CBTKBD:
+-	case USB_DEVICE_ID_LENOVO_TPIIUSBKBD:
+-	case USB_DEVICE_ID_LENOVO_TPIIBTKBD:
 -		return lenovo_event_cptkbd(hdev, field, usage, value);
 -	case USB_DEVICE_ID_LENOVO_TP10UBKBD:
+-	case USB_DEVICE_ID_LENOVO_X1_TAB:
 -		return lenovo_event_tp10ubkbd(hdev, field, usage, value);
 -	default:
 -		return 0;
@@ -105,7 +117,7 @@ index 0ff03fed9770..0dae4e481a3e 100644
  static int lenovo_features_set_tpkbd(struct hid_device *hdev)
  {
  	struct hid_report *report;
-@@ -1156,7 +1067,6 @@ static struct hid_driver lenovo_driver = {
+@@ -1378,7 +1277,6 @@ static struct hid_driver lenovo_driver = {
  	.probe = lenovo_probe,
  	.remove = lenovo_remove,
  	.raw_event = lenovo_raw_event,
