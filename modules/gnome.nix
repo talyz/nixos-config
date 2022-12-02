@@ -73,6 +73,12 @@ in
 
     services.fwupd.enable = true;
 
+    qt5 = {
+      enable = true;
+      platformTheme = "gnome";
+      style = "adwaita-dark";
+    };
+
     home-manager.users.${user} = { lib, ... }:
       {
         xdg.configFile."gnome-initial-setup-done".text = "yes";
