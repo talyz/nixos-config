@@ -48,6 +48,7 @@ in
       aspellDicts.en-science
       aspellDicts.en-computers
       foot
+      spotify
     ];
 
     environment.sessionVariables = {
