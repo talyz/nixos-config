@@ -97,6 +97,8 @@
         nixpkgs.config = import ./config.nix;
         xdg.configFile."nixpkgs/config.nix".source = ./config.nix;
 
+        home.stateVersion = config.system.stateVersion;
+
         programs.git = {
           enable = true;
           userEmail = "kim.lindberger@gmail.com";
