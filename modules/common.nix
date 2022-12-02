@@ -71,6 +71,7 @@
       unzip
       jq
       cpufrequtils
+      delta
     ];
 
     boot.kernelParams = [
@@ -154,6 +155,14 @@
           signing = {
             key = "950336A4CA46BB42242733312DED2151F4671A2B";
             signByDefault = true;
+          };
+          delta = {
+            enable = true;
+            options = {
+              navigate = true;
+              side-by-side = true;
+              true-color = "always";
+            };
           };
         };
 
