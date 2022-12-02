@@ -33,8 +33,8 @@
       # users.users.${config.talyz.username}.extraGroups = [ "libvirtd" ];
       # networking.firewall.checkReversePath = false;
 
-      # virtualisation.virtualbox.host.enable = true;
-      # virtualisation.virtualbox.host.enableExtensionPack = true;
+      virtualisation.virtualbox.host.enable = true;
+      virtualisation.virtualbox.host.enableExtensionPack = true;
 
       virtualisation.podman.enable = true;
       virtualisation.podman.dockerCompat = true;
