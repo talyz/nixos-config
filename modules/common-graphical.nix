@@ -228,17 +228,6 @@ in
             drawColor=#ff0000
             drawThickness=0
           '';
-
-          ".config/kitty/kitty.conf".text = ''
-            font_family       Fira Code Retina
-            bold_font         Fira Code Bold
-            italic_font       Fira Code Italic
-            bold_italic_font  Fira Code Bold Italic
-            font_size         11.0
-            repaint_delay     1
-            input_delay       1
-            term              kitty
-          '';
         };
       };
 
