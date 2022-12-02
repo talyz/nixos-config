@@ -86,9 +86,6 @@ in
             files = [
               "screen/.screenrc"
             ];
-            directories = [
-              "fish/.config/fish"
-            ];
           };
         };
     })

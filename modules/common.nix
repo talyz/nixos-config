@@ -99,6 +99,54 @@
 
         home.stateVersion = config.system.stateVersion;
 
+        programs.fish = {
+          enable = true;
+          shellAbbrs = {
+            shell = "nix-shell --run fish -p";
+            tmp = "cd (mktemp -d)";
+          };
+          shellInit = ''
+            eval (direnv hook fish)
+            set fish_greeting ""
+          '';
+          functions = {
+            fish_prompt = {
+              description = "Write out the prompt";
+              body = ''
+                set retstatus $status
+
+                if not set -q __fish_prompt_hostname
+                    set -g __fish_prompt_hostname (hostname|cut -d . -f 1)
+                end
+
+                if not [ -n "$PWD" ]
+                    cd $HOME
+                end
+
+                if [ $retstatus = 0 ]
+                    set smiley (set_color green)"^^"
+                else
+                    set smiley (set_color red)"-.-\""
+                end
+
+                if [ $TERM = screen-256color ]
+                    set screen_title_escape "\033k$argv\033\\"
+                else
+                    set screen_title_escape ""
+                end
+
+                if fish_git_prompt >/dev/null
+                    set git_prompt (fish_git_prompt)
+                else
+                    set git_prompt ""
+                end
+
+                printf '( %s%s %s@%s  %s  %s %s) %b' (set_color magenta)(prompt_pwd) (set_color red)$git_prompt (set_color green)$USER $__fish_prompt_hostname (set_color blue)$retstatus $smiley (set_color normal) $screen_title_escape
+              '';
+            };
+          };
+        };
+
         programs.git = {
           enable = true;
           userEmail = "kim.lindberger@gmail.com";
