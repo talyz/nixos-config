@@ -20,6 +20,7 @@
           bitwarden
           nomachine-client
           zoom-us
+          libreoffice
         ];
 
       programs.ssh.extraConfig = ''
