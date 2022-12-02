@@ -37,6 +37,7 @@ in
       krita
       mpv
       discord
+      element-desktop
       gparted
       evolution
       gnome3.evince
