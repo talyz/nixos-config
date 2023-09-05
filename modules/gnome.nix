@@ -50,6 +50,11 @@ in
       rhythmbox
     ];
 
+    environment.sessionVariables = lib.optionalAttrs cfg.useWayland {
+      QT_QPA_PLATFORM = "wayland";
+      NIXOS_OZONE_WL = "1";
+    };
+
     environment.gnome.excludePackages = with pkgs; [
       gnome.gnome-software
     ];
