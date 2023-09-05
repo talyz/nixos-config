@@ -154,7 +154,9 @@ in
             ".cache/keepassxc"
             ".cache/flatpak"
           ] ++ cfg.home.extraDirectories;
-          files = cfg.home.extraFiles;
+          files = [
+            ".config/monitors.xml"
+          ] ++ cfg.home.extraFiles;
         };
       };
     })
