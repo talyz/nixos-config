@@ -53,7 +53,7 @@ in
     environment.gnome.excludePackages = with pkgs; [
       gnome.gnome-software
     ];
-    services.packagekit.enable = false;
+    services.packagekit.enable = lib.mkForce false;
 
     # Open firewall port for GSConnect
     networking.firewall.allowedTCPPorts = [ 1716 ];
