@@ -91,6 +91,7 @@ in
     networking.networkmanager.enable = lib.mkDefault true;
 
     services.avahi.enable = true;
+    services.avahi.nssmdns = true;
 
     # Enable wireshark.
     programs.wireshark.enable = true;
