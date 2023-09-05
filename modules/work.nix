@@ -44,9 +44,16 @@
       # Enable CUPS to print documents.
       services.printing = {
         enable = true;
-        drivers = [
-          pkgs.hplipWithPlugin
-          pkgs.postscript-lexmark
+        drivers = with pkgs; [
+          hplipWithPlugin
+          postscript-lexmark
+          canon-cups-ufr2
+          carps-cups
+          cnijfilter2
+          cnijfilter_2_80
+          cnijfilter_4_00
+          cups-bjnp
+          gutenprintBin
         ];
       };
 
