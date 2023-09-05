@@ -178,6 +178,11 @@
           pinentry-program ${pkgs.pinentry-gnome}/bin/pinentry-gnome3
         '';
 
+        programs.btop.enable = true;
+        programs.btop.settings = {
+          color_theme = "flat-remix";
+        };
+
         systemd.user.startServices = true;
 
         services.lorri.enable = true;
