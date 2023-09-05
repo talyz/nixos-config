@@ -72,6 +72,7 @@
       jq
       cpufrequtils
       delta
+      duf
     ];
 
     boot.kernelParams = [
