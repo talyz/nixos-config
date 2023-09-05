@@ -218,8 +218,7 @@ in
             };
 
             "org/gnome/mutter".experimental-features = [
-              "rt-scheduler"
-              "autostart-xwayland"
+              "scale-monitor-framebuffer"
             ];
 
             # File browser (nautilus) settings
