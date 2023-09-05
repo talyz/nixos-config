@@ -122,7 +122,7 @@ in
             "VirtualBox VMs"
             "Projects"
             "NoMachine"
-            "Dropbox (XLN Audio)"
+            "XLN Audio Dropbox"
             ".aws"
             { directory = ".gnupg"; mode = "0700"; }
             { directory = ".ssh"; mode = "0700"; }
@@ -142,12 +142,14 @@ in
             ".local/share/flatpak"
             ".local/share/Steam"
             ".config/Bitwarden"
+            ".config/discord"
             ".config/evolution"
             ".config/goa-1.0"
             ".config/keepassxc"
             ".config/Slack"
             ".config/VirtualBox"
             ".config/cura"
+            ".config/Element"
             ".cache/evolution"
             ".cache/lorri"
             ".cache/nix"
