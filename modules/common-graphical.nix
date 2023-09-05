@@ -205,9 +205,6 @@ in
     programs.adb.enable = true;
     #android_sdk.accept_license = true;
 
-    # Enable the smartcard deamon.
-    services.pcscd.enable = true;
-
     users.users.${user}.extraGroups = [
       "networkmanager"
       "video"
