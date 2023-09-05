@@ -190,6 +190,14 @@ in
               color-scheme = "prefer-dark";
             };
 
+            "org/gnome/desktop/background" = {
+              picture-options = "zoom";
+              picture-uri = "file:///run/current-system/sw/share/backgrounds/gnome/blobs-l.svg";
+              picture-uri-dark = "file:///run/current-system/sw/share/backgrounds/gnome/blobs-d.svg";
+              primary-color = "#241f31";
+              secondary-color = "#000000";
+            };
+
             "org/gnome/desktop/session" =
               let
                 delay = if config.talyz.media-center.enable then 900 else 0;
