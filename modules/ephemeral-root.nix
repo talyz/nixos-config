@@ -108,6 +108,7 @@ in
           "/var/log"
           "/var/lib/bluetooth"
           "/var/lib/docker"
+          "/var/lib/nixos"
           "/var/lib/flatpak"
           "/var/lib/fprint"
           "/var/lib/systemd/coredump"
