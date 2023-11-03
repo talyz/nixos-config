@@ -84,7 +84,8 @@
     # Internationalisation properties.
     console.font = "Lat2-Terminus16";
     console.keyMap = "dvorak";
-    i18n.defaultLocale = "en_US.UTF-8";
+    i18n.defaultLocale = "sv_SE.UTF-8";
+    i18n.extraLocaleSettings.LC_MESSAGES = "en_US.UTF-8";
 
     time.timeZone = "Europe/Stockholm";
 
