@@ -149,9 +149,23 @@ in
         dconf.settings = {
           # Evolution
           "org/gnome/evolution/mail" = {
-            forward-style-name = "inline";
+            composer-mode = "html";
+            composer-show-from-override = false;
+            composer-spell-languages = [ "en_US" "sv" ];
+            composer-unicode-smileys = true;
+            composer-visually-wrap-long-lines = false;
             forward-style = 1;
+            forward-style-name = "inline";
+            image-loading-policy = "sometimes";
+            junk-check-custom-header = true;
+            junk-empty-on-exit-days = 0;
+            junk-lookup-addressbook = false;
             layout = 1;
+            load-http-images = 1;
+            prompt-on-accel-send = false;
+            prompt-on-composer-mode-switch = true;
+            prompt-on-unwanted-html = false;
+            reply-style-name = "quoted";
           };
         };
 

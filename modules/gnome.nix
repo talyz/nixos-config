@@ -236,6 +236,10 @@ in
               sort-directories-first = true;
               sort-column = "type";
             };
+
+            "org/gnome/evolution/shell/window" = {
+              maximized = true;
+            };
           };
 
         home.activation.${if (cfg.privateDconfSettings != null) then "privateDconfSettings" else null} =
