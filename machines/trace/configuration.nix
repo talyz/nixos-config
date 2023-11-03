@@ -22,8 +22,6 @@
 
   hardware.bluetooth.enable = true;
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
-  boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
@@ -65,9 +63,6 @@
 
   talyz.ephemeralRoot.enable = true;
 
-  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/45a3728f-2d14-4e0b-8547-22a347b112ca";
-  boot.initrd.luks.devices."cryptroot".allowDiscards = true;
-
   fileSystems."/" =
     { device = "/dev/root_vg/root";
       fsType = "btrfs";
@@ -84,6 +79,13 @@
     sync
     umount /btrfs_tmp
   '';
+  boot.initrd =
+      {
+        availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
+        kernelModules = [ "dm-snapshot" ];
+        luks.devices."cryptroot".device = "/dev/disk/by-uuid/e16e9123-b1bb-4480-8557-3bfcdd503a95";
+        luks.devices."cryptroot".allowDiscards = true;
+      };
 
   fileSystems."/persistent" =
     { device = "/dev/root_vg/root";
@@ -99,7 +101,7 @@
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/F276-B050";
+    { device = "/dev/disk/by-uuid/F3F5-A079";
       fsType = "vfat";
     };
 
@@ -119,5 +121,5 @@
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "22.05"; # Did you read the comment?
+  system.stateVersion = "22.11"; # Did you read the comment?
 }
