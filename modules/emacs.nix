@@ -9,7 +9,7 @@ let
   emacs = (pkgs.emacsWithPackagesFromUsePackage {
     config = ./dotfiles/emacs/emacs-config.org;
     package = pkgs.emacsPgtk;
-    extraEmacsPackages = epkgs: [ epkgs.inf-elixir ] ++ (cfg.extraPackages epkgs);
+    extraEmacsPackages = epkgs: [ epkgs.copilot ] ++ (cfg.extraPackages epkgs);
     override = epkgs: epkgs // {
       # weechat = epkgs.melpaPackages.weechat;
       weechat =  epkgs.melpaPackages.weechat.overrideAttrs (oldAttrs: oldAttrs // {
@@ -24,13 +24,24 @@ let
       dracula-theme = epkgs.melpaPackages.dracula-theme.overrideAttrs (oldAttrs: oldAttrs // {
         src = ./dracula-emacs;
       });
-      inf-elixir = epkgs.trivialBuild {
-        pname = "inf-elixir";
+
+      # Install copilot.el
+      copilot = epkgs.trivialBuild {
+        pname = "copilot";
+        version = "2023-04-27";
+
+        packageRequires = with epkgs; [ dash editorconfig s ];
+
+        preInstall = ''
+          mkdir -p $out/share/emacs/site-lisp
+          cp -vr $src/dist $out/share/emacs/site-lisp
+        '';
+
         src = pkgs.fetchFromGitHub {
-          owner = "J3RN";
-          repo = "inf-elixir";
-          rev = "a257ebd5a4c6bda82cf086069c36f2e1ae02eb6f";
-          sha256 = "05f0h6jrzkjshv444kz80vaqnm1800ykiibhkkgq08nff7icz05f";
+          owner = "zerolfx";
+          repo = "copilot.el";
+          rev = "7cb7beda89145ccb86a4324860584545ec016552";
+          sha256 = "sha256-57ACMikRzHSwRkFdEn9tx87NlJsWDYEfmg2n2JH8Ig0=";
         };
       };
     };
@@ -43,6 +54,7 @@ let
     cmake-language-server
     rnix-lsp
     python3Packages.python-lsp-server
+    nodejs # For copilot.el
   ];
 
   emacsWithLanguageServers =

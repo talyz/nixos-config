@@ -145,6 +145,7 @@ in
             ".config/discord"
             ".config/evolution"
             ".config/goa-1.0"
+            ".config/github-copilot"
             ".config/keepassxc"
             ".config/Slack"
             ".config/VirtualBox"
