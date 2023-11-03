@@ -104,7 +104,7 @@ in
           "/etc/ssh/ssh_host_rsa_key.pub"
         ] ++ cfg.root.extraFiles;
         directories = [
-          "/etc/nixos"
+          { directory = "/etc/nixos"; mode = "0700"; user = "talyz"; group = "root"; }
           "/var/log"
           "/var/lib/bluetooth"
           "/var/lib/docker"
