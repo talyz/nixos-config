@@ -59,6 +59,8 @@
       };
     };
 
+  services.fprintd.enable = true;
+
   services.power-profiles-daemon.enable = false;
 
   talyz.ephemeralRoot.enable = true;

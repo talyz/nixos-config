@@ -109,6 +109,7 @@ in
           "/var/lib/bluetooth"
           "/var/lib/docker"
           "/var/lib/flatpak"
+          "/var/lib/fprint"
           "/var/lib/systemd/coredump"
           "/etc/NetworkManager/system-connections"
         ] ++ cfg.root.extraDirectories;
