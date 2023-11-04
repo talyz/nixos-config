@@ -95,7 +95,8 @@ in
       users.users.${user}.passwordFile = "/persistent/password_${user}";
       users.users.root.passwordFile = "/persistent/password_root";
 
-      environment.persistence."/persistent" = {
+      environment.persistence.main = {
+        persistentStoragePath = "/persistent";
         files = [
           "/etc/machine-id"
           "/etc/ssh/ssh_host_ed25519_key"
