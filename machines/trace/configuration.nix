@@ -68,7 +68,7 @@
   fileSystems."/" =
     { device = "/dev/root_vg/root";
       fsType = "btrfs";
-      options = [ "subvol=root" ];
+      options = [ "subvol=root" "noatime" ];
     };
 
   boot.initrd.postDeviceCommands = lib.mkAfter ''
@@ -93,18 +93,19 @@
     { device = "/dev/root_vg/root";
       neededForBoot = true;
       fsType = "btrfs";
-      options = [ "subvol=persistent" ];
+      options = [ "subvol=persistent" "noatime" ];
     };
 
   fileSystems."/nix" =
     { device = "/dev/root_vg/root";
       fsType = "btrfs";
-      options = [ "subvol=nix" ];
+      options = [ "subvol=nix" "noatime" ];
     };
 
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/F3F5-A079";
       fsType = "vfat";
+      options = [ "noatime" ];
     };
 
   swapDevices = [{
