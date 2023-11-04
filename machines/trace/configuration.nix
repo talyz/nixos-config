@@ -99,6 +99,17 @@
       '';
     in
       {
+        systemd.enable = true;
+        systemd.services = {
+          root-reset = {
+            wantedBy = [ "initrd-root-device.target" ];
+            wants = [ "dev-root_vg-root.device" ];
+            after = [ "dev-root_vg-root.device" ];
+            before = [ "sysroot.mount" ];
+            serviceConfig.Type = "oneshot";
+            script = rootReset;
+          };
+        };
         availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
         kernelModules = [ "dm-snapshot" ];
         luks.devices."cryptroot".device = "/dev/disk/by-uuid/e16e9123-b1bb-4480-8557-3bfcdd503a95";
