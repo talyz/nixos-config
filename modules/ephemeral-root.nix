@@ -165,6 +165,21 @@ in
           ] ++ cfg.home.extraFiles;
         };
       };
+
+      virtualisation.vmVariant.virtualisation = {
+        graphics = false;
+        fileSystems = {
+          "/" = {
+            mountPoint = "/persistent";
+            neededForBoot = true;
+          };
+          "/tmpfsroot" = {
+            mountPoint = "/";
+            fsType = "tmpfs";
+            neededForBoot = true;
+          };
+        };
+      };
     })
   ];
 }
