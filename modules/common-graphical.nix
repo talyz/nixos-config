@@ -140,7 +140,8 @@ in
 
         programs.mpv.enable = true;
         programs.mpv.config = {
-          profile = "gpu-hq";
+          # profile = "gpu-hq";
+          vo = "gpu-next";
           interpolation = true;
           tscale = "oversample";
           video-sync = "display-resample";
