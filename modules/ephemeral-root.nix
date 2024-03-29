@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, impermanence, ... }:
 
 let
   cfg = config.talyz.ephemeralRoot;
@@ -78,7 +78,7 @@ in
 
       home-manager.users.${user} = { lib, ... }:
         {
-          imports = [ ../modules/impermanence/home-manager.nix ];
+          imports = [ impermanence.nixosModules.home-manager.impermanence ];
 
           home.persistence."/etc/nixos/modules/dotfiles" = {
             allowOther = true;

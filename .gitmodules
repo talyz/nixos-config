@@ -8,7 +8,7 @@
 	path = modules/emacs-overlay
 	url = https://github.com/nix-community/emacs-overlay
 [submodule "machines/zen/nixpkgs"]
-	path = machines/zen/nixpkgs
+	path = modules/nixpkgs
 	url = git@github.com:talyz/nixpkgs.git
 [submodule "machines/evals/nixpkgs"]
 	path = machines/evals/nixpkgs
