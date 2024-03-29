@@ -122,7 +122,7 @@
     options = [ "subvol=subvol_root" ];
     encrypted = {
       enable = true;
-      blkDev = "/dev/disk/by-uuid/19c066af-f5f3-498b-aa45-078350e554a4";
+      blkDev = "/dev/disk/by-id/md-uuid-fc6f63ab:d3e35ce5:1f7b4ac6:34aa23b1";
       keyFile = "/mnt-root/etc/raid_keyfile";
       label = "raid";
     };
