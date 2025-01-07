@@ -15,7 +15,7 @@
   hardware.cpu.amd.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
 
-  programs.sway.enable = true;
+  talyz.hyprland.enable = true;
   talyz.gnome.enable = true;
   talyz.work.enable = true;
 

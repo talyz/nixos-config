@@ -19,6 +19,9 @@
     dotfiles.flake = false;
     dracula-emacs.url = "path:./modules/dracula-emacs";
     dracula-emacs.flake = false;
+    anyrun.url = "github:anyrun-org/anyrun";
+    anyrun.inputs.nixpkgs.follows = "nixpkgs";
+    ags.url = "github:aylur/ags/v1";
   };
 
   outputs = {

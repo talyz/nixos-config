@@ -1,0 +1,190 @@
+/* get rid of GTK theme's styles and set defaults */
+* {
+  all: unset;
+  font-family: Inter, Roboto, sans-serif;
+}
+
+/* buttons */
+* {
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* buttons */
+* {
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* general styles */
+* {
+  color: #ffffff;
+}
+
+/* mixins */
+tooltip {
+  background: #000000;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 0 rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+}
+
+/* scales & progress bars */
+scale trough,
+progressbar trough {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 0.5rem;
+  min-width: 5rem;
+  padding: 0 0.25rem;
+}
+scale highlight,
+scale progress,
+progressbar highlight,
+progressbar progress {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 0.5rem;
+  margin: 0 calc(0px - 0.25rem);
+  min-height: 0.5rem;
+}
+
+.button {
+  transition: 200ms;
+  background: #9d5b7a;
+  border-radius: 5rem;
+  padding: 0.4rem;
+}
+.button:hover {
+  background: #7d4861;
+}
+
+.button.disabled {
+  transition: 200ms;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 5rem;
+  padding: 0.4rem;
+}
+.button.disabled:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.bar {
+  background: rgba(0, 0, 0, 0.21);
+  min-height: 32px;
+}
+.bar .module {
+  margin: 0 0.5rem;
+}
+
+/* workspaces */
+.bar .workspaces {
+  margin: 0.2rem 0.5rem;
+}
+.bar .workspaces button {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 2rem;
+  margin: 0.7rem 0.2rem;
+  min-width: 1rem;
+  transition: 100ms linear;
+}
+.bar .workspaces .focused {
+  min-width: 2rem;
+}
+.bar .workspaces .monitor0 {
+  background: #f38ba8;
+}
+.bar .workspaces .monitor1 {
+  background: #f9e2af;
+}
+.bar .workspaces .monitor2 {
+  background: #a6e3a1;
+}
+.bar .workspaces .monitor3 {
+  background: #89b4fa;
+}
+
+/* music */
+.bar .music > box {
+  transition: 200ms;
+  border-radius: 16px;
+  margin: 0.4rem;
+}
+.bar .music.active > box {
+  background: rgba(255, 255, 255, 0.15);
+}
+.bar .music .cover {
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  min-width: 2rem;
+  min-height: 2rem;
+}
+
+/* tray */
+.tray button {
+  transition: 200ms;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 5rem;
+  padding: 0.4rem;
+  background: none;
+  margin: 0.5rem 0;
+}
+.tray button:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+.tray button:not(:last-child) {
+  margin-right: 0.3rem;
+}
+.tray button.active {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+menu {
+  background: #000000;
+  border-radius: 8px;
+}
+menu separator {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+menu menuitem {
+  transition: 200ms;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 5rem;
+  padding: 0.4rem;
+  border-radius: 0;
+  padding: 0.4rem 0.7rem;
+}
+menu menuitem:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+menu menuitem:first-child {
+  border-radius: 8px 8px 0 0;
+}
+menu menuitem:last-child {
+  border-radius: 0 0 8px 8px;
+}
+menu menuitem:only-child {
+  border-radius: 8px;
+}
+
+/* system-info */
+.bar .system-info {
+  margin: 0 0.2rem;
+}
+.bar .system-info > box {
+  margin: 0 0.3rem;
+}
+.bar .system-info .type {
+  font-size: 0.55rem;
+  font-weight: 300;
+}
+.bar .system-info .value {
+  font-size: 0.8rem;
+}
+
+.system-menu-toggler box {
+  transition: 200ms;
+  margin: 0.4rem 0;
+  border-radius: 16px;
+}
+.system-menu-toggler.active box {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/*# sourceMappingURL=bar.css.map */
