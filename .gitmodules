@@ -1,36 +1,20 @@
 [submodule "dotfiles"]
 	path = modules/dotfiles
 	url = git@github.com:talyz/dotfiles.git
-[submodule "machines/flora/nixpkgs"]
-	path = machines/flora/nixpkgs
-	url = git@github.com:talyz/nixpkgs.git
 [submodule "modules/emacs-overlay"]
 	path = modules/emacs-overlay
 	url = https://github.com/nix-community/emacs-overlay
 [submodule "machines/zen/nixpkgs"]
 	path = modules/nixpkgs
 	url = git@github.com:talyz/nixpkgs.git
-[submodule "machines/evals/nixpkgs"]
-	path = machines/evals/nixpkgs
-	url = git@github.com:talyz/nixpkgs.git
 [submodule "modules/impermanence"]
 	path = modules/impermanence
 	url = git@github.com:nix-community/impermanence.git
 [submodule "modules/home-manager/"]
 	url = https://github.com/nix-community/home-manager.git
-[submodule "machines/natani/nixpkgs"]
-	path = machines/natani/nixpkgs
-	url = git@github.com:NixOS/nixpkgs.git
-[submodule "machines/trace/nixpkgs"]
-	path = machines/trace/nixpkgs
-	url = git@github.com:talyz/nixpkgs.git
 [submodule "modules/dracula-emacs"]
 	path = modules/dracula-emacs
 	url = git@github.com:talyz/dracula-emacs.git
 [submodule "home-manager"]
 	path = modules/home-manager
 	url = https://github.com/nix-community/home-manager.git
-[submodule "machines/raine/nixpkgs"]
-	path = machines/raine/nixpkgs
-	url = https://github.com/NixOS/nixpkgs.git
-	branch = nixos-20.09
