@@ -200,9 +200,11 @@
 
     services.openssh = {
       enable = true;
-      kbdInteractiveAuthentication = false;
-      passwordAuthentication = false;
-      permitRootLogin = "no";
+      settings = {
+        KbdInteractiveAuthentication = false;
+        PasswordAuthentication = false;
+        PermitRootLogin = "prohibit-password";
+      };
       startWhenNeeded = true;
     };
 

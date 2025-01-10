@@ -33,7 +33,7 @@
 
   services.getty.autologinUser = lib.mkForce null;
 
-  services.openssh.permitRootLogin = lib.mkForce "yes";
+  services.openssh.settings.PermitRootLogin = lib.mkForce "yes";
 
   # users.users.nixos = {
   #   shell = pkgs.fish;
