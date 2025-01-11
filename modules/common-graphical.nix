@@ -47,6 +47,9 @@ in
       aspellDicts.en
       aspellDicts.en-science
       aspellDicts.en-computers
+      hunspell
+      hunspellDicts.sv-se
+      hunspellDicts.en-us-large
       foot
       spotify
       adwaita-icon-theme
