@@ -33,7 +33,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Make /tmp a tmpfs mount.
-  boot.tmpOnTmpfs = true;
+  boot.tmp.useTmpfs = true;
 
   # Use the latest kernel.
   #boot.kernelPackages = pkgs.linuxPackages_hardened;
@@ -100,6 +100,11 @@
     fsType = "vfat";
   };
 
+
+  ### Media RAID ###
+
+  boot.swraid.enable = true;
+
   fileSystems."/media/raid" = {
     device = "/dev/mapper/raid";
     fsType = "btrfs";
@@ -120,5 +125,5 @@
 
   nix.settings.max-jobs = lib.mkDefault 4;
 
-  system.stateVersion = "20.09";
+  system.stateVersion = "24.05";
 }
