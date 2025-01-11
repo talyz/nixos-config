@@ -160,6 +160,7 @@ in
           "/var/lib/nixos"
           "/var/lib/flatpak"
           "/var/lib/fprint"
+          "/var/lib/tailscale"
           "/var/lib/systemd/coredump"
           "/etc/NetworkManager/system-connections"
         ] ++ cfg.root.extraDirectories;

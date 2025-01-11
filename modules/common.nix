@@ -209,6 +209,13 @@
         };
       };
 
+    services.tailscale.enable = !config.talyz.domain.internal.runControlServer;
+    networking.firewall = lib.mkIf (!config.talyz.domain.internal.runControlServer) {
+      checkReversePath = "loose";
+      trustedInterfaces = [ "tailscale0" ];
+      allowedUDPPorts = [ config.services.tailscale.port ];
+    };
+
     services.openssh = {
       enable = true;
       settings = {

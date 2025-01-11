@@ -112,6 +112,26 @@
           };
         };
 
+        nixosConfigurations.rpi4 = nixpkgs-stable.lib.nixosSystem {
+          system = "aarch64-linux";
+          modules = modules-stable ++ [
+            ./machines/rpi4/configuration.nix
+          ];
+          specialArgs = args // {
+            isStable = true;
+          };
+        };
+
+        deploy.nodes.rpi4 = {
+          hostname = "192.168.1.11";
+          profiles.system = {
+            user = "root";
+            sshUser = "root";
+            remoteBuild = true;
+            path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.rpi4;
+          };
+        };
+
         isoImage = (nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = modules ++ [

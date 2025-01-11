@@ -50,7 +50,7 @@
     enable = true;
     matchConfig.Name = "enp9s0";
     DHCP = "no";
-    address = [ "192.168.1.128/24" ];
+    address = [ "192.168.1.10/24" ];
     gateway = [ "192.168.1.1" ];
   };
 
@@ -64,18 +64,6 @@
   networking.firewall = {
     enable = true;
     allowPing = true;
-  };
-
-
-  ### Dynamic DNS update ###
-
-  services.ddclient = {
-    enable = true;
-    server = "dyndns.loopia.se";
-    domains = [ "webhallon.com" ];
-    use = "web, web=dyndns.loopia.se/checkip, web-skip='Current IP Address:'";
-    username = "webhallon.com";
-    passwordFile = "/etc/nixos/machines/raine/loopia_password";
   };
 
 

@@ -16,5 +16,6 @@
       ./anyrun.nix
       ./ags
       ./wlogout.nix
+      ./domain.nix
     ];
 }
