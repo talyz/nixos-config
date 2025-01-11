@@ -58,6 +58,7 @@ let
     cmake
     nil
     # nixd
+    nodePackages.bash-language-server
     python3Packages.python-lsp-server
     nodejs # For copilot.el
     "${pkgs.vscode-extensions.ms-vscode.cpptools}/share/vscode/extensions/ms-vscode.cpptools/debugAdapters"
