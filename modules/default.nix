@@ -21,5 +21,6 @@
       ./vaultwarden.nix
       ./backups.nix
       ./immich.nix
+      ./nextcloud.nix
     ];
 }

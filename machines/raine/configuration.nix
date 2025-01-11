@@ -20,6 +20,7 @@
   talyz.home-assistant.enable = true;
   talyz.vaultwarden.enable = true;
   talyz.immich.enable = true;
+  talyz.nextcloud.enable = true;
 
   talyz.backups.time = "03:00";
   talyz.backups.paths = [
