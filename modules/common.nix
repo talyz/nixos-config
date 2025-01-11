@@ -100,6 +100,8 @@
 
     programs.fish.enable = true;
 
+    hardware.nitrokey.enable = true;
+
     home-manager.users.${config.talyz.username} = { ... }:
       {
         nixpkgs.config = import ./config.nix;
