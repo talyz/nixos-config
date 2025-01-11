@@ -15,7 +15,7 @@ in
     };
   };
   config = lib.mkIf cfg.enable {
-    fonts.fonts = with pkgs; [
+    fonts.packages = with pkgs; [
       liberation_ttf
       source-code-pro
       inconsolata
@@ -40,8 +40,7 @@ in
       element-desktop
       gparted
       evolution
-      gnome3.evince
-      gnome3.adwaita-icon-theme
+      evince
       aspell
       aspellDicts.sv
       aspellDicts.en
@@ -49,6 +48,7 @@ in
       aspellDicts.en-computers
       foot
       spotify
+      adwaita-icon-theme
     ];
 
     environment.sessionVariables = {
@@ -67,7 +67,7 @@ in
 
     hardware.pulseaudio.enable = false;
 
-    hardware.opengl.enable = true;
+    hardware.graphics.enable = true;
 
     # Enable the X11 windowing system.
     services.xserver.enable = true;
@@ -76,13 +76,13 @@ in
     services.xserver.desktopManager.xterm.enable = false;
 
     # Use libinput to handle trackpoint, touchpad, etc.
-    services.xserver.libinput.enable = true;
-    services.xserver.libinput.touchpad.naturalScrolling = true;
+    services.libinput.enable = true;
+    services.libinput.touchpad.naturalScrolling = true;
 
     # Keyboard layout.
-    services.xserver.layout = "us";
-    services.xserver.xkbOptions = "eurosign:e,ctrl:nocaps,numpad:mac,kpdl:dot";
-    services.xserver.xkbVariant = "dvorak-intl";
+    services.xserver.xkb.layout = "us";
+    services.xserver.xkb.options = "eurosign:e,ctrl:nocaps,numpad:mac,kpdl:dot";
+    services.xserver.xkb.variant = "dvorak-intl";
 
     # Enable Flatpak.
     services.flatpak.enable = true;
@@ -91,7 +91,8 @@ in
     networking.networkmanager.enable = lib.mkDefault true;
 
     services.avahi.enable = true;
-    services.avahi.nssmdns = true;
+    services.avahi.nssmdns4 = true;
+    services.avahi.nssmdns6 = true;
 
     # Enable wireshark.
     programs.wireshark.enable = true;
@@ -124,12 +125,16 @@ in
       {
         gtk.enable = true;
         gtk.iconTheme = {
-          package = pkgs.gnome3.adwaita-icon-theme;
+          package = pkgs.adwaita-icon-theme;
           name = "Adwaita";
         };
         gtk.gtk3.extraConfig = {
           gtk-cursor-theme-name = "Adwaita";
-          gtk-application-prefer-dark-theme = 1;
+          gtk-application-prefer-dark-theme = true;
+        };
+        gtk.gtk4.extraConfig = {
+          gtk-cursor-theme-name = "Adwaita";
+          gtk-application-prefer-dark-theme = true;
         };
 
         # xdg.mimeApps.enable = true;
@@ -218,7 +223,6 @@ in
       };
 
     programs.adb.enable = true;
-    #android_sdk.accept_license = true;
 
     users.users.${user}.extraGroups = [
       "networkmanager"
