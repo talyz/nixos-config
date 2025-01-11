@@ -21,6 +21,12 @@
           nomachine-client
           zoom-us
           libreoffice
+          awscli2
+          age
+          openssl
+          google-cloud-sdk
+          imgp
+          clickup
         ];
 
       programs.ssh.extraConfig = ''
