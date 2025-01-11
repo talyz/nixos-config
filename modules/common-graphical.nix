@@ -32,6 +32,7 @@ in
 
     environment.systemPackages = with pkgs; [
       firefox-wayland
+      ungoogled-chromium
       keepassxc
       dropbox
       krita

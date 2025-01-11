@@ -193,6 +193,7 @@ in
             ".local/share/flatpak"
             ".local/share/Steam"
             ".config/Bitwarden"
+            ".config/chromium"
             ".config/discord"
             ".config/evolution"
             ".config/goa-1.0"
