@@ -50,6 +50,7 @@ in
       foot
       spotify
       adwaita-icon-theme
+      flashprint
     ];
 
     environment.sessionVariables = {

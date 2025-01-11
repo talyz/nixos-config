@@ -175,6 +175,7 @@ in
             "NoMachine"
             "XLN Audio Dropbox"
             ".aws"
+            ".FlashPrint5"
             { directory = ".gnupg"; mode = "0700"; }
             { directory = ".ssh"; mode = "0700"; }
             ".mix"
