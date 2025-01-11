@@ -15,8 +15,6 @@
   hardware.enableRedistributableFirmware = true;
 
   talyz.gnome.enable = true;
-  # Can't use wayland because of Synergy :(
-  talyz.gnome.useWayland = false;
   #talyz.exwm.enable = true;
 
   talyz.work.enable = true;
