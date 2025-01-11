@@ -20,5 +20,6 @@
       ./domain.nix
       ./vaultwarden.nix
       ./backups.nix
+      ./immich.nix
     ];
 }
