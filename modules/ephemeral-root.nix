@@ -242,12 +242,11 @@ in
         graphics = false;
         fileSystems = {
           "/" = {
-            mountPoint = "/persistent";
+            fsType = lib.mkForce "ramfs";
             neededForBoot = true;
           };
-          "/tmpfsroot" = {
-            mountPoint = "/";
-            fsType = "tmpfs";
+          "/persistent" = {
+            fsType = "ramfs";
             neededForBoot = true;
           };
         };
