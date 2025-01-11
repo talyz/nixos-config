@@ -19,7 +19,9 @@ let
   emacs = (pkgs.emacsWithPackagesFromUsePackage {
     config = "${dotfiles}/emacs/emacs-config.org";
     defaultInitFile = true;
-    package = pkgs.emacs-pgtk;
+    package = pkgs.emacs.override {
+      withPgtk = true;
+    };
     extraEmacsPackages = epkgs: [ epkgs.copilot epkgs.treesit-grammars.with-all-grammars ] ++ (cfg.extraPackages epkgs);
     override = epkgs: (cfg.extraOverrides epkgs) // {
       # weechat = epkgs.melpaPackages.weechat;
