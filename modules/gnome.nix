@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, isStable, ... }:
 
 with lib;
 
@@ -44,15 +44,16 @@ in
       evince
       pavucontrol
       glib.dev
-      gnome3.gnome-tweaks
-      gnome3.gnome-session
       gnomeExtensions.gsconnect
+      gnomeExtensions.appindicator
       rhythmbox
+      gnome-tweaks
     ];
 
     environment.sessionVariables = lib.optionalAttrs cfg.useWayland {
       QT_QPA_PLATFORM = "wayland";
       NIXOS_OZONE_WL = "1";
+      # MUTTER_DEBUG_FORCE_KMS_MODE = "simple";
     };
 
     environment.gnome.excludePackages = with pkgs; [
@@ -78,7 +79,7 @@ in
 
     services.fwupd.enable = true;
 
-    qt5 = {
+    qt = {
       enable = true;
       platformTheme = "gnome";
       style = "adwaita-dark";
@@ -87,20 +88,6 @@ in
     home-manager.users.${user} = { lib, ... }:
       {
         xdg.configFile."gnome-initial-setup-done".text = "yes";
-
-        programs.gnome-terminal.enable = true;
-        programs.gnome-terminal.profile."b1dcc9dd-5262-4d8d-a863-c897e6d979b9" = {
-          default = true;
-          visibleName = "White on Black";
-          font = "DejaVu Sans Mono 10";
-          showScrollbar = true;
-          colors = {
-            foregroundColor = "rgb(220,220,220)";
-            palette = [];
-            boldColor = "rgb(255,255,255)";
-            backgroundColor = "rgb(0,0,0)";
-          };
-        };
 
         dconf.settings =
           {
@@ -159,6 +146,7 @@ in
 
             "org/gnome/desktop/wm/preferences" = {
               num-workspaces = 9;
+              resize-with-right-button = true;
             };
 
             "org/gnome/shell/overrides" = {
@@ -167,10 +155,15 @@ in
 
             "org/gnome/mutter" = {
               dynamic-workspaces = false;
+              workspaces-only-on-primary = true;
+              experimental-features = [
+                "scale-monitor-framebuffer"
+              ];
             };
 
-            "org/gnome/desktop/wm/preferences" = {
-              resize-with-right-button = true;
+            "org/gnome/desktop/sound" = {
+              allow-volume-above-100-percent = !config.talyz.media-center.enable;
+              event-sounds = false;
             };
 
             "org/gnome/shell" = {
@@ -214,12 +207,9 @@ in
               enabled-extensions = [
                 "launch-new-instance@gnome-shell-extensions.gcampax.github.com"
                 "gsconnect@andyholmes.github.io"
+                "appindicatorsupport@rgcjonas.gmail.com"
               ];
             };
-
-            "org/gnome/mutter".experimental-features = [
-              "scale-monitor-framebuffer"
-            ];
 
             # File browser (nautilus) settings
             "org/gnome/nautilus/settings" = {

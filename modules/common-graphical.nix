@@ -103,7 +103,6 @@ in
     programs.wireshark.enable = true;
     programs.wireshark.package = pkgs.wireshark-qt;
 
-    programs.gnome-terminal.enable = true;
     services.gnome.gnome-keyring.enable = true;
     #security.pam.services.login.enableGnomeKeyring = true;
     security.pam.services.lightdm.enableGnomeKeyring = true;
