@@ -43,15 +43,19 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Kernel modules required in the initrd to boot.
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "r8169" ];
 
   # Kernel modules to load in the second stage of boot.
   boot.kernelModules = [ "kvm-amd" "nct6775" ];
   #boot.extraModulePackages = [ config.boot.kernelPackages.acpi_call ];
 
+  boot.extraModprobeConfig = ''
+    options snd_usb_audio vid=0x1235 pid=0x8210 device_setup=1
+  '';
+
   networking.hostName = "zen";
 
-  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/debb17e3-71fc-471a-b9eb-ee3361fae721";
+  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/f1a4b6f5-63e3-4723-9bcc-b82ffa9a83f6";
 
   fileSystems."/" =
     { device = "/dev/root_vg/root";
@@ -74,6 +78,7 @@
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/6A31-12B4";
       fsType = "vfat";
+      options = [ "umask=077" ];
     };
 
   swapDevices = [
