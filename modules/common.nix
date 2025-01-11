@@ -180,8 +180,13 @@
         };
 
         services.gpg-agent.enable = true;
+        services.gpg-agent.enableSshSupport = true;
+        services.gpg-agent.defaultCacheTtl = 14400;
+        services.gpg-agent.maxCacheTtl = 86400;
+        services.gpg-agent.defaultCacheTtlSsh = 14400;
+        services.gpg-agent.maxCacheTtlSsh = 86400;
         services.gpg-agent.extraConfig = ''
-          pinentry-program ${pkgs.pinentry-gnome}/bin/pinentry-gnome3
+          pinentry-program ${pkgs.pinentry-gnome3}/bin/pinentry
         '';
 
         programs.btop.enable = true;
