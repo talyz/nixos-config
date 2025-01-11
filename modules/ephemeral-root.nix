@@ -91,11 +91,59 @@ in
     })
 
     (lib.mkIf cfg.enable {
-      users.mutableUsers = false;
-      users.users.${user}.passwordFile = "/persistent/password_${user}";
-      users.users.root.passwordFile = "/persistent/password_root";
+      boot.initrd =
+        let
+          rootReset = ''
+            mkdir /btrfs_tmp
+            mount /dev/root_vg/root /btrfs_tmp
+            if [[ -e /btrfs_tmp/root ]]; then
+                mkdir -p /btrfs_tmp/old_roots
+                timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/root)" "+%Y-%m-%-d_%H:%M:%S")
+                mv /btrfs_tmp/root "/btrfs_tmp/old_roots/$timestamp"
+            fi
 
+            delete_subvolume_recursively() {
+                IFS=$'\n'
+                for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
+                    delete_subvolume_recursively "/btrfs_tmp/$i"
+                done
+                btrfs subvolume delete "$1"
+            }
+
+            for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime +30); do
+                delete_subvolume_recursively "$i"
+            done
+
+            btrfs subvolume create /btrfs_tmp/root
+            umount /btrfs_tmp
+          '';
+        in
+          {
+            systemd.enable = true;
+            systemd.emergencyAccess = true;
+            systemd.services = {
+              root-reset = {
+                wantedBy = [ "initrd-root-device.target" ];
+                wants = [ "dev-root_vg-root.device" ];
+                after = [ "dev-root_vg-root.device" ];
+                before = [ "sysroot.mount" ];
+                serviceConfig.Type = "oneshot";
+                script = rootReset;
+              };
+            };
+          };
+
+      users.mutableUsers = false;
+      users.users.${user} = {
+        hashedPasswordFile = "/persistent/password_${user}";
+        initialPassword = lib.mkForce null;
+      };
+      users.users.root.hashedPasswordFile = "/persistent/password_root";
+    })
+
+    {
       environment.persistence.main = {
+        inherit (cfg) enable;
         persistentStoragePath = "/persistent";
         files = [
           "/etc/machine-id"
@@ -180,6 +228,6 @@ in
           };
         };
       };
-    })
+    }
   ];
 }
