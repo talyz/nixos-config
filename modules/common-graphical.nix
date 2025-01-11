@@ -177,6 +177,13 @@ in
             prompt-on-unwanted-html = false;
             reply-style-name = "quoted";
           };
+          "org/gnome/evolution/plugin/mail-notification" = {
+            notify-sound-beep = false;
+            notify-sound-enabled = false;
+          };
+          "org/gnome/evolution/plugin/autocontacts" = {
+            enable = true;
+          };
         };
 
         xresources.properties = {
