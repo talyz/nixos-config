@@ -28,6 +28,23 @@ let
       dracula-theme = epkgs.melpaPackages.dracula-theme.overrideAttrs (oldAttrs: oldAttrs // {
         src = dracula-emacs;
       });
+      cmake-integration = epkgs.trivialBuild {
+        pname = "cmake-integration";
+        version = "2023-08-25";
+
+        packageRequires = with epkgs; [ f s ];
+
+        preInstall = ''
+          mkdir -p $out/share/emacs/site-lisp
+        '';
+
+        src = pkgs.fetchFromGitHub {
+          owner = "darcamo";
+          repo = "cmake-integration";
+          rev = "018ef1e847ce0909c202800e69021d7477ac13ab";
+          sha256 = "sha256-FjZ13htVdngds8fiobqUiVo01rnKES73AjOiLY0xr4M=";
+        };
+      };
     };
   });
 
@@ -35,12 +52,15 @@ let
     elixir_ls
     gopls
     clang-tools
+    lldb
+    gdb
     cmake-language-server
     cmake
     nil
     # nixd
     python3Packages.python-lsp-server
     nodejs # For copilot.el
+    "${pkgs.vscode-extensions.ms-vscode.cpptools}/share/vscode/extensions/ms-vscode.cpptools/debugAdapters"
   ];
 
   emacsWithLanguageServers =
