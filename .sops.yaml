@@ -1,0 +1,14 @@
+creation_rules:
+  - key_groups:
+      - pgp:
+          - 950336A4CA46BB42242733312DED2151F4671A2B
+
+        # To add a new remote host, run
+        #   nix-shell -p ssh-to-age --run 'ssh-keyscan <host> | ssh-to-age'
+        # and add the public age key here. Then run
+        #   sops updatekeys secrets.yaml
+        # to reencrypt the secrets file.
+        age:
+          - age1wv0uxg4frqdp6xyrd3jz97zg3rurm67cqutfanpjl20x3guj5pzskv54ny  # sythe
+          - age1tzlppdn584a46dc77y8z9srmfpcslg0dstxhtk25weyl8pwkc5uqypet7q  # raine
+          - age1rfdsszh68478wlmpdgzesxnq74sdllav74whmvaey5p82zd8y5zsarv39y  # rpi4

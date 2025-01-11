@@ -22,6 +22,8 @@
     anyrun.url = "github:anyrun-org/anyrun";
     anyrun.inputs.nixpkgs.follows = "nixpkgs";
     ags.url = "github:aylur/ags/v1";
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -29,6 +31,7 @@
     nixpkgs,
     nixpkgs-stable,
     impermanence,
+    sops-nix,
     deploy-rs,
     ...
   }@args:
@@ -40,6 +43,11 @@
           home-manager.useUserPackages = true;
         }
         impermanence.nixosModules.impermanence
+        sops-nix.nixosModules.sops
+        {
+          sops.defaultSopsFile = ./secrets.yaml;
+          sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+        }
       ];
       modules = modules' "";
       modules-stable = modules' "-stable";
@@ -113,6 +121,16 @@
             isStable = false;
           };
         }).config.system.build.isoImage;
+
+        devShells.x86_64-linux.default =
+          let
+            pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          in
+            pkgs.mkShell {
+              packages = [
+                pkgs.sops
+              ];
+            };
 
         # checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
       };

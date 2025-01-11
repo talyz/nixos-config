@@ -1,5 +1,47 @@
 {
   "nodes": {
+    "ags": {
+      "inputs": {
+        "nixpkgs": "nixpkgs",
+        "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1731591309,
+        "narHash": "sha256-2qL6CAoQjCJLsxpy0Ac/9pLFoItf3L9KMCSLpoJ6jSw=",
+        "owner": "aylur",
+        "repo": "ags",
+        "rev": "67b0e31ded361934d78bddcfc01f8c3fcf781aad",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aylur",
+        "ref": "v1",
+        "repo": "ags",
+        "type": "github"
+      }
+    },
+    "anyrun": {
+      "inputs": {
+        "flake-parts": "flake-parts",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "systems": "systems_2"
+      },
+      "locked": {
+        "lastModified": 1735221180,
+        "narHash": "sha256-xx19bEgwZDnNddm8svJnIrt1MWH1FfDbBJh0+PBNZL8=",
+        "owner": "anyrun-org",
+        "repo": "anyrun",
+        "rev": "7f40aaa02f71974e4eba19ca42a6b60969bbde09",
+        "type": "github"
+      },
+      "original": {
+        "owner": "anyrun-org",
+        "repo": "anyrun",
+        "type": "github"
+      }
+    },
     "deploy-rs": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -26,7 +68,7 @@
       "flake": false,
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-sy3myVerL1OEyksMutn+ZGP8uCoKLJBe6vpV/6/dg9E=",
+        "narHash": "sha256-wNs5y8LoKAN/6kZtxo698y06TgheMPnQZ0RiiR+xxsY=",
         "path": "./modules/dotfiles",
         "type": "path"
       },
@@ -39,7 +81,7 @@
       "flake": false,
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-xkhZs6/lY6puwNSaaaawcIhQvDY03l/MaOVKuHyeiag=",
+        "narHash": "sha256-rlAgMVA2QeGEWJ2109SPRUAdHFJh6t2KF9cpNE2Dyek=",
         "path": "./modules/dracula-emacs",
         "type": "path"
       },
@@ -218,6 +260,8 @@
     },
     "root": {
       "inputs": {
+        "ags": "ags",
+        "anyrun": "anyrun",
         "deploy-rs": "deploy-rs",
         "dotfiles": "dotfiles",
         "dracula-emacs": "dracula-emacs",
@@ -227,6 +271,27 @@
         "impermanence": "impermanence",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-stable": "nixpkgs-stable_2",
+        "sops-nix": "sops-nix"
+      }
+    },
+    "sops-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1734546875,
+        "narHash": "sha256-6OvJbqQ6qPpNw3CA+W8Myo5aaLhIJY/nNFDk3zMXLfM=",
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "rev": "ed091321f4dd88afc28b5b4456e0a15bd8374b4d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "type": "github"
       }
     },
     "systems": {
