@@ -139,6 +139,14 @@ in
         initialPassword = lib.mkForce null;
       };
       users.users.root.hashedPasswordFile = "/persistent/password_root";
+
+      talyz.backups.enable = true;
+      talyz.backups.paths = [
+        config.environment.persistence.main.persistentStoragePath
+      ];
+      talyz.backups.exclude = [
+        "/persistent/home/talyz/Projects/server-setup/secrets"
+      ];
     })
 
     {
@@ -174,7 +182,6 @@ in
             "VirtualBox VMs"
             "Projects"
             "NoMachine"
-            "XLN Audio Dropbox"
             ".aws"
             ".FlashPrint5"
             { directory = ".gnupg"; mode = "0700"; }
@@ -185,7 +192,6 @@ in
             { directory = ".nixops"; mode = "0700"; }
             { directory = ".nixops-managed-deployments"; mode = "0700"; }
             ".dropbox"
-            ".dropbox-dist"
             ".local/share/containers"
             ".local/share/fish"
             ".local/share/evolution"
@@ -193,7 +199,6 @@ in
             ".local/share/direnv"
             ".local/share/cura"
             ".local/share/flatpak"
-            ".local/share/Steam"
             ".config/Bitwarden"
             ".config/chromium"
             ".config/discord"
@@ -207,15 +212,29 @@ in
             ".config/VirtualBox"
             ".config/cura"
             ".config/Element"
+          ] ++ cfg.home.extraDirectories;
+          files = [
+            ".config/monitors.xml"
+          ] ++ cfg.home.extraFiles;
+        };
+      };
+
+      environment.persistence.cache = {
+        inherit (cfg) enable;
+        persistentStoragePath = "/cache";
+        users.talyz = {
+          directories = [
+            "cotton_virtualbox_vms"
+            "XLN Audio Dropbox"
+            ".conan2"
+            ".dropbox-dist"
             ".cache/evolution"
             ".cache/lorri"
             ".cache/nix"
             ".cache/keepassxc"
             ".cache/flatpak"
-          ] ++ cfg.home.extraDirectories;
-          files = [
-            ".config/monitors.xml"
-          ] ++ cfg.home.extraFiles;
+            ".local/share/Steam"
+          ];
         };
       };
 

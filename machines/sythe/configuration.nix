@@ -96,6 +96,12 @@
     options = [ "subvol=persistent" ];
   };
 
+  fileSystems."/cache" = {
+    device = "/dev/root_vg/root";
+    neededForBoot = true;
+    fsType = "btrfs";
+    options = [ "subvol=cache" ];
+  };
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/7569-18E8";

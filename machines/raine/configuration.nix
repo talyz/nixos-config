@@ -17,6 +17,12 @@
   talyz.gnome.enable = true;
   talyz.media-center.enable = true;
 
+  talyz.backups.time = "03:00";
+  talyz.backups.paths = [
+    "/media/raid/old"
+    "/media/raid/musik"
+  ];
+
   programs.steam.enable = true;
 
   # Video drivers

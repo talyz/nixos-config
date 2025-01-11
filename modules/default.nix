@@ -17,5 +17,6 @@
       ./ags
       ./wlogout.nix
       ./domain.nix
+      ./backups.nix
     ];
 }
