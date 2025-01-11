@@ -29,7 +29,7 @@
     "nouveau"
   ];
 
-  nix.buildCores = 0;
+  nix.settings.cores = 0;
 
   services.getty.autologinUser = lib.mkForce null;
 

@@ -124,7 +124,7 @@
     }
   ];
 
-  nix.maxJobs = lib.mkDefault 8;
+  nix.settings.max-jobs = lib.mkDefault 4;
 
   system.stateVersion = "20.09";
 }

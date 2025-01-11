@@ -84,7 +84,7 @@
     }
   ];
 
-  nix.maxJobs = lib.mkDefault 8;
+  nix.settings.max-jobs = lib.mkDefault 4;
 
   networking.firewall = {
     enable = true;
