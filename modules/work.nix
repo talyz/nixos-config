@@ -29,10 +29,6 @@
           clickup
         ];
 
-      programs.ssh.extraConfig = ''
-        GSSAPIAuthentication yes
-      '';
-
       # virtualisation.libvirtd.enable = true;
       # virtualisation.libvirtd.qemuRunAsRoot = false;
       # virtualisation.libvirtd.onShutdown = "shutdown";
@@ -86,7 +82,60 @@
       users.users.${config.talyz.username}.extraGroups = [
         "lp"
         "scanner"
-        # "vboxusers"
+        "vboxusers"
+      ];
+
+      nix.buildMachines = [
+        # {
+        #   hostName = "zen";
+        #   sshUser = "root";
+        #   system = "x86_64-linux";
+        #   maxJobs = 2;
+        #   supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+        # }
+        {
+          hostName = "meshify-ml";
+          sshUser = "root";
+          system = "x86_64-linux";
+          maxJobs = 2;
+          supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+        }
+      ];
+      nix.distributedBuilds = true;
+      # nix.extraOptions = ''
+      #   builders-use-substitutes = true
+      # '';
+      # nix.binaryCaches = lib.mkAfter [ "ssh-ng://zen" ];
+      nix.settings.trusted-public-keys = [
+        "zen:/mViKdKKlduW1kwAGKauOPM0dg3Jfe6Z4Yosho+54PU="
+        "xln:SXLx65clGonsiGSfCbOWvq6zI3leKKc92+mUZ1tMWUQ="
+      ];
+
+      programs.ssh.knownHosts = {
+        zen = {
+          extraHostNames = [ "zen" "192.168.1.106" ];
+          publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINyFlaKS43N8ZqheVodC2g1Xo0Z/HvvI+aekYHw9bIIS";
+        };
+        meshify-ml = {
+          extraHostNames = [ "meshify-ml" "10.0.1.32" ];
+          publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBaJD+r5QWS53sEWoClxs/lIcDl+hdO6OS1ERlqpYpLD";
+        };
+      };
+
+      programs.ssh.extraConfig = ''
+        Host zen
+            Hostname 192.168.1.106
+            User root
+            IdentitiesOnly yes
+            IdentityFile /etc/nix/id_rsa
+        Host meshify-ml
+            Hostname 10.0.1.32
+            User root
+            IdentitiesOnly yes
+            IdentityFile /etc/nix/id_rsa
+      '';
+      talyz.ephemeralRoot.root.extraFiles = [
+        "/etc/nix/id_rsa"
       ];
     };
 }
