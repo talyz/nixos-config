@@ -72,6 +72,15 @@ in
   options =
   {
     talyz.emacs = {
+      enable = lib.mkOption {
+        default = true;
+        type = lib.types.bool;
+        example = false;
+        description = ''
+          Whether to install and use my Emacs setup.
+        '';
+      };
+
       # configFile = mkOption {
       #   description = ''
       #     Emacs config file.
@@ -97,7 +106,8 @@ in
       };
     };
   };
-  config =
+
+  config = lib.mkIf cfg.enable
     {
       nixpkgs.overlays = [ emacs-overlay.overlays.default ];
 
