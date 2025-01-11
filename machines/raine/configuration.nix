@@ -15,6 +15,7 @@
   hardware.enableRedistributableFirmware = true;
 
   talyz.gnome.enable = true;
+
   talyz.media-center.enable = true;
 
   talyz.backups.time = "03:00";
@@ -75,6 +76,8 @@
 
   ### File system configuration ###
 
+  talyz.ephemeralRoot.enable = true;
+
   boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/f9bd2426-07d1-4874-923c-e9e63adc8122";
 
   fileSystems."/" = {
@@ -83,38 +86,30 @@
     options = [ "subvol=root" ];
   };
 
-  fileSystems."/home" = {
-    device = "/dev/root_vg/root";
-    fsType = "btrfs";
-    options = [ "subvol=home" ];
-  };
-
   fileSystems."/nix" = {
     device = "/dev/root_vg/root";
     fsType = "btrfs";
     options = [ "subvol=nix" ];
   };
 
+  fileSystems."/persistent" = {
+    device = "/dev/root_vg/root";
+    neededForBoot = true;
+    fsType = "btrfs";
+    options = [ "subvol=persistent" ];
+  };
+
+  fileSystems."/cache" = {
+    device = "/dev/root_vg/root";
+    neededForBoot = true;
+    fsType = "btrfs";
+    options = [ "subvol=cache" ];
+  };
+
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/70DE-7DAC";
     fsType = "vfat";
-  };
-
-
-  ### Media RAID ###
-
-  boot.swraid.enable = true;
-
-  fileSystems."/media/raid" = {
-    device = "/dev/mapper/raid";
-    fsType = "btrfs";
-    options = [ "subvol=subvol_root" ];
-    encrypted = {
-      enable = true;
-      blkDev = "/dev/disk/by-id/md-uuid-fc6f63ab:d3e35ce5:1f7b4ac6:34aa23b1";
-      keyFile = "/mnt-root/etc/raid_keyfile";
-      label = "raid";
-    };
+    options = [ "umask=077" ];
   };
 
   swapDevices = [
@@ -122,6 +117,27 @@
       device = "/dev/root_vg/swap";
     }
   ];
+
+
+  ### Media RAID ###
+
+  boot.swraid.enable = true;
+
+  fileSystems."/media/raid" = {
+    depends = [ "/persistent" ];
+    device = "/dev/mapper/raid";
+    fsType = "btrfs";
+    options = [ "subvol=subvol_root" ];
+    encrypted = {
+      enable = true;
+      blkDev = "/dev/disk/by-id/md-uuid-fc6f63ab:d3e35ce5:1f7b4ac6:34aa23b1";
+      keyFile = "/persistent/etc/raid_keyfile";
+      label = "raid";
+    };
+  };
+
+  boot.initrd.luks.devices.raid.crypttabExtraOpts = [ "nofail" ];
+
 
   nix.settings.max-jobs = lib.mkDefault 4;
 
