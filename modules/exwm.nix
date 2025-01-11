@@ -50,7 +50,7 @@ in
       {
         services.dunst.enable = true;
         services.dunst.iconTheme = {
-          package = pkgs.gnome3.adwaita-icon-theme;
+          package = pkgs.adwaita-icon-theme;
           name = "Adwaita";
         };
         services.dunst.settings =  {
