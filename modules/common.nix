@@ -85,6 +85,8 @@
     ];
     systemd.services."user@".serviceConfig.Delegate = "pids memory cpu io";
 
+    boot.plymouth.enable = true;
+
     # Internationalisation properties.
     console.keyMap = "dvorak";
     i18n.defaultLocale = "sv_SE.UTF-8";
