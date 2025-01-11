@@ -16,6 +16,7 @@
       ./anyrun.nix
       ./ags
       ./wlogout.nix
+      ./home-assistant.nix
       ./domain.nix
       ./vaultwarden.nix
       ./backups.nix

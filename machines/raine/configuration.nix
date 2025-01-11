@@ -17,6 +17,7 @@
   talyz.gnome.enable = true;
 
   talyz.media-center.enable = true;
+  talyz.home-assistant.enable = true;
   talyz.vaultwarden.enable = true;
 
   talyz.backups.time = "03:00";
